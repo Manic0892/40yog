@@ -1,3 +1,6 @@
 [submodule "dev/serv"]
 	path = dev/serv
 	url = https://github.com/Manic0892/python-impact.git
+[submodule "wkshp"]
+	path = wkshp
+	url = https://github.com/Manic0892/40yog_wkshp.git
