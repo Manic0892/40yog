@@ -1,6 +1,6 @@
 ig.module('game.entities.howToPlay').requires('impact.entity').defines(function(){
 	EntityHowToPlay = ig.Entity.extend({
-		name: 'winMenu',
+		name: 'howToPlay',
 		
 		font: new ig.Font( 'media/impact_bitmap.png' ),
 	
