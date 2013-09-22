@@ -6,6 +6,11 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		sunSound: new ig.Sound('media/sound/sun.*'),
 		sunSoundTrack: new ig.Music(),
 		sunSoundPlaying: false,
+		
+		
+		fireSound: new ig.Sound('media/sound/fire2.*'),
+		maxSoundCD: 35,
+		soundCD: 0,
 		cooldown: 5,
 		
 		flameActive: false,
@@ -18,6 +23,7 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 				
 				this.sunSoundTrack.add(this.sunSound);
 				this.sunSoundTrack.volume = 1;
+				this.fireSound.volume = 4;
 			}
 		},
 		
@@ -27,6 +33,8 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		
 		update: function() {
 			this.parent();
+			
+			this.soundCD--;
 			
 			if (ig.input.state('sun') && this.sun > 0 && this.sunActive) {
 				var distanceFromPlayer = 700;
@@ -75,6 +83,10 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 			if (this.flameActive) {
 				ig.game.spawnEntity( EntityFireParticleDamage, this.pos.x+this.size.x/2, this.pos.y+this.size.y/2, {flip:this.flip, d:{x:ig.input.mouse.x, y:ig.input.mouse.y}, vel:this.vel} );
 				this.cooldown = 2;
+				if (this.soundCD <= 0) {
+					this.fireSound.play();
+					this.soundCD = this.maxSoundCD;
+				}
 			}
 		},
 		
@@ -85,7 +97,6 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 			}
 			
 			if (other == 8301115117110) {
-				console.log('heya');
 				ig.game.spawnEntity(EntitySunSpark, this.pos.x - 100,this.pos.y - 100,{target:this});
 				
 			}

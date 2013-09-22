@@ -14,7 +14,7 @@ ig.module('game.entities.levelLogic').requires('impact.entity').defines(function
 				ig.game.spawnEntity(EntityHealthbar);
 				ig.game.spawnEntity(EntityKeybinder);
 				ig.music.add(this.levelMusic);
-				ig.music.volume = .1;
+				ig.music.volume = .05;
 				ig.music.play();
 			}	
 		},

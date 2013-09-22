@@ -66,6 +66,8 @@ MyGame = ig.Game.extend({
 
 //ig.setNocache(true);
 
+ig.Sound.channels = 10;
+
 ig.main( '#canvas', MyGame, 60, 800, 600, 1 );
 
 });
