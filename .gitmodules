@@ -1,0 +1,3 @@
+[submodule "py-imp"]
+	path = game/py-imp
+	url = git://github.com/Manic0892/python-impact.git
