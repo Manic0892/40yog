@@ -1,4 +1,4 @@
-ig.module('game.entities.fireParticleDamage').requires('game.entities.particle', 'game.entities.ashParticleRising').defines(function() {
+ig.module('game.entities.fireParticleDamage').requires('game.entities.particle', 'game.entities.ashParticleRising', 'impact.entity-pool').defines(function() {
 	EntityFireParticleDamage = EntityParticle.extend({
 		checkAgainst: ig.Entity.TYPE.B,
 		lifetime: .3,
@@ -11,6 +11,31 @@ ig.module('game.entities.fireParticleDamage').requires('game.entities.particle',
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
+			this.r = 255;
+			this.g = 255;
+			this.b = 0;
+			this.color = 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
+			
+			this.idleTimer = new ig.Timer();
+			this.particleSize = 1;
+			
+			this.vel.x = ig.game.screen.x+settings.d.x - this.pos.x; 
+			this.vel.y = settings.d.y+ ig.game.screen.y- this.pos.y;
+			var vectorLength = Math.sqrt(this.vel.x*this.vel.x + this.vel.y*this.vel.y);
+			this.vel.x /= vectorLength;
+			this.vel.y /= vectorLength;
+			this.vel.x*=750; //default 500
+			this.vel.y*=750;
+		},
+		
+		reset: function( x, y, settings ) {
+			// This function is called when an instance of this class is
+			// resurrected from the entity pool.
+			// The parent implementation of reset() will reset the .pos to 
+			// the given x, y and will reset the .vel, .accel, .health and 
+			// some other properties.
+			this.parent( x, y, settings );
+			
 			this.r = 255;
 			this.g = 255;
 			this.b = 0;
@@ -72,4 +97,6 @@ ig.module('game.entities.fireParticleDamage').requires('game.entities.particle',
 			}
 		}
 	});
+	
+	ig.EntityPool.enableFor(EntityFireParticleDamage);
 });

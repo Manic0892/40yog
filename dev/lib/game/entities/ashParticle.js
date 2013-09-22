@@ -13,7 +13,8 @@ ig.module(
 	'game.entities.ashParticle'
 )
 .requires(
-	'game.entities.particle'
+	'game.entities.particle',
+	'impact.entity-pool'
 )
 .defines(function(){
 
@@ -35,6 +36,21 @@ ig.module(
 			this.color = Math.floor(Math.random()*255);
 			
 			this.particleSize = Math.random()*5;
+			
+			this.idleTimer = new ig.Timer();
+		},
+		
+		reset: function(x,y,settings) {
+			this.parent(x,y,settings);
+			this.alpha = 1;
+			this.lifetime = 1;
+			this.fadetime = .4;
+			
+			this.pos.x = x+Math.floor(Math.random()*settings.width);
+			this.pos.y = y+Math.floor(Math.random()*settings.height);
+			//this.color = Math.floor(Math.random()*255);
+			
+			//this.particleSize = Math.random()*5;
 			
 			this.idleTimer = new ig.Timer();
 		},
@@ -62,5 +78,6 @@ ig.module(
 		}
 	});
 
+	ig.EntityPool.enableFor(EntityAshParticle);
 
 });
