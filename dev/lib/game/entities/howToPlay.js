@@ -1,5 +1,5 @@
-ig.module('game.entities.winMenu').requires('impact.entity').defines(function(){
-	EntityWinMenu = ig.Entity.extend({
+ig.module('game.entities.howToPlay').requires('impact.entity').defines(function(){
+	EntityHowToPlay = ig.Entity.extend({
 		name: 'winMenu',
 		
 		font: new ig.Font( 'media/impact_bitmap.png' ),

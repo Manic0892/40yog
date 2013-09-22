@@ -1,8 +1,8 @@
-cd ./game/tools
+cd ./dev/tools
 ./bake.sh
 cd ../..
-mv ./game/game.min.js ./built
-cp -r ./game/media ./built/
+mv ./dev/game.min.js ./built
+cp -r ./dev/media ./built/
 cd ./built
 mv game.min.js game.min.js.old
 echo 'Further minifying...'

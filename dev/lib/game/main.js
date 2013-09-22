@@ -14,6 +14,7 @@ ig.module(
 	'game.levels.1',
 	'game.levels.mainMenu',
 	'game.levels.win',
+	'game.levels.howToPlay',
 	
 	//'plugins.gui',
 	'plugins.pause'

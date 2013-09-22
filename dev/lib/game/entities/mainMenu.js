@@ -11,6 +11,8 @@ ig.module('game.entities.mainMenu').requires('impact.entity').defines(function()
 				ig.game.loadLevel(Level1);
 			}}, {text:'OPTIONS', exec:function() {
 				console.log('clicked options');
+			}}, {text:'HOW TO PLAY', exec:function() {
+				ig.game.loadLevel(LevelHowToPlay)
 			}}
 		],
 		
