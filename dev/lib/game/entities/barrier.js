@@ -4,7 +4,7 @@ ig.module('game.entities.barrier').requires('impact.entity').defines(function() 
 		animSheet: new ig.AnimationSheet('media/barrier.png', 200,141),
 		
 		type: ig.Entity.TYPE.NONE,
-		collides: ig.Entity.TYPE.STATIC,
+		collides: ig.Entity.COLLIDES.STATIC,
 		checkAgainst: ig.Entity.TYPE.A,
 		
 		init: function(x,y,settings) {
