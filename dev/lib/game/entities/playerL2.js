@@ -4,6 +4,11 @@ ig.module('game.entities.playerL2').requires('ig.entities.player').defines(funct
 		collides: ig.Entity.COLLIDES.ACTIVE,
 		checkAgainst: ig.Entity.TYPE.B,
 		
-		animSheet: new ig.AnimationSheet( 'media/car.png', 294, 600 )
+		animSheet: new ig.AnimationSheet( 'media/car.png', 294, 600 ),
+		
+		init: function(x,y,settings) {
+			this.parent(x,y,settings);
+			this.addAnim('idle', 1, [0]);
+		}
 	});
 });
