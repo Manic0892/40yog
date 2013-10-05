@@ -11,6 +11,11 @@ ig.module('game.entities.playerL2').requires('game.entities.player').defines(fun
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			this.addAnim('idle', 1, [0]);
+		},
+		
+		update: function() {
+			this.vel.x += 1;
+			this.parent();
 		}
 	});
 });
