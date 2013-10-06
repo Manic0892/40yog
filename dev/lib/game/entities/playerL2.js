@@ -6,6 +6,7 @@ ig.module('game.entities.playerL2').requires('game.entities.player').defines(fun
 		
 		animSheet: new ig.AnimationSheet( 'media/car.png', 294, 600 ),
 		
+		maxVel: {x:50,y:400},
 		size: {x:294, y:600},
 		
 		init: function(x,y,settings) {
@@ -15,7 +16,7 @@ ig.module('game.entities.playerL2').requires('game.entities.player').defines(fun
 		},
 		
 		update: function() {
-			this.vel.x += 1;
+			this.vel.y += 1;
 			this.parent();
 		}
 	});
