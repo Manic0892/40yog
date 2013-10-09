@@ -18,6 +18,10 @@ ig.module('game.entities.playerL2').requires('game.entities.player').defines(fun
 		update: function() {
 			this.vel.y += 1;
 			this.parent();
+		},
+		
+		draw: function() {
+			this.parent();
 		}
 	});
 });
