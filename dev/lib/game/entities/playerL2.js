@@ -9,6 +9,8 @@ ig.module('game.entities.playerL2').requires('game.entities.player').defines(fun
 		maxVel: {x:50,y:400},
 		size: {x:294, y:600},
 		
+		health:100,
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			this.addAnim('idle', 1, [0]);
@@ -22,6 +24,11 @@ ig.module('game.entities.playerL2').requires('game.entities.player').defines(fun
 		
 		draw: function() {
 			this.parent();
+		},
+		
+		check: function(other) {
+			this.receiveDamage(10);
+			other.kill();
 		}
 	});
 });
