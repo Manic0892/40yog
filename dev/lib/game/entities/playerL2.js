@@ -10,6 +10,7 @@ ig.module('game.entities.playerL2').requires('game.entities.player').defines(fun
 		size: {x:294, y:600},
 		
 		health:100,
+		gravityFactor:0,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
