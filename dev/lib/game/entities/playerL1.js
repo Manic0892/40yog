@@ -71,7 +71,7 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		triggeredBy: function(triggered, other) {
 			if (other.name=='winTrigger') {
 				ig.music.stop();
-				ig.game.loadLevelDeferred(LevelWin);
+				ig.game.loadLevelDeferred(Level2);
 			}
 		},
 		

@@ -46,6 +46,13 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 			this.vel.x = 0;
 			//this.pos.y += 50;
 			other.kill();
+		},
+		
+		triggeredBy: function(triggered, other) {
+			if (other.name=='winTrigger') {
+				ig.music.stop();
+				ig.game.loadLevelDeferred(LevelWin);
+			}
 		}
 	});
 });
