@@ -12,10 +12,12 @@ ig.module('game.entities.levelLogic').requires('impact.entity').defines(function
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
 				ig.game.spawnEntity(EntityHealthbar);
-				ig.game.spawnEntity(EntityKeybinder);
+				
 				ig.music.add(this.levelMusic);
 				ig.music.volume = .05;
 				ig.music.play();
+				
+				this.bindKeys();
 			}	
 		},
 		update: function() {
@@ -26,6 +28,24 @@ ig.module('game.entities.levelLogic').requires('impact.entity').defines(function
 					ig.music.play();
 				else ig.music.pause();
 				this.paused = !this.paused;
+			}
+			this.updateScreenPos();
+			
+		},
+		
+		bindKeys: function() {
+			ig.input.bind( ig.KEY.A, 'left' );
+			ig.input.bind( ig.KEY.D, 'right' );
+			ig.input.bind( ig.KEY.W, 'jump' );
+			ig.input.bind(ig.KEY.MOUSE1, 'shoot');
+			ig.input.bind(ig.KEY.ESC, 'pause');
+		},
+		
+		updateScreenPos: function() {
+			var player = ig.game.getEntitiesByType( EntityPlayer )[0];
+			if( player ) {
+				ig.game.screen.x = player.pos.x - ig.system.width/2;
+				ig.game.screen.y = player.pos.y - ig.system.height/2;
 			}
 		}
 	});
@@ -58,18 +78,6 @@ ig.module('game.entities.levelLogic').requires('impact.entity').defines(function
 				ig.system.context.lineWidth = 1;
 				ig.system.context.stroke();
 			}
-		}
-	});
-	
-	EntityKeybinder = ig.Entity.extend({
-		_wmIgnore: true,
-		
-		init: function() {
-			ig.input.bind( ig.KEY.A, 'left' );
-			ig.input.bind( ig.KEY.D, 'right' );
-			ig.input.bind( ig.KEY.W, 'jump' );
-			ig.input.bind(ig.KEY.MOUSE1, 'shoot');
-			ig.input.bind(ig.KEY.ESC, 'pause');
 		}
 	});
 });

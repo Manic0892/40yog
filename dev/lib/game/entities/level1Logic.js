@@ -5,6 +5,15 @@ ig.module('game.entities.level1Logic').requires('game.entities.levelLogic').defi
 			if (!ig.global.wm) {
 				ig.game.spawnEntity(EntitySunbar);
 			}
+		},
+		
+		bindKeys: function() {
+			ig.input.bind( ig.KEY.A, 'left' );
+			ig.input.bind( ig.KEY.D, 'right' );
+			ig.input.bind( ig.KEY.W, 'jump' );
+			ig.input.bind(ig.KEY.MOUSE1, 'shoot');
+			ig.input.bind(ig.KEY.ESC, 'pause');
+			ig.input.bind(ig.KEY.SPACE, 'sun');
 		}
 	});
 	EntitySunbar = ig.Entity.extend({
@@ -35,18 +44,6 @@ ig.module('game.entities.level1Logic').requires('game.entities.levelLogic').defi
 				ig.system.context.lineWidth = 1;
 				ig.system.context.stroke();
 			}
-		}
-	});
-	EntityKeybinder = ig.Entity.extend({
-		_wmIgnore: true,
-		
-		init: function() {
-			ig.input.bind( ig.KEY.A, 'left' );
-			ig.input.bind( ig.KEY.D, 'right' );
-			ig.input.bind( ig.KEY.W, 'jump' );
-			ig.input.bind(ig.KEY.MOUSE1, 'shoot');
-			ig.input.bind(ig.KEY.ESC, 'pause');
-			ig.input.bind(ig.KEY.SPACE, 'sun');
 		}
 	});
 });

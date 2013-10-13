@@ -12,6 +12,7 @@ ig.module(
 	'game.entities.ashParticle',
 		
 	'game.levels.1',
+	'game.levels.2',
 	'game.levels.mainMenu',
 	'game.levels.win',
 	'game.levels.howToPlay',
@@ -56,11 +57,7 @@ MyGame = ig.Game.extend({
 		
 		
 		// Add your own drawing code here
-		var player = this.getEntitiesByType( EntityPlayer )[0];
-		if( player ) {
-			this.screen.x = player.pos.x - ig.system.width/2;
-			this.screen.y = player.pos.y - ig.system.height/2;
-		}
+		
 	}
 });
 
