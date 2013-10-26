@@ -22,9 +22,9 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 		update: function() {
 			this.accel = {x:0,y:0};
 			if (ig.input.state('left') && this.vel.y < 0)
-				this.accel.x = -100;
+				this.accel.x = -400;
 			if (ig.input.state('right') && this.vel.y < 0)
-				this.accel.x = 100;
+				this.accel.x = 400;
 			if (ig.input.state('up'))
 				this.accel.y = -200;
 			if (ig.input.state('down') && this.vel.y < 0)
