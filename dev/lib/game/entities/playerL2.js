@@ -4,10 +4,10 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 		collides: ig.Entity.COLLIDES.ACTIVE,
 		checkAgainst: ig.Entity.TYPE.B,
 		
-		animSheet: new ig.AnimationSheet( 'media/car.png', 128, 261 ),
+		animSheet: new ig.AnimationSheet( 'media/car.png', 261, 128),
 		
 		maxVel: {x:200,y:750},
-		size: {x:128, y:261},
+		size: {x:261, y:128},
 		friction: {x:100,y:200},
 		
 		health:100,
