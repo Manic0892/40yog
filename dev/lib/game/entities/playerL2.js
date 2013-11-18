@@ -6,7 +6,7 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 		
 		animSheet: new ig.AnimationSheet( 'media/car.png', 261, 128),
 		
-		maxVel: {x:200,y:750},
+		maxVel: {x:750,y:200},
 		size: {x:261, y:128},
 		friction: {x:100,y:200},
 		

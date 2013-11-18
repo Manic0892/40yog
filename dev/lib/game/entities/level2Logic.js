@@ -18,7 +18,7 @@ ig.module('game.entities.level2Logic').requires('game.entities.levelLogic').defi
 			var player = ig.game.getEntitiesByType( EntityPlayerL2 )[0];
 			if( player ) {
 				//ig.game.screen.x = player.pos.x - ig.system.width/2;
-				ig.game.screen.y = player.pos.y - ig.system.height/2 - player.size.y/2;
+				ig.game.screen.x= player.pos.x - ig.system.width/2 - player.size.x/2;
 			}
 		}
 	});
