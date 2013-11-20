@@ -6,9 +6,9 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 		
 		animSheet: new ig.AnimationSheet( 'media/car.png', 261, 128),
 		
-		maxVel: {x:750,y:200},
+		maxVel: {x:750,y:400},
 		size: {x:261, y:128},
-		friction: {x:0,y:400},
+		friction: {x:0,y:2000},
 		
 		health:100,
 		gravityFactor:0,
@@ -35,9 +35,11 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 			//if (this.vel.y >= 0)
 			//	this.vel.x = 0;
 			if (ig.input.state('left') || ig.input.state('up'))
-				this.vel.y = -200;
+				this.vel.y = -700;
 			else if (ig.input.state('right') || ig.input.state('down'))
-				this.vel.y = 200;
+				this.vel.y = 700;
+			else
+				this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
 			this.parent();
 			//if (this.vel.x == this.maxVel.x)
 			//	this.accel.x = 0;
