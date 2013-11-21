@@ -6,6 +6,8 @@ ig.module('game.entities.barrier').requires('impact.entity').defines(function() 
 		gravityFactor:0,
 		health: 1,
 		
+		zIndex: -1,
+		
 		type: ig.Entity.TYPE.B,
 		collides: ig.Entity.COLLIDES.STATIC,
 		checkAgainst: ig.Entity.TYPE.A,
