@@ -9,7 +9,7 @@ ig.module('game.entities.healthPowerup').requires('game.entities.powerup').defin
 		
 		_wmIgnore: false,
 		
-		animSheet: new ig.AnimationSheet( 'media/healthPowerup.png', 32, 32 ),
+		animSheet: new ig.AnimationSheet( 'media/health.png', 32, 32 ),
 		
 		check: function(other) {
 			other.healthPowerup(50);
