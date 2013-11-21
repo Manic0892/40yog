@@ -1,9 +1,10 @@
 ig.module('game.entities.barrier').requires('impact.entity').defines(function() {
 	EntityBarrier = ig.Entity.extend({
 		size: {x:38,y:141},
-		animSheet: new ig.AnimationSheet('media/barrier.png', 38,141),
+		animSheet: new ig.AnimationSheet('media/barrier_comp.png', 38,141),
 		maxVel: {x:0,y:0},
 		gravityFactor:0,
+		health: 1,
 		
 		type: ig.Entity.TYPE.B,
 		collides: ig.Entity.COLLIDES.STATIC,
@@ -12,7 +13,13 @@ ig.module('game.entities.barrier').requires('impact.entity').defines(function() 
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			this.addAnim('idle', 1, [0]);
+			this.addAnim('dead', 1, [1]);
 			this.currentAnim = this.anims.idle;
+		},
+		
+		kill: function() {
+			this.currentAnim = this.anims.dead;
+			this.health--;
 		}
 	})
 });

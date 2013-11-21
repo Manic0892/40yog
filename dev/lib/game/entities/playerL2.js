@@ -52,11 +52,13 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 		},
 		
 		check: function(other) {
-			this.receiveDamage(10);
-			//this.vel.y += 500;
-			this.vel.x -= 200;
-			//this.pos.y += 50;
-			other.kill();
+			if (other.health > 0) {	
+				this.receiveDamage(10);
+				//this.vel.y += 500;
+				this.vel.x -= 200;
+				//this.pos.y += 50;
+				other.kill();
+			}
 		},
 		
 		triggeredBy: function(triggered, other) {
