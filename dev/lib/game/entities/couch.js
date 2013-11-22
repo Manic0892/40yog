@@ -11,7 +11,7 @@ ig.module('game.entities.couch').requires('impact.entity', 'game.entities.enemyB
 		
 		health: 100,
 		
-		zIndex: -1,
+		zIndex: -10,
 		
 		bulletDamage: false,
 		

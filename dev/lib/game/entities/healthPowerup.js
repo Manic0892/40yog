@@ -9,12 +9,18 @@ ig.module('game.entities.healthPowerup').requires('game.entities.powerup').defin
 		
 		_wmIgnore: false,
 		
+		zIndex: -10,
+		
 		animSheet: new ig.AnimationSheet( 'media/health.png', 32, 32 ),
 		
 		check: function(other) {
-			other.healthPowerup(50);
-			
-			this.kill();
+			if (other.health < other.maxHealth) {
+				other.healthPowerup(50);
+				if (other.health > other.maxHealth) {
+					other.health = other.maxHealth;
+				}
+				this.kill();
+			}
 		}
 	});
 });
