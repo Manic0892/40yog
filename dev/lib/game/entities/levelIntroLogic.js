@@ -5,7 +5,7 @@ ig.module('game.entities.levelIntroLogic').requires('impact.entity', 'impact.ima
 			size: {x:976, y:235},
 			
 			gravityFactor: 0,
-			alphaIterator: .005,
+			alphaIterator: .008,
 			
 			init: function(x,y,settings) {
 				this.parent(x,y,settings);
