@@ -10,9 +10,10 @@ ig.module(
 	
 	'game.entities.bloodParticle',
 	'game.entities.ashParticle',
-		
+	
 	'game.levels.1',
 	'game.levels.2',
+	'game.levels.intro',
 	'game.levels.mainMenu',
 	'game.levels.win',
 	'game.levels.howToPlay',
@@ -35,7 +36,7 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		ig.soundManager.volume = .1;
-		this.loadLevel(LevelMainMenu);
+		this.loadLevel(LevelIntro);
 	},
 	
 	update: function() {
