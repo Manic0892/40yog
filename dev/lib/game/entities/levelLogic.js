@@ -24,9 +24,16 @@ ig.module('game.entities.levelLogic').requires('impact.entity').defines(function
 			this.parent();
 			if (ig.input.pressed('pause')) {
 				ig.game.togglePause();
-				if (this.paused)
+				if (this.paused) {
 					ig.music.play();
-				else ig.music.pause();
+					if (ig.music2)
+						ig.music2.play();
+				}
+				else {
+					ig.music.pause();
+					if (ig.music2)
+						ig.music2.pause();
+				}
 				this.paused = !this.paused;
 			}
 			this.updateScreenPos();

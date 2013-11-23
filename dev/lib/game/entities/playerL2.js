@@ -10,6 +10,8 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 		size: {x:261, y:128},
 		friction: {x:0,y:2000},
 		
+		carSound: new ig.Sound('media/sound/engine.*'),
+		
 		health:100,
 		gravityFactor:0,
 		
@@ -18,6 +20,13 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 			this.addAnim('idle', 1, [0]);
 			this.currentAnim = this.anims.idle;
 			this.accel.x=100;
+			
+			if (!ig.global.wm) {
+				ig.music2 = new ig.Music();
+				ig.music2.add(this.carSound);
+				ig.music2.volume = 0.1;
+				ig.music2.play();
+			}
 		},
 		
 		update: function() {
@@ -65,6 +74,7 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 			if (other.name=='winTrigger') {
 				ig.music.stop();
 				ig.game.loadLevelDeferred(LevelWin);
+				ig.music2.stop();
 			}
 		}
 	});
