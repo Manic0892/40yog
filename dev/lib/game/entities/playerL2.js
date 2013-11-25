@@ -1,4 +1,4 @@
-ig.module('game.entities.playerL2').requires('impact.entity').defines(function() {
+ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.particleSpawner', 'game.entities.particle').defines(function() {
 	EntityPlayerL2 = ig.Entity.extend({
 		type: ig.Entity.TYPE.A,
 		collides: ig.Entity.COLLIDES.ACTIVE,
@@ -91,5 +91,13 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 				ig.music2.stop();
 			}
 		}
+	});
+	
+	EntitySmokeParticle = EntityParticle.extend({
+		
+	});
+	
+	EntitySmokeParticleSpawner = EntityParticleSpawner.extend({
+		
 	});
 });
