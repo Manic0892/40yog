@@ -12,13 +12,15 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 		
 		carSound: new ig.Sound('media/sound/engine.*'),
 		
-		health:100,
+		health:3,
 		gravityFactor:0,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
-			this.addAnim('idle', 1, [0]);
-			this.currentAnim = this.anims.idle;
+			this.addAnim('damage0', 1, [0]);
+			this.addAnim('damage1', 1, [1]);
+			this.addAnim('damage2', 1, [2]);
+			this.currentAnim = this.anims.damage0;
 			this.accel.x=100;
 			
 			if (!ig.global.wm) {
@@ -62,12 +64,24 @@ ig.module('game.entities.playerL2').requires('impact.entity').defines(function()
 		
 		check: function(other) {
 			if (other.health > 0) {	
-				this.receiveDamage(10);
+				this.receiveDamage(1);
+				if (this.health == 2) {
+					this.currentAnim = this.anims.damage1;
+				}
+				if (this.health == 1) {
+					this.currentAnim = this.anims.damage2;
+				}
 				//this.vel.y += 500;
 				this.vel.x -= 200;
 				//this.pos.y += 50;
 				other.kill();
 			}
+		},
+		
+		kill: function() {
+			ig.game.loadLevelDeferred(LevelMainMenu);
+			ig.music2.stop();
+			ig.music.stop();
 		},
 		
 		triggeredBy: function(triggered, other) {
