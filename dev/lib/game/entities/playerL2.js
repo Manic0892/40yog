@@ -11,6 +11,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		friction: {x:0,y:2000},
 		
 		carSound: new ig.Sound('media/sound/engine.*'),
+		crashSound: new ig.Sound('media/sound/crash.*'),
 		
 		health:3,
 		gravityFactor:0,
@@ -64,7 +65,8 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		check: function(other) {
-			if (other.health > 0) {	
+			if (other.health > 0) {
+				this.crashSound.play();
 				this.receiveDamage(1);
 				if (this.health == 2) {
 					this.currentAnim = this.anims.damage1;
