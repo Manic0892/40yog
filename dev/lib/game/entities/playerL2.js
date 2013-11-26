@@ -67,6 +67,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				this.receiveDamage(1);
 				if (this.health == 2) {
 					this.currentAnim = this.anims.damage1;
+					ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 20, yOffset: this.size.y/2});
 				}
 				if (this.health == 1) {
 					this.currentAnim = this.anims.damage2;
@@ -94,10 +95,67 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 	});
 	
 	EntitySmokeParticle = EntityParticle.extend({
+		//Should use entity pool
+		
+		color: 0,
+		particleSize: 40,
+		
+		deathTimer: 40,
+		
+		
+		
+		gravityFactor: 0,
+		
+		update: function() {
+			this.deathTimer--;
+			if (this.deathTimer == 0) {
+				this.kill;
+			}
+		},
+		
+		draw: function() {
+			this.parent();
+			var x = this.pos.x - ig.game.screen.x;
+			var y = this.pos.y - ig.game.screen.y;
+			ig.system.context.beginPath();
+			ig.system.context.arc(x, y, this.particleSize, 0, Math.PI*2, true);
+			ig.system.context.fillStyle = 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',' + this.alpha + ')';
+			ig.system.context.fill();
+		}
 		
 	});
 	
 	EntitySmokeParticleSpawner = EntityParticleSpawner.extend({
+		particleSpawnCD: 10,
+		currSpawnCD: 5,
 		
+		init: function(x,y,settings) {
+			this.parent(x,y,settings);
+			console.log(settings);
+			this.anchor = settings.anchor;
+			this.xOffset = settings.xOffset;
+			this.yOffset = settings.yOffset;
+		},
+		
+		update: function() {
+			this.parent();
+			this.pos.x = this.anchor.pos.x + this.xOffset;
+			this.pos.y = this.anchor.pos.y + this.yOffset;
+			console.log(this.pos);
+			
+			this.currSpawnCD--;
+			if (this.currSpawnCD == 0) {
+				this.spawnParticle();
+				this.currSpawnCD = this.particleSpawnCD;
+			}
+		},
+		
+		spawnParticle: function() {
+			ig.game.spawnEntity(EntitySmokeParticle, this.pos.x, this.pos.y);
+		},
+		
+		draw: function() {
+			this.parent();
+		}
 	});
 });
