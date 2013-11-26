@@ -29,6 +29,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				ig.music2.volume = 0.1;
 				ig.music2.play();
 			}
+			ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
 		},
 		
 		update: function() {
@@ -67,7 +68,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				this.receiveDamage(1);
 				if (this.health == 2) {
 					this.currentAnim = this.anims.damage1;
-					ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
 				}
 				if (this.health == 1) {
 					this.currentAnim = this.anims.damage2;
@@ -95,8 +95,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 	});
 	
 	EntitySmokeParticle = EntityParticle.extend({
-		//Should use entity pool
-		
 		color: 50,
 		particleSize: 40,
 		
@@ -115,6 +113,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			
 			this.vel.x = Math.random()*80-40;
 			this.vel.y = Math.random()*200-100;
+			this.color = settings.color;
 		},
 		
 		reset: function( x, y, settings ) {
@@ -130,6 +129,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			
 			this.vel.x = Math.random()*80-40;
 			this.vel.y = Math.random()*200-100;
+			this.color = settings.color;
 		},
 		
 		update: function() {
@@ -140,7 +140,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			}
 			if (this.pos.x < ig.game.screen.x - this.particleSize) {
 				this.kill();
-				console.log('killed offscreen particle');
 				return;
 			}
 			this.parent();
@@ -175,8 +174,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 	});
 	
 	EntitySmokeParticleSpawner = EntityParticleSpawner.extend({
-		//particleSpawnCD: 1,
-		//currSpawnCD: 5,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -190,18 +187,19 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			this.pos.x = this.anchor.pos.x + this.xOffset;
 			this.pos.y = this.anchor.pos.y + this.yOffset;
 			
-			//if (this.currSpawnCD > 0)
-				//this.currSpawnCD--;
-			//if (this.currSpawnCD == 0) {
-				//if (Math.random() > .9) {
-					this.spawnParticle();
-					//this.currSpawnCD = this.particleSpawnCD;
-				//}
-			//}
+			if (this.anchor.health < 3) {
+				if (this.anchor.health == 2) {
+					this.particleColor = 50;
+				}
+				if (this.anchor.health == 1) {
+					this.particleColor = 25;
+				}
+				this.spawnParticle();
+			}
 		},
 		
 		spawnParticle: function() {
-			ig.game.spawnEntity(EntitySmokeParticle, this.pos.x+(Math.random()*10), this.pos.y+(Math.random()*10));
+				ig.game.spawnEntity(EntitySmokeParticle, this.pos.x+(Math.random()*10), this.pos.y+(Math.random()*10), {color: this.particleColor});
 		},
 		
 		draw: function() {
