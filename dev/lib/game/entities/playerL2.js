@@ -1,4 +1,4 @@
-ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.particleSpawner', 'game.entities.particle').defines(function() {
+ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.particleSpawner', 'game.entities.particle', 'impact.entity-pool').defines(function() {
 	EntityPlayerL2 = ig.Entity.extend({
 		type: ig.Entity.TYPE.A,
 		collides: ig.Entity.COLLIDES.ACTIVE,
@@ -67,7 +67,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				this.receiveDamage(1);
 				if (this.health == 2) {
 					this.currentAnim = this.anims.damage1;
-					ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 20, yOffset: this.size.y/2});
+					ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
 				}
 				if (this.health == 1) {
 					this.currentAnim = this.anims.damage2;
@@ -97,41 +97,89 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 	EntitySmokeParticle = EntityParticle.extend({
 		//Should use entity pool
 		
-		color: 0,
+		color: 50,
 		particleSize: 40,
 		
-		deathTimer: 40,
-		
-		
-		
 		gravityFactor: 0,
+		collides: ig.Entity.COLLIDES.NONE,
+		
+		lifetime: 1.3,
+		maxVel: {x:100,y:100},
+		friction: {x:0, y:0},
+		
+		init: function(x,y,settings) {
+			this.parent(x,y,settings);
+			this.particleSize = Math.random()*10 + 40;
+			
+			this.idleTimer = new ig.Timer();
+			
+			this.vel.x = Math.random()*80-40;
+			this.vel.y = Math.random()*200-100;
+		},
+		
+		reset: function( x, y, settings ) {
+			// This function is called when an instance of this class is
+			// resurrected from the entity pool.
+			// The parent implementation of reset() will reset the .pos to 
+			// the given x, y and will reset the .vel, .accel, .health and 
+			// some other properties.
+			this.parent( x, y, settings );
+			
+			this.idleTimer = new ig.Timer();
+			this.particleSize = Math.random()*10 + 40;
+			
+			this.vel.x = Math.random()*80-40;
+			this.vel.y = Math.random()*200-100;
+		},
 		
 		update: function() {
-			this.deathTimer--;
-			if (this.deathTimer == 0) {
-				this.kill;
+			
+			if( this.idleTimer.delta() > this.lifetime ) {
+				this.kill();
+				return;
 			}
+			if (this.pos.x < ig.game.screen.x - this.particleSize) {
+				this.kill();
+				console.log('killed offscreen particle');
+				return;
+			}
+			this.parent();
 		},
 		
 		draw: function() {
 			this.parent();
 			var x = this.pos.x - ig.game.screen.x;
 			var y = this.pos.y - ig.game.screen.y;
-			ig.system.context.beginPath();
-			ig.system.context.arc(x, y, this.particleSize, 0, Math.PI*2, true);
-			ig.system.context.fillStyle = 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',' + this.alpha + ')';
-			ig.system.context.fill();
+			//Old, deprecated way without gradients.
+			//Keeping it around in case it comes in handy later
+			
+			//ig.system.context.beginPath();
+			//ig.system.context.arc(x, y, this.particleSize, 0, Math.PI*2, true);
+			//ig.system.context.fillStyle = 'rgb(' + this.color + ',' + this.color + ',' + this.color + ')';
+			//ig.system.context.fill();
+			
+			
+			
+			//Okay, what the fuck now?  Defining a rect and then drawing makes performance shit its pants, but using fillRect doesn't.  I need to investigate this later.
+			
+			
+			//ig.system.context.rect(x-this.particleSize, y-this.particleSize, x+this.particleSize, y+this.particleSize);
+			var grd = ig.system.context.createRadialGradient(x,y, 0, x, y, this.particleSize);
+			grd.addColorStop(0, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',1)');
+			grd.addColorStop(.5, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',.7)');
+			grd.addColorStop(1, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',0)');
+			ig.system.context.fillStyle = grd;
+			ig.system.context.fillRect(0,0,ig.system.width,ig.system.height);
 		}
 		
 	});
 	
 	EntitySmokeParticleSpawner = EntityParticleSpawner.extend({
-		particleSpawnCD: 10,
-		currSpawnCD: 5,
+		//particleSpawnCD: 1,
+		//currSpawnCD: 5,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
-			console.log(settings);
 			this.anchor = settings.anchor;
 			this.xOffset = settings.xOffset;
 			this.yOffset = settings.yOffset;
@@ -141,21 +189,25 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			this.parent();
 			this.pos.x = this.anchor.pos.x + this.xOffset;
 			this.pos.y = this.anchor.pos.y + this.yOffset;
-			console.log(this.pos);
 			
-			this.currSpawnCD--;
-			if (this.currSpawnCD == 0) {
-				this.spawnParticle();
-				this.currSpawnCD = this.particleSpawnCD;
-			}
+			//if (this.currSpawnCD > 0)
+				//this.currSpawnCD--;
+			//if (this.currSpawnCD == 0) {
+				//if (Math.random() > .9) {
+					this.spawnParticle();
+					//this.currSpawnCD = this.particleSpawnCD;
+				//}
+			//}
 		},
 		
 		spawnParticle: function() {
-			ig.game.spawnEntity(EntitySmokeParticle, this.pos.x, this.pos.y);
+			ig.game.spawnEntity(EntitySmokeParticle, this.pos.x+(Math.random()*10), this.pos.y+(Math.random()*10));
 		},
 		
 		draw: function() {
 			this.parent();
 		}
 	});
+	
+	ig.EntityPool.enableFor(EntitySmokeParticle);
 });
