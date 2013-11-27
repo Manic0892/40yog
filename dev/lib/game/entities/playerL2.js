@@ -170,7 +170,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			grd.addColorStop(.5, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',.7)');
 			grd.addColorStop(1, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',0)');
 			ig.system.context.fillStyle = grd;
-			ig.system.context.fillRect(0,0,ig.system.width,ig.system.height);
+			ig.system.context.fillRect(x-this.particleSize, y-this.particleSize, x+this.particleSize, y+this.particleSize);
 		}
 		
 	});
