@@ -60,9 +60,6 @@ MyGame = ig.Game.extend({
 		
 		// Add your own drawing code here
 		if (this.zoomLevel != 1) {
-			ig.system.width = ig.system.realWidth / this.zoomLevel;
-			ig.system.height = ig.system.realHeight / this.zoomLevel;
-		
 			ig.system.context.save();
 			ig.system.context.scale(this.zoomLevel, this.zoomLevel);
 			
@@ -76,7 +73,9 @@ MyGame = ig.Game.extend({
 	},
 	
 	zoom: function(zoomLevel) {
-		
+		ig.system.width = ig.system.realWidth / zoomLevel;
+		ig.system.height = ig.system.realHeight / zoomLevel;
+			
 		this.zoomLevel = zoomLevel;
 	}
 });
