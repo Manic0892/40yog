@@ -26,6 +26,7 @@ ig.module(
 MyGame = ig.Game.extend({
 	
 	gravity:500,
+	zoomLevel: 1,
 	
 	clearColor: '#ffffff',
 	
@@ -54,11 +55,29 @@ MyGame = ig.Game.extend({
 	
 	draw: function() {
 		// Draw all entities and backgroundMaps
-		this.parent();
+		//this.parent();
 		
 		
 		// Add your own drawing code here
+		if (this.zoomLevel != 1) {
+			ig.system.width = ig.system.realWidth / this.zoomLevel;
+			ig.system.height = ig.system.realHeight / this.zoomLevel;
 		
+			ig.system.context.save();
+			ig.system.context.scale(this.zoomLevel, this.zoomLevel);
+			
+			this.parent();
+			
+			ig.system.context.restore();
+		} else {
+			this.parent();
+		}
+		
+	},
+	
+	zoom: function(zoomLevel) {
+		
+		this.zoomLevel = zoomLevel;
 	}
 });
 
