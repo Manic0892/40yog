@@ -29,8 +29,8 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				ig.music2.add(this.carSound);
 				ig.music2.volume = 0.1;
 				ig.music2.play();
+				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
 			}
-			ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
 		},
 		
 		update: function() {
