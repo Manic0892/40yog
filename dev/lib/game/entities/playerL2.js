@@ -16,13 +16,15 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		health:3,
 		gravityFactor:0,
 		
+		enabled: false,
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			this.addAnim('damage0', 1, [0]);
 			this.addAnim('damage1', 1, [1]);
 			this.addAnim('damage2', 1, [2]);
 			this.currentAnim = this.anims.damage0;
-			this.accel.x=100;
+			
 			
 			if (!ig.global.wm) {
 				ig.music2 = new ig.Music();
@@ -34,6 +36,17 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		update: function() {
+			if (this.enabled) {
+				this.accel.x=100;
+				if (ig.input.state('left') || ig.input.state('up'))
+					this.vel.y = -700;
+				else if (ig.input.state('right') || ig.input.state('down'))
+					this.vel.y = 700;
+				else
+					this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
+				this.parent();
+			}
+			
 			//this.accel = {x:0,y:0};
 			//if (ig.input.state('left') && this.vel.y < 0)
 			//	this.accel.x = -400;
@@ -47,13 +60,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			//	this.vel.y = 0;
 			//if (this.vel.y >= 0)
 			//	this.vel.x = 0;
-			if (ig.input.state('left') || ig.input.state('up'))
-				this.vel.y = -700;
-			else if (ig.input.state('right') || ig.input.state('down'))
-				this.vel.y = 700;
-			else
-				this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
-			this.parent();
+			
 			//if (this.vel.x == this.maxVel.x)
 			//	this.accel.x = 0;
 			//else
