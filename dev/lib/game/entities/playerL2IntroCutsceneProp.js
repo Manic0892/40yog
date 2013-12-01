@@ -16,8 +16,11 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 		},
 		
 		update: function() {
-			
 			this.parent();
+		},
+		
+		triggeredBy: function() {
+			//go to next void target
 		}
 	});
 });
