@@ -1,12 +1,15 @@
 ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').defines(function() {
 	EntityPlayerL2IntroCutsceneProp = ig.Entity.extend({
 		type: ig.Entity.TYPE.A,
-		collides: ig.Entity.COLLIDES.ACTIVE,
+		collides: ig.Entity.COLLIDES.NEVER,
 		checkAgainst: ig.Entity.TYPE.B,
+		gravityFactor: 0,
 		
 		animSheet: new ig.AnimationSheet( 'media/L2CutscenePlayerProp.png', 64, 55),
 		
 		size: {x:64, y:55},
+		
+		currWaypoint: null,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -17,10 +20,24 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 		
 		update: function() {
 			this.parent();
+			if (this.currWaypoint != null) {
+				if (this.currWaypoint.pos.x > this.pos.x) {
+					this.pos.x += 1;
+				} else if (this.currWaypoint.pos.x < this.pos.x) {
+					this.pos.x -= 1;
+				}
+				
+				if (this.currWaypoint.pos.y > this.pos.y) {
+					this.pos.y += 1;
+				} else if (this.currWaypoint.pos.y < this.pos.y) {
+					this.pos.y -= 1;
+				}
+			}
+			
 		},
 		
-		triggeredBy: function() {
-			//go to next void target
+		triggeredBy: function(triggered, other) {
+			this.currWaypoint = ig.game.getEntityByName(other.nextWaypoint);
 		}
 	});
 });
