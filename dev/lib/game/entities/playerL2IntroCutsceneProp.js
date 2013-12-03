@@ -32,8 +32,11 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 				} else if (this.currWaypoint.pos.y < this.pos.y) {
 					this.pos.y -= 1;
 				}
+				var ninetyDegrees = 90 * (Math.PI/180);
+				var angle = Math.atan2(this.currWaypoint.pos.y - this.pos.y + ig.game.screen.y, this.currWaypoint.pos.x - this.pos.x + ig.game.screen.x);
+				angle += ninetyDegrees;
+				this.currentAnim.angle = angle;
 			}
-			
 		},
 		
 		triggeredBy: function(triggered, other) {
