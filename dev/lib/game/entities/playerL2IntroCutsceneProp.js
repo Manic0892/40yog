@@ -37,17 +37,12 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 		},
 		
 		triggeredBy: function(triggered, other) {
-			console.log('sup');
 			if (other.hasNextWaypoint) {
-				console.log('here');
 				this.currWaypoint = ig.game.getEntityByName(other.nextWaypoint);
 			} else {
-				console.log('here2');
 				ig.game.getEntityByName('PlayerL2').enabled = true;
 				this.kill();
 			}
-			console.log('bitch');
-			console.log(other.name);
 		}
 	});
 });
