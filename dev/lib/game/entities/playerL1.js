@@ -16,6 +16,8 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		flameActive: false,
 		sunActive: false,
 		
+		friction: {x:1000,y:0},
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
