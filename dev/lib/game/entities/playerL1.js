@@ -13,6 +13,8 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		soundCD: 0,
 		cooldown: 5,
 		
+		gruntSound: new ig.Sound('media/sound/grunt.*'),
+		
 		flameActive: false,
 		sunActive: false,
 		
@@ -102,6 +104,11 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 				ig.game.spawnEntity(EntitySunSpark, this.pos.x - 100,this.pos.y - 100,{target:this});
 				
 			}
+		},
+		
+		receiveDamage: function(amount, from) {
+			this.parent(amount, from);
+			this.gruntSound.play();
 		}
 	});
 	
