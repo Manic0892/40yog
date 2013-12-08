@@ -8,7 +8,7 @@ ig.module(
 		size:{x:32,y:64},
 		
 		maxVel: {x: 400, y: 400},
-		friction: {x: 500, y: 0},
+		friction: {x: 500, y: 500},
 		
 		animSheet: new ig.AnimationSheet( 'media/player.png', 32, 64 ),
 		
@@ -18,9 +18,9 @@ ig.module(
 		collides: ig.Entity.COLLIDES.PASSIVE,
 		
 		flip: false,
-		accelGround: 700,
-		accelAir: 400,
-		jump: 600,
+		accelGround: 400,
+		accelAir: 200,
+		jump: 325,
 		health: 100,
 		maxHealth: 100,
 		cooldown: 40,
@@ -46,10 +46,16 @@ ig.module(
 			// move left or right
 			var accel = this.standing ? this.accelGround : this.accelAir;
 			if( ig.input.state('left') ) {
+				if (this.vel.x > 0) {
+					this.vel.x -= this.friction.x/60;
+				}
 				this.accel.x = -accel;
 				this.flip = true;
 			}
 			else if( ig.input.state('right') ) {
+				if (this.vel.x < 0) {
+					this.vel.x += this.friction.x/60;
+				}
 				this.accel.x = accel;
 				this.flip = false;
 			}
