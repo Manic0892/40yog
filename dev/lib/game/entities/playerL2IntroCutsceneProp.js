@@ -7,6 +7,8 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 		
 		animSheet: new ig.AnimationSheet( 'media/L2CutscenePlayerProp.png', 64, 55),
 		
+		carSound: new ig.Sound('media/sound/engine.*'),
+		
 		size: {x:64, y:55},
 		
 		currWaypoint: null,
@@ -44,6 +46,10 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 				this.currWaypoint = ig.game.getEntityByName(other.nextWaypoint);
 			} else {
 				ig.game.getEntityByName('PlayerL2').enabled = true;
+				ig.music2 = new ig.Music();
+				ig.music2.add(this.carSound);
+				ig.music2.volume = 0.1;
+				ig.music2.play();
 				this.kill();
 			}
 		}

@@ -10,14 +10,13 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		size: {x:261, y:128},
 		friction: {x:0,y:2000},
 		
-		carSound: new ig.Sound('media/sound/engine.*'),
 		crashSound: new ig.Sound('media/sound/crash.*'),
 		
 		health:3,
 		gravityFactor:0,
 		
 		enabled: false,
-		
+				
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			this.addAnim('damage0', 1, [0]);
@@ -27,10 +26,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			
 			
 			if (!ig.global.wm) {
-				ig.music2 = new ig.Music();
-				ig.music2.add(this.carSound);
-				ig.music2.volume = 0.1;
-				ig.music2.play();
 				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
 			}
 		},
