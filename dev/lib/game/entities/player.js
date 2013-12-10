@@ -8,7 +8,6 @@ ig.module(
 		size:{x:32,y:64},
 		
 		maxVel: {x: 400, y: 400},
-		friction: {x: 500, y: 500},
 		
 		animSheet: new ig.AnimationSheet( 'media/player.png', 32, 64 ),
 		
@@ -18,9 +17,10 @@ ig.module(
 		collides: ig.Entity.COLLIDES.PASSIVE,
 		
 		flip: false,
-		accelGround: 400,
-		accelAir: 200,
-		jump: 325,
+		accelGround: 2000,
+		friction: {x:2000, y:0},
+		accelAir: 1000,
+		jump: 1000,
 		health: 100,
 		maxHealth: 100,
 		cooldown: 40,

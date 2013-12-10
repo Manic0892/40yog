@@ -153,6 +153,8 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			this.parent();
 			var x = this.pos.x - ig.game.screen.x;
 			var y = this.pos.y - ig.game.screen.y;
+			
+			
 			//Old, deprecated way without gradients.
 			//Keeping it around in case it comes in handy later
 			
