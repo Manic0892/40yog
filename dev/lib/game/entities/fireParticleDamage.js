@@ -84,7 +84,7 @@ ig.module('game.entities.fireParticleDamage').requires('game.entities.particle',
 			grd.addColorStop(1, 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',0)');
 			
 			ig.system.context.fillStyle = grd;
-			partSizeBuff = this.particleSize + 20;
+			var partSizeBuff = this.particleSize + 20; //This just ensures that we'll be drawing a large enough rectangle for the gradient to fill
 			ig.system.context.fillRect(x-partSizeBuff,y-partSizeBuff,x+partSizeBuff, y+partSizeBuff);
 			
 
