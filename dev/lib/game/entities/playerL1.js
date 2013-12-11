@@ -18,6 +18,12 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		flameActive: false,
 		sunActive: false,
 		
+		maxVel: {x: 400, y: 10000000000000},
+		accelGround: 2000,
+		friction: {x:2000, y:0},
+		accelAir: 1000,
+		jump: 750,
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {

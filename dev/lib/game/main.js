@@ -25,7 +25,7 @@ ig.module(
 
 MyGame = ig.Game.extend({
 	
-	gravity:500,
+	gravity:2000,
 	zoomLevel: 1,
 	
 	clearColor: '#ffffff',
