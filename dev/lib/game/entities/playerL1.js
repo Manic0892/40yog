@@ -1,13 +1,5 @@
-ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entities.fireParticleDamage', 'game.entities.sunSpark').defines(function() {
+ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entities.fireParticleDamage').defines(function() {
 	EntityPlayerL1 = EntityPlayer.extend({
-		sun: 100,
-		maxSun: 100,
-		
-		sunSound: new ig.Sound('media/sound/sun.*'),
-		sunSoundTrack: new ig.Music(),
-		sunSoundPlaying: false,
-		
-		
 		fireSound: new ig.Sound('media/sound/fire2.*'),
 		maxSoundCD: 35,
 		soundCD: 0,
@@ -16,7 +8,6 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		gruntSound: new ig.Sound('media/sound/grunt.*'),
 		
 		flameActive: false,
-		sunActive: false,
 		
 		maxVel: {x: 400, y: 10000000000000},
 		accelGround: 2000,
@@ -27,10 +18,6 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
-				this.sunProp = ig.game.spawnEntity(EntitySun, this.pos.x, this.pos.y, {attachee: this});
-				
-				this.sunSoundTrack.add(this.sunSound);
-				this.sunSoundTrack.volume = 1;
 				this.fireSound.volume = 4;
 			}
 		},
@@ -43,37 +30,6 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 			this.parent();
 			
 			this.soundCD--;
-			
-			if (ig.input.state('sun') && this.sun > 0 && this.sunActive) {
-				var distanceFromPlayer = 700;
-				var enemies = ig.game.getEntitiesByType(EntityEnemy);
-				//var enemies = [];
-				//if (EntityEnemySpider)
-				//	enemies = ig.game.getEntitiesByType(EntityEnemySpider);
-				//if (EntityEnemySpider)
-				//	enemies = enemies.concat(ig.game.getEntitiesByType(EntityEnemyBedbug));
-				//if (EntityEnemySpider)
-				//	enemies = enemies.concat(ig.game.getEntitiesByType(EntityCouch));
-				for (var i = 0; i < enemies.length; i++) {
-					if (enemies[i].pos.x < this.pos.x+distanceFromPlayer && enemies[i].pos.x > this.pos.x - distanceFromPlayer && enemies[i].pos.y < this.pos.y+distanceFromPlayer && enemies[i].pos.y > this.pos.y - distanceFromPlayer) {
-						enemies[i].receiveSunDamage(1, this);
-					}
-				}
-				this.sun--;
-				this.sunProp.active = true;
-				if (!this.sunSoundPlaying) {
-					this.sunSoundTrack.play();
-					this.sunSoundPlaying = true;
-				}
-			} else {
-				this.sunProp.active = false;
-				if (this.sunSoundPlaying) {
-					this.sunSoundTrack.stop();
-					this.sunSoundPlaying = false;
-				}
-			}
-			
-			this.sunProp.attacheeUpdate(this.pos.x, this.pos.y, this.size.x, this.size.y);
 		},
 		
 		triggeredBy: function(triggered, other) {
@@ -81,10 +37,6 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 				ig.music.stop();
 				ig.game.loadLevelDeferred(Level2);
 			}
-		},
-		
-		sunPowerup: function(amount) {
-			this.sun += amount;
 		},
 		
 		shoot: function() {
@@ -102,11 +54,6 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 			if (other == 10210897109101) {
 				this.arm.pickupFlame();
 				this.flameActive = true;
-			}
-			
-			if (other == 8301115117110) {
-				ig.game.spawnEntity(EntitySunSpark, this.pos.x - 100,this.pos.y - 100,{target:this});
-				
 			}
 		},
 		
@@ -150,48 +97,6 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		
 		pickupFlame: function() {
 			this.currentAnim = this.anims.blowtorch;
-		}
-	});
-	
-	EntitySun = ig.Entity.extend({
-		size: {x:64, y:16},
-		type: ig.Entity.TYPE.NONE,
-		//checkAgainst: ig.Entity.TYPE.B,
-		collides: ig.Entity.COLLIDES.NONE,
-		gravityFactor: 0,
-		
-		zIndex: 99999,
-		
-		active: false,
-		
-		init: function(x,y,settings) {
-			this.parent(x,y,settings);
-			
-			this.pos.x = x;
-			this.pos.y = y;
-
-			this.attachedTo = settings.attachee;
-		},
-		
-		attacheeUpdate: function(x,y,width,height) {
-			this.pos = {x:x+(width/2), y:y+(height/2)};
-		},
-		
-		draw: function() {
-			this.parent();
-			
-			if (this.active) {				
-				var x = this.attachedTo.pos.x - ig.game.screen.x+this.attachedTo.size.x/2;
-				var y = this.attachedTo.pos.y - ig.game.screen.y+this.attachedTo.size.y/2;
-				
-				ig.system.context.rect(0,0,ig.system.width,ig.system.height);
-				var grd = ig.system.context.createRadialGradient(x,y, 40, x, y, 1000);
-				grd.addColorStop(0, 'rgba(255,255,0,1)');
-				grd.addColorStop(.1, 'rgba(255,255,0,.3)');
-				grd.addColorStop(1, 'rgba(255,255,0,0)');
-				ig.system.context.fillStyle = grd;
-				ig.system.context.fill();
-			}
 		}
 	});
 });
