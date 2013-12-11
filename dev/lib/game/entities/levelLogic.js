@@ -6,7 +6,7 @@ ig.module('game.entities.levelLogic').requires('impact.entity').defines(function
 		
 		paused: false,
 		ignorePause: true,
-		levelMusic: new ig.Sound('media/sound/loop_level1.*'),
+		levelMusic: new ig.Sound('media/sound/rock_loop.*'),
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -14,7 +14,7 @@ ig.module('game.entities.levelLogic').requires('impact.entity').defines(function
 				ig.game.spawnEntity(EntityHealthbar);
 				
 				ig.music.add(this.levelMusic);
-				ig.music.volume = .05;
+				ig.music.volume = .75;
 				ig.music.play();
 				
 				this.bindKeys();
