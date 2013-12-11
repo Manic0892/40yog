@@ -32,15 +32,17 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		
 		update: function() {
 			if (this.enabled) {
-				this.accel.x=100;
+				this.accel.x=100;		
 				if (ig.input.state('left') || ig.input.state('up'))
 					this.vel.y = -700;
 				else if (ig.input.state('right') || ig.input.state('down'))
 					this.vel.y = 700;
 				else
 					this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
-				this.parent();
 			}
+			this.parent();
+			
+
 			
 			//this.accel = {x:0,y:0};
 			//if (ig.input.state('left') && this.vel.y < 0)
@@ -76,9 +78,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				if (this.health == 1) {
 					this.currentAnim = this.anims.damage2;
 				}
-				//this.vel.y += 500;
 				this.vel.x -= 200;
-				//this.pos.y += 50;
 				other.kill();
 			}
 		},

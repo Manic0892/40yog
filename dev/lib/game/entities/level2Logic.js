@@ -1,5 +1,7 @@
 ig.module('game.entities.level2Logic').requires('game.entities.levelLogic').defines(function() {
 	EntityLevel2Logic = EntityLevelLogic.extend({
+		zIndex: 9999,
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
