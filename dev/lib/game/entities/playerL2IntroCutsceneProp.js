@@ -7,8 +7,6 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 		
 		animSheet: new ig.AnimationSheet( 'media/L2CutscenePlayerProp.png', 64, 55),
 		
-		carSound: new ig.Sound('media/sound/engine.*'),
-		
 		size: {x:64, y:55},
 		
 		currWaypoint: null,
@@ -24,15 +22,15 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 			this.parent();
 			if (this.currWaypoint != null) {
 				if (this.currWaypoint.pos.x > this.pos.x) {
-					this.pos.x += 1;
+					this.pos.x += 2;
 				} else if (this.currWaypoint.pos.x < this.pos.x) {
-					this.pos.x -= 1;
+					this.pos.x -= 2;
 				}
 				
 				if (this.currWaypoint.pos.y > this.pos.y) {
-					this.pos.y += 1;
+					this.pos.y += 2;
 				} else if (this.currWaypoint.pos.y < this.pos.y) {
-					this.pos.y -= 1;
+					this.pos.y -= 2;
 				}
 				var ninetyDegrees = 90 * (Math.PI/180);
 				var angle = Math.atan2(this.currWaypoint.pos.y - this.pos.y + ig.game.screen.y, this.currWaypoint.pos.x - this.pos.x + ig.game.screen.x);
@@ -45,11 +43,7 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 			if (other.hasNextWaypoint) {
 				this.currWaypoint = ig.game.getEntityByName(other.nextWaypoint);
 			} else {
-				ig.game.getEntityByName('PlayerL2').enabled = true;
-				ig.music2 = new ig.Music();
-				ig.music2.add(this.carSound);
-				ig.music2.volume = 0.1;
-				ig.music2.play();
+				ig.game.getEntityByName('PlayerL2').enable();
 				this.kill();
 			}
 		}

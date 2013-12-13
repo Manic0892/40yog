@@ -12,6 +12,8 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		
 		crashSound: new ig.Sound('media/sound/crash.*'),
 		
+		carSound: new ig.Sound('media/sound/engine.*'),
+		
 		health:3,
 		gravityFactor:0,
 		
@@ -24,6 +26,8 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			this.addAnim('damage2', 1, [2]);
 			this.currentAnim = this.anims.damage0;
 			
+			this.carSound.loop = true;
+			this.carSound.multiChannel = false;
 			
 			if (!ig.global.wm) {
 				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
@@ -41,27 +45,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 					this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
 			}
 			this.parent();
-			
-
-			
-			//this.accel = {x:0,y:0};
-			//if (ig.input.state('left') && this.vel.y < 0)
-			//	this.accel.x = -400;
-			//if (ig.input.state('right') && this.vel.y < 0)
-			//	this.accel.x = 400;
-			//if (ig.input.state('up'))
-			//	this.accel.y = -200;
-			//if (ig.input.state('down') && this.vel.y < 0)
-			//	this.accel.y = 300;
-			//if (this.vel.y > 0)
-			//	this.vel.y = 0;
-			//if (this.vel.y >= 0)
-			//	this.vel.x = 0;
-			
-			//if (this.vel.x == this.maxVel.x)
-			//	this.accel.x = 0;
-			//else
-			//	this.accel.x = 100;
 		},
 		
 		draw: function() {
@@ -84,17 +67,28 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		kill: function() {
-			ig.game.loadLevelDeferred(LevelMainMenu);
-			ig.music2.stop();
-			ig.music.stop();
+			this.endOfLevel();
 		},
 		
 		triggeredBy: function(triggered, other) {
 			if (other.name=='winTrigger') {
-				ig.music.stop();
-				ig.game.loadLevelDeferred(LevelWin);
-				ig.music2.stop();
+				this.endOfLevel();
 			}
+		},
+		
+		endOfLevel: function(win) {
+			ig.music.stop();
+			this.carSound.stop();
+			if (win) {
+				ig.game.loadLevelDeferred(LevelWin);
+			} else {
+				ig.game.loadLevelDeferred(LevelMainMenu);
+			}
+		},
+		
+		enable: function() {
+			this.enabled = true;
+			this.carSound.play();
 		}
 	});
 	
