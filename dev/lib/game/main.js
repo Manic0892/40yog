@@ -19,7 +19,8 @@ ig.module(
 	'game.levels.howToPlay',
 	
 	//'plugins.gui',
-	'plugins.pause'
+	'plugins.pause',
+	'plugins.betterLoadLevel'
 )
 .defines(function(){
 

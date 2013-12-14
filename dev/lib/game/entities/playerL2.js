@@ -12,7 +12,8 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		
 		crashSound: new ig.Sound('media/sound/crash.*'),
 		
-		carSound: new ig.Sound('media/sound/engine.*'),
+		carSound: new ig.Sound('media/sound/inside_car.*', false),
+		soundStopped: false,
 		
 		health:3,
 		gravityFactor:0,
@@ -27,7 +28,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			this.currentAnim = this.anims.damage0;
 			
 			this.carSound.loop = true;
-			this.carSound.multiChannel = false;
 			
 			if (!ig.global.wm) {
 				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
@@ -43,9 +43,18 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 					this.vel.y = 700;
 				else
 					this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
+				
+				if (ig.soundManager.volume == 0) {
+					this.carSound.stop();
+					this.soundStopped = true;
+				} else if (this.soundStopped) {
+					this.carSound.play();
+					this.soundStopped = false;
+				}
 			}
 			this.parent();
 		},
+			
 		
 		draw: function() {
 			this.parent();
@@ -89,6 +98,10 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		enable: function() {
 			this.enabled = true;
 			this.carSound.play();
+		},
+		
+		loadLevel: function() {
+			this.carSound.stop();
 		}
 	});
 	

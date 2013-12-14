@@ -13,7 +13,6 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 				ig.game.spawnEntity(EntityHealthbar);
 				
 				ig.music.add(this.levelMusic);
-				ig.music.volume = .75;
 				ig.music.play();
 				
 				this.bindKeys();
@@ -26,7 +25,6 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 				ig.game.spawnEntity(EntityPauseMenu, 0, 0);
 			}
 			this.updateScreenPos();
-			
 		},
 		
 		bindKeys: function() {
