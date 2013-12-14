@@ -41,6 +41,10 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 				ig.game.screen.x = player.pos.x - ig.system.width/2;
 				ig.game.screen.y = player.pos.y - ig.system.height/2;
 			}
+		},
+		
+		loadLevel: function() {
+			ig.music.stop();
 		}
 	});
 	

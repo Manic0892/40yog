@@ -1,4 +1,4 @@
-ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.particleSpawner', 'game.entities.particle', 'impact.entity-pool').defines(function() {
+ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.particleSpawner', 'game.entities.particle', 'game.entities.loopingSoundManager', 'impact.entity-pool').defines(function() {
 	EntityPlayerL2 = ig.Entity.extend({
 		type: ig.Entity.TYPE.A,
 		collides: ig.Entity.COLLIDES.ACTIVE,
@@ -13,7 +13,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		crashSound: new ig.Sound('media/sound/crash.*'),
 		
 		carSound: new ig.Sound('media/sound/inside_car.*', false),
-		soundStopped: false,
 		
 		health:3,
 		gravityFactor:0,
@@ -27,9 +26,10 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			this.addAnim('damage2', 1, [2]);
 			this.currentAnim = this.anims.damage0;
 			
-			this.carSound.loop = true;
-			
 			if (!ig.global.wm) {
+				
+				this.loopingSoundManager = ig.game.spawnEntity(EntityLoopingSoundManager, 0, 0);
+				
 				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
 			}
 		},
@@ -43,14 +43,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 					this.vel.y = 700;
 				else
 					this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
-				
-				if (ig.soundManager.volume == 0) {
-					this.carSound.stop();
-					this.soundStopped = true;
-				} else if (this.soundStopped) {
-					this.carSound.play();
-					this.soundStopped = false;
-				}
 			}
 			this.parent();
 		},
@@ -86,8 +78,6 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		endOfLevel: function(win) {
-			ig.music.stop();
-			this.carSound.stop();
 			if (win) {
 				ig.game.loadLevelDeferred(LevelWin);
 			} else {
@@ -97,11 +87,10 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		
 		enable: function() {
 			this.enabled = true;
-			this.carSound.play();
+			this.loopingSoundManager.add(this.carSound);
 		},
 		
 		loadLevel: function() {
-			this.carSound.stop();
 		}
 	});
 	
