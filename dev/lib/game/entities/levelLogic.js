@@ -1,10 +1,9 @@
-ig.module('game.entities.levelLogic').requires('impact.entity').defines(function() {
+ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.pauseMenu').defines(function() {
 	EntityLevelLogic = ig.Entity.extend({
 		size:{x:64,y:64},
 		_wmDrawBox: true,
 		_wmBoxColor: 'rgba(0, 0, 255, 0.4)',
 		
-		paused: false,
 		ignorePause: true,
 		levelMusic: new ig.Sound('media/sound/rock_loop.*'),
 		
@@ -22,19 +21,9 @@ ig.module('game.entities.levelLogic').requires('impact.entity').defines(function
 		},
 		update: function() {
 			this.parent();
-			if (ig.input.pressed('pause')) {
+			if (ig.input.pressed('pause') && !ig.game.paused) {
 				ig.game.togglePause();
-				if (this.paused) {
-					ig.music.play();
-					if (ig.music2)
-						ig.music2.play();
-				}
-				else {
-					ig.music.pause();
-					if (ig.music2)
-						ig.music2.pause();
-				}
-				this.paused = !this.paused;
+				ig.game.spawnEntity(EntityPauseMenu, 0, 0);
 			}
 			this.updateScreenPos();
 			

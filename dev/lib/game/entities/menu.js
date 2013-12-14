@@ -15,6 +15,8 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 			}}
 		],
 		
+		clickCD: [], //*See below
+		
 		hitboxList: [],
 		
 		initYOffset: 200,
@@ -44,8 +46,6 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 			this.addAnim('idle', 1, [0]);
 			
 			
-			
-			
 			if (!ig.global.wm) {
 				for (var i = 0; i < this.items.length; i++) {
 					var width = this.font.widthForString(this.items[i].text);
@@ -55,6 +55,8 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 					var pos2 = {x:ig.system.width/2 + width/2 + this.initXOffset, y:this.initYOffset+i*this.ySpacing+height};
 					
 					this.hitboxList.push(new hitbox(pos1, pos2, i));
+					
+					this.clickCD.push(0); //*See below
 				}
 				
 				ig.input.initMouse();
@@ -77,8 +79,14 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 				}
 			}
 			
-			if (ig.input.state('shoot') && this.currSelected != null)
+			for (var i = 0; i < this.clickCD.length; i++) {
+				this.clickCD[i]--; //*See below
+			}
+			
+			if (ig.input.state('shoot') && this.currSelected != null && this.clickCD[this.currSelected] <= 0) {
+				this.clickCD[this.currSelected] = 60; //*I fucking hate this shit which is only here to prevent spamming unintentionally.  It's impossible to click for fewer than a few frames.  This should hackishly fix the issue, though.
 				this.items[this.currSelected].exec();
+			}
 		},
 		
 		draw: function() {

@@ -36,7 +36,6 @@ ig.module(
 		
 		
 		init: function() {
-			ig.soundManager.volume = .1;
 			this.loadLevel(LevelIntro);
 		},
 		
@@ -79,18 +78,34 @@ ig.module(
 			this.zoomLevel = zoomLevel;
 		},
 		
-		muteSound: function(mute) {
-			if (mute)
-				ig.soundManager.volume = 0;
-			else
-				ig.soundManager.volume = 1;
+		muteSound: function() {
+			ig.soundManager.volume = 0;
 		},
 		
-		muteMusic: function(mute) {
-			if (mute)
-				ig.music.volume = 0;
+		unMuteSound: function() {
+			ig.soundManager.volume = 1;
+		},
+		
+		toggleSound: function() {
+			if (ig.soundManager.volume == 0)
+				this.unMuteSound();
 			else
-				ig.music.volume = 1;
+				this.muteSound();
+		},
+		
+		muteMusic: function() {
+			ig.music.volume = 0;
+		},
+		
+		unMuteMusic: function() {
+			ig.music.volume = 1;
+		},
+		
+		toggleMusic: function() {
+			if (ig.music.volume == 0)
+				this.unMuteMusic();
+			else
+				this.muteMusic();
 		}
 	});
 	
