@@ -16,6 +16,7 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 		],
 		
 		clickCD: [], //*See below
+		defClickCD: 20,
 		
 		hitboxList: [],
 		
@@ -56,7 +57,7 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 					
 					this.hitboxList.push(new hitbox(pos1, pos2, i));
 					
-					this.clickCD.push(0); //*See below
+					this.clickCD.push(this.defClickCD); //*See below
 				}
 				
 				ig.input.initMouse();
@@ -84,7 +85,7 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 			}
 			
 			if (ig.input.state('shoot') && this.currSelected != null && this.clickCD[this.currSelected] <= 0) {
-				this.clickCD[this.currSelected] = 60; //*I fucking hate this shit which is only here to prevent spamming unintentionally.  It's impossible to click for fewer than a few frames.  This should hackishly fix the issue, though.
+				this.clickCD[this.currSelected] = this.defClickCD; //*I fucking hate this shit which is only here to prevent spamming unintentionally.  It's impossible to click for fewer than a few frames.  This should hackishly fix the issue, though.
 				this.items[this.currSelected].exec();
 			}
 		},
