@@ -1,5 +1,5 @@
 ig.module( 'game.levels.1' )
-.requires( 'impact.image','game.entities.healthPowerup','game.entities.couch','game.entities.playerL1','game.entities.level1Logic','game.entities.enemyBedbug','game.entities.text','game.entities.trigger','game.entities.flamePickup','game.entities.winFlag' )
+.requires( 'impact.image','game.entities.healthPowerup','game.entities.couch','game.entities.playerL1','game.entities.enemyBedbug','game.entities.trigger','game.entities.text','game.entities.level1Logic','game.entities.flamePickup','game.entities.winFlag' )
 .defines(function(){
 Level1=/*JSON[*/{
 	"entities": [
@@ -10,8 +10,13 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityCouch",
-			"x": 11160,
-			"y": 384
+			"x": 11400,
+			"y": 380
+		},
+		{
+			"type": "EntityHealthPowerup",
+			"x": 10236,
+			"y": 196
 		},
 		{
 			"type": "EntityCouch",
@@ -30,13 +35,8 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityCouch",
-			"x": 11400,
-			"y": 380
-		},
-		{
-			"type": "EntityHealthPowerup",
-			"x": 10236,
-			"y": 196
+			"x": 11160,
+			"y": 384
 		},
 		{
 			"type": "EntityPlayerL1",
@@ -47,58 +47,9 @@ Level1=/*JSON[*/{
 			}
 		},
 		{
-			"type": "EntityLevel1Logic",
-			"x": -8,
-			"y": 288
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 2036,
-			"y": 384
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 11096,
-			"y": -64
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 11700,
-			"y": -64
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 4192,
-			"y": 256
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 4780,
-			"y": 48
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 3772,
-			"y": -4
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 4492,
-			"y": 256
-		},
-		{
 			"type": "EntityEnemyBedbug",
 			"x": 1768,
-			"y": 380
-		},
-		{
-			"type": "EntityText",
-			"x": 928,
-			"y": -96,
-			"settings": {
-				"name": "initStory",
-				"val": "Is that... is that a fucking bedbug?"
-			}
+			"y": 384
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -107,18 +58,8 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 10084,
-			"y": 92
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 2676,
 			"y": 384
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 10688,
-			"y": 316
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -127,27 +68,8 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 11340,
-			"y": -68
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 11240,
 			"y": -64
-		},
-		{
-			"type": "EntityTrigger",
-			"x": 828,
-			"y": -656,
-			"settings": {
-				"size": {
-					"x": 72,
-					"y": 368
-				},
-				"target": {
-					"1": "initStory"
-				}
-			}
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -156,22 +78,8 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 3828,
-			"y": 256
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 5024,
 			"y": 256
-		},
-		{
-			"type": "EntityText",
-			"x": 8036,
-			"y": -148,
-			"settings": {
-				"name": "story4",
-				"val": "That blowtorch might work... but how to get it?"
-			}
 		},
 		{
 			"type": "EntityTrigger",
@@ -188,29 +96,14 @@ Level1=/*JSON[*/{
 			}
 		},
 		{
-			"type": "EntityFlamePickup",
-			"x": 7436,
-			"y": 368
-		},
-		{
 			"type": "EntityEnemyBedbug",
 			"x": 4768,
 			"y": 256
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 8248,
-			"y": 380
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 11928,
 			"y": -64
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 13028,
-			"y": 512
 		},
 		{
 			"type": "EntityText",
@@ -219,20 +112,6 @@ Level1=/*JSON[*/{
 			"settings": {
 				"name": "story3",
 				"val": "What I really need is something to burn them out."
-			}
-		},
-		{
-			"type": "EntityTrigger",
-			"x": 5312,
-			"y": -1104,
-			"settings": {
-				"size": {
-					"x": 404,
-					"y": 308
-				},
-				"target": {
-					"1": "story3"
-				}
 			}
 		},
 		{
@@ -250,11 +129,6 @@ Level1=/*JSON[*/{
 			}
 		},
 		{
-			"type": "EntityWinFlag",
-			"x": 13996,
-			"y": 636
-		},
-		{
 			"type": "EntityTrigger",
 			"x": 13972,
 			"y": 604,
@@ -270,11 +144,6 @@ Level1=/*JSON[*/{
 			}
 		},
 		{
-			"type": "EntityEnemyBedbug",
-			"x": 10812,
-			"y": 372
-		},
-		{
 			"type": "EntityText",
 			"x": 3240,
 			"y": -324,
@@ -285,18 +154,8 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 1108,
-			"y": 380
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 12920,
 			"y": 508
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 11168,
-			"y": -64
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -305,28 +164,13 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 11612,
-			"y": -64
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 9516,
 			"y": 120
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 4892,
-			"y": 56
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 2424,
 			"y": 384
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 12512,
-			"y": 512
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -337,6 +181,162 @@ Level1=/*JSON[*/{
 			"type": "EntityEnemyBedbug",
 			"x": 13136,
 			"y": 512
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 3828,
+			"y": 256
+		},
+		{
+			"type": "EntityLevel1Logic",
+			"x": -8,
+			"y": 288
+		},
+		{
+			"type": "EntityText",
+			"x": 8036,
+			"y": -148,
+			"settings": {
+				"name": "story4",
+				"val": "That blowtorch might work... but how to get it?"
+			}
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 4492,
+			"y": 256
+		},
+		{
+			"type": "EntityFlamePickup",
+			"x": 7436,
+			"y": 368
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 2036,
+			"y": 380
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 8248,
+			"y": 380
+		},
+		{
+			"type": "EntityText",
+			"x": 928,
+			"y": -96,
+			"settings": {
+				"name": "initStory",
+				"val": "Is that... is that a fucking bedbug?"
+			}
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 13028,
+			"y": 512
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11096,
+			"y": -64
+		},
+		{
+			"type": "EntityTrigger",
+			"x": 5312,
+			"y": -1104,
+			"settings": {
+				"size": {
+					"x": 404,
+					"y": 308
+				},
+				"target": {
+					"1": "story3"
+				}
+			}
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 10084,
+			"y": 92
+		},
+		{
+			"type": "EntityWinFlag",
+			"x": 13996,
+			"y": 636
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11700,
+			"y": -64
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 10812,
+			"y": 372
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 10688,
+			"y": 316
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 1108,
+			"y": 380
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 4192,
+			"y": 256
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11168,
+			"y": -64
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11340,
+			"y": -68
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11612,
+			"y": -64
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 4780,
+			"y": 48
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 4892,
+			"y": 56
+		},
+		{
+			"type": "EntityTrigger",
+			"x": 828,
+			"y": -656,
+			"settings": {
+				"size": {
+					"x": 72,
+					"y": 368
+				},
+				"target": {
+					"1": "initStory"
+				}
+			}
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 12512,
+			"y": 512
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 3772,
+			"y": -4
 		}
 	],
 	"layer": [
