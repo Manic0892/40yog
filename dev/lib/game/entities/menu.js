@@ -41,6 +41,8 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 		size: {x:64, y:64},
 		offset: {x:0,y:0},
 		
+		clearColor: '#fff',
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			
@@ -63,7 +65,7 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 				ig.input.initMouse();
 				ig.input.bind(ig.KEY.MOUSE1, 'shoot');
 				
-				ig.game.clearColor = '#ffffff';
+				ig.game.clearColor = this.clearColor;
 			}
 		},
 		
