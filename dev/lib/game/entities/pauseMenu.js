@@ -39,13 +39,17 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu').defines(func
 		},
 		
 		draw: function() {
-			this.parent();
 			if (!ig.global.wm) {
+				ig.system.context.beginPath();
+				ig.system.context.rect(0, 0, ig.system.width, ig.system.height);
+				ig.system.context.fillStyle = 'white';
+				ig.system.context.fill();
 				var soundStatus = "SOUND: " + (ig.soundManager.volume == 0 ? "MUTED" : "UNMUTED");
 				var musicStatus = "MUSIC: " + (ig.music.volume == 0 ? "MUTED" : "UNMUTED");
 				this.statusFont.draw(soundStatus, 50, 50, ig.Font.ALIGN.LEFT);
 				this.statusFont.draw(musicStatus, ig.system.width-50, 50, ig.Font.ALIGN.RIGHT);
 			}
+			this.parent();
 		}
 	});
 });
