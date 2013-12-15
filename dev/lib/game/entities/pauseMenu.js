@@ -5,7 +5,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu').defines(func
 		
 		safetyCD: 20, //this is here to fix bug where it's spawned and then kills itself but misses toggling pause again.  dumb bug.
 		
-		statusFont: new ig.Font('media/impact_bitmap_25pt.png'),
+		statusFont: new ig.Font('media/bebas_neue_50_black.png'),
 		
 		items: [
 			{text:'RESUME', exec:function() {

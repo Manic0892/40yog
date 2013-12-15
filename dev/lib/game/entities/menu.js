@@ -5,9 +5,9 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 		
 		name: 'menu',
 		
-		font: new ig.Font( 'media/impact_bitmap.png' ),
+		font: new ig.Font( 'media/bebas_neue_100_black.png' ),
 	
-		redFont: new ig.Font('media/impact_bitmap_red.png'),
+		redFont: new ig.Font('media/bebas_neue_100_red.png'),
 		
 		items: [
 			{text:'HELLO, WORLD!',exec:function() {
