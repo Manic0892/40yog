@@ -14,6 +14,7 @@ ig.module(
 	'game.levels.1',
 	'game.levels.2',
 	'game.levels.intro',
+	'game.levels.intro1',
 	'game.levels.mainMenu',
 	'game.levels.win',
 	'game.levels.howToPlay',
