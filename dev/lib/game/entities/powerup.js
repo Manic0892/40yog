@@ -4,6 +4,8 @@ ig.module('game.entities.powerup').requires('impact.entity').defines(function() 
 		collides: ig.Entity.COLLIDES.NONE,
 		checkAgainst: ig.Entity.TYPE.A,
 		
+		powerupSound: new ig.Sound('media/sound/yrrt.*'),
+		
 		maxX:0,
 		maxY:5,
 		minX:0,

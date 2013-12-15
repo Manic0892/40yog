@@ -19,6 +19,9 @@ ig.module('game.entities.healthPowerup').requires('game.entities.powerup').defin
 				if (other.health > other.maxHealth) {
 					other.health = other.maxHealth;
 				}
+				
+				this.powerupSound.play();
+				
 				this.kill();
 			}
 		}
