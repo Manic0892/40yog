@@ -1,7 +1,6 @@
 40yog
 =====
-
-####[Latest Build](http://40yog.manic-studios.com)
+##The 40 Year Old Game - [Play Now](http://40yog.manic-studios.com)
 
 This is a game based on the [40 Year Old Boy Podcast](http://www.mikeschmidtcomedy.com/podcast) hosted by comedian [Mike Schmidt](http://www.mikeschmidtcomedy.com).  It is built on the [ImapctJS](http://impactjs.com) engine to run natively in HTML5.
 
@@ -14,4 +13,4 @@ After you've done so, run one of the build scripts from the top level of the dir
 The build scripts are [build.sh](build.sh), [build_node.sh](build_node.sh), and [build_simple.sh](build_simple.sh).  All three require the ImpactJS build tools, available after purchasing a license.  build.sh requires http://javascript-minifier.com/ and its API to be online, but gives the smallest output file.  build_node.sh requires Node.JS and [UglifyJS2](https://github.com/mishoo/UglifyJS2) to be installed, and gives a decently small output file.  build_simple.sh doesn't require anything except the aforementioned ImpactJS build tools, and gives the largest output file.
 
 ###Assets
-All assets that are used by the game are included in dev/media, but the project files for these assets, as well as unused assets, can be found in [40yog_wkshp](https://github.com/Manic0892/40yog_wkshp).
+All assets that are used by the game are included in [dev/media](dev/media), but the project files for these assets, as well as unused assets, can be found in [40yog_wkshp](https://github.com/Manic0892/40yog_wkshp).
