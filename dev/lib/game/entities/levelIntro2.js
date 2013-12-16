@@ -1,9 +1,3 @@
-/*
- *MAIN KEYS
- *titleText
- *descriptionText
- *levelToLoad
- */
 ig.module('game.entities.levelIntro2').requires('game.entities.levelIntro').defines(function(){
 	EntityLevelIntro2 = EntityLevelIntro.extend({
 		titleText: 'TRAVIS BARBECUE',

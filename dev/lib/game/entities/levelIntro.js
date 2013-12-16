@@ -3,6 +3,7 @@
  *titleText
  *descriptionText
  *levelToLoad
+ *clip (optional)
  */
 ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.menu').defines(function(){
 	EntityLevelIntro = ig.Entity.extend({
@@ -39,6 +40,10 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 				this.levelToLoad = eval(this.levelToLoad);
 			
 				ig.game.spawnEntity(EntityPlayMenu, 0,0, {levelToLoad: this.levelToLoad});
+				
+				if (this.clip) {
+					this.clip.play();
+				}
 			}
 		},
 		
@@ -63,6 +68,12 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 		drawDescription: function() {
 			this.descriptionFont.draw(this.descriptionText, ig.system.width/2, 150, this.alignment);
 		},
+		
+		loadLevel: function() {
+			if (this.clip) {
+				this.clip.stop();
+			}
+		}
 	});
 	
 	EntityPlayMenu = EntityMenu.extend({
