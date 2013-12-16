@@ -3,7 +3,7 @@
 
 ####[Latest Build](http://40yog.manic-studios.com)
 
-This is a simple game made to both test the ImpactJS engine and to provide a launch point for a larger project.
+This is a game based on the [40 Year Old Boy Podcast](http://www.mikeschmidtcomedy.com/podcast) hosted by comedian [Mike Schmidt](http://www.mikeschmidtcomedy.com).  It is built on the [ImapctJS](http://impactjs.com) engine to run natively in HTML5.
 
 ###Build Instructions
 Since this is built on ImpactJS, you need to own an ImpactJS license (http://impactjs.com) and download the core libraries and tools to be able to build the game yourself.
