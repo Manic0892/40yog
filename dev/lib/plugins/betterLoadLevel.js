@@ -1,10 +1,3 @@
-/*
-* ImpactJS Per-Pixel Collision Detection Plugin
-* Written by Abraham Walters
-* v1.0 - January 2012
-* v1.1 - August 2012
-*
-*/
 ig.module(
 	'plugins.betterLoadLevel'
 )
