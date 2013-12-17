@@ -1,5 +1,5 @@
-ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entities.menu').defines(function(){
-	EntityLevelWinLogic = ig.Entity.extend({
+ig.module('game.entities.levelLoseLogic').requires('impact.entity', 'game.entities.menu', 'game.levels.mainMenu').defines(function(){
+	EntityLevelLoseLogic = ig.Entity.extend({
 		font: new ig.Font( 'media/bebas_neue_50_black.png' ),
 		
 		initYOffset: 25,
@@ -13,7 +13,7 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 		
 		animSheet: new ig.AnimationSheet('media/null.png',64,64),
 		
-		text: "Congratulations!\nYou won!\nPlay again?",
+		text: "Oh no!\nYou lost!\nPlay again?",
 		
 		collision: ig.Entity.COLLIDES.NONE,
 		type: ig.Entity.TYPE.NONE,
@@ -21,7 +21,7 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 		size: {x:64, y:64},
 		offset: {x:0,y:0},
 		
-		nextLevel:null,
+		thisLevel:LevelMainMenu,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -30,8 +30,8 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 			this.currentAnim = this.anims.idle;
 			
 			if (!ig.global.wm) {
-				ig.game.spawnEntity(EntityWinMenu,0,0,{nextLevel:this.nextLevel});
-				ig.game.clearColor = '#fff';
+				ig.game.spawnEntity(EntityLoseMenu,0,0,{thisLevel:this.thisLevel});
+				ig.game.clearColor = '#500';
 			}
 		},
 		
@@ -44,8 +44,10 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 		}
 	});
 	
-	EntityWinMenu = EntityMenu.extend({
-		name: 'winMenu',
+	EntityLoseMenu = EntityMenu.extend({
+		name: 'loseMenu',
+		
+		redFont: new ig.Font('media/bebas_neue_100_white.png'), //this is just silly
 		
 		items: [
 			{text:'MAIN MENU',exec:function() {
@@ -53,17 +55,14 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 			}}
 		],
 		
-		initYOffset: 500,
+		initYOffset: 400,
 		
 		initXOffset: 0,
 		
 		init:function(x,y,settings) {
-			if (settings.nextLevel != null) {
-				this.items.unshift({text:'NEXT LEVEL', exec:function() {
-					ig.game.loadLevel(settings.nextLevel);
-				}});
-				this.initYOffset -= 100;
-			}
+			this.items.unshift({text:'REPLAY', exec:function() {
+				ig.game.loadLevel(settings.thisLevel);
+			}});
 			this.parent(x,y,settings);
 		}
 	});

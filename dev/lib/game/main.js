@@ -4,21 +4,18 @@ ig.module(
 .requires(
 	'plugins.perpixel',
 	
-	'impact.game',
-	'impact.font',
 	'impact.debug.debug',
 	
-	'game.entities.bloodParticle',
-	'game.entities.ashParticle',
-	
-	'game.levels.1',
-	'game.levels.2',
 	'game.levels.intro',
-	'game.levels.intro1',
-	'game.levels.intro2',
 	'game.levels.mainMenu',
-	'game.levels.win',
-	'game.levels.howToPlay',
+	'game.levels.intro1',
+	'game.levels.1',
+	'game.levels.lose1',
+	'game.levels.win1',
+	'game.levels.intro2',
+	'game.levels.2',
+	'game.levels.lose2',
+	'game.levels.win2',
 	
 	//'plugins.gui',
 	'plugins.pause',

@@ -106,14 +106,14 @@ ig.module(
 			
 			if (this.pos.y > collisionMapRef.height*collisionMapRef.tilesize + 400) {
 				ig.music.stop();
-				ig.game.loadLevelDeferred(LevelMainMenu);
+				this.endOfLevel(false);
 			}
 		},
 		
 		receiveDamage: function(amount, other) {
 			if (this.health - amount <= 0) {
 				ig.music.stop();
-				ig.game.loadLevelDeferred(LevelMainMenu);
+				this.endOfLevel(false);
 			}
 			this.parent(amount, other);
 		},
@@ -132,6 +132,10 @@ ig.module(
 		
 		pickup: function(other) {
 			console.log('picked up' + other);
+		},
+		
+		endOfLevel: function(win) {
+			console.log("No end of level logic supplied.");
 		}
 	});
 	

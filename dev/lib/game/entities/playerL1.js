@@ -35,7 +35,7 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		triggeredBy: function(triggered, other) {
 			if (other.name=='winTrigger') {
 				ig.music.stop();
-				ig.game.loadLevelDeferred(LevelWin1);
+				this.endOfLevel(true);
 			}
 		},
 		
@@ -60,6 +60,10 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		receiveDamage: function(amount, from) {
 			this.parent(amount, from);
 			this.gruntSound.play();
+		},
+		
+		endOfLevel: function(win) {
+			win ? ig.game.loadLevelDeferred(LevelWin1) : ig.game.loadLevelDeferred(LevelLose1);
 		}
 	});
 	

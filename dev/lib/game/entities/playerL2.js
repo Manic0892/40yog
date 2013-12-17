@@ -18,7 +18,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		gravityFactor:0,
 		
 		enabled: false,
-				
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			this.addAnim('damage0', 1, [0]);
@@ -77,20 +77,13 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			}
 		},
 		
-		endOfLevel: function(win) {
-			if (win) {
-				ig.game.loadLevelDeferred(LevelWin2);
-			} else {
-				ig.game.loadLevelDeferred(LevelMainMenu);
-			}
-		},
-		
 		enable: function() {
 			this.enabled = true;
 			this.loopingSoundManager.add(this.carSound);
 		},
 		
-		loadLevel: function() {
+		endOfLevel: function(win) {
+			win ? ig.game.loadLevelDeferred(LevelWin2) : ig.game.loadLevelDeferred(LevelLose2);
 		}
 	});
 	
