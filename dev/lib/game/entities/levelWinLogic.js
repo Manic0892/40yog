@@ -1,6 +1,6 @@
-ig.module('game.entities.levelWinLogic').requires('impact.entity').defines(function(){
+ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entities.menu').defines(function(){
 	EntityLevelWinLogic = ig.Entity.extend({
-		font: new ig.Font( 'media/impact_bitmap_large_yellow.png' ),
+		font: new ig.Font( 'media/bebas_neue_50_black.png' ),
 		
 		initYOffset: 25,
 		
@@ -13,11 +13,15 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity').defines(funct
 		
 		animSheet: new ig.AnimationSheet('media/null.png',64,64),
 		
+		text: "Congratulations!\nYou won!\nPlay again?",
+		
 		collision: ig.Entity.COLLIDES.NONE,
 		type: ig.Entity.TYPE.NONE,
 		checkAgainst: ig.Entity.TYPE.NONE,
 		size: {x:64, y:64},
 		offset: {x:0,y:0},
+		
+		nextLevel:null,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -25,7 +29,8 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity').defines(funct
 			this.addAnim('idle', 1, [0]);
 			
 			if (!ig.global.wm) {
-				ig.game.clearColor = '#969696';
+				ig.game.spawnEntity(EntityWinMenu,0,0,{nextLevel:this.nextLevel});
+				ig.game.clearColor = '#fff';
 			}
 		},
 		
@@ -39,10 +44,32 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity').defines(funct
 			this.parent();
 			
 			if (!ig.global.wm) {
-				this.font.draw('Congratulations!\nYou won!\nPlay again?', this.initXOffset + ig.system.width/2, this.initYOffset, this.alignment);
+				this.font.draw(this.text, this.initXOffset + ig.system.width/2, this.initYOffset, this.alignment);
 			}
 		}
 	});
 	
-	
+	EntityWinMenu = EntityMenu.extend({
+		name: 'winMenu',
+		
+		items: [
+			{text:'MAIN MENU',exec:function() {
+				ig.game.loadLevel(LevelMainMenu);
+			}}
+		],
+		
+		initYOffset: 500,
+		
+		initXOffset: 0,
+		
+		init:function(x,y,settings) {
+			if (settings.nextLevel != null) {
+				this.items.unshift({text:'NEXT LEVEL', exec:function() {
+					ig.game.loadLevel(settings.nextLevel);
+				}});
+				this.initYOffset -= 100;
+			}
+			this.parent(x,y,settings);
+		}
+	});
 });

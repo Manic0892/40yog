@@ -35,7 +35,7 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		triggeredBy: function(triggered, other) {
 			if (other.name=='winTrigger') {
 				ig.music.stop();
-				ig.game.loadLevelDeferred(LevelIntro2);
+				ig.game.loadLevelDeferred(LevelWin1);
 			}
 		},
 		

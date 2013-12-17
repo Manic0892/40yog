@@ -21,7 +21,7 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 		
 		descriptionText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,\nsed do eiusmod tempor incididunt ut labore et dolore magna\naliqua. Ut enim ad minim veniam, quis nostrud exercitation\nullamco laboris nisi ut aliquip ex ea commodo consequat. Duis\naute irure dolor in reprehenderit in voluptate velit esse cillum\ndolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat\nnon proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 		
-		levelToLoad: 'LevelMainMenu',
+		levelToLoad: null,
 		
 		collision: ig.Entity.COLLIDES.NONE,
 		type: ig.Entity.TYPE.NONE,
@@ -36,8 +36,6 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 			
 			if (!ig.global.wm) {
 				ig.game.clearColor = 'black';
-				
-				this.levelToLoad = eval(this.levelToLoad);
 			
 				ig.game.spawnEntity(EntityPlayMenu, 0,0, {levelToLoad: this.levelToLoad});
 				

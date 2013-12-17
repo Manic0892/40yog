@@ -42,7 +42,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu').defines(func
 			if (!ig.global.wm) {
 				ig.system.context.beginPath();
 				ig.system.context.rect(0, 0, ig.system.width, ig.system.height);
-				ig.system.context.fillStyle = 'white';
+				ig.system.context.fillStyle = '#5f5f5f';
 				ig.system.context.fill();
 				var soundStatus = "SOUND: " + (ig.soundManager.volume == 0 ? "MUTED" : "UNMUTED");
 				var musicStatus = "MUSIC: " + (ig.music.volume == 0 ? "MUTED" : "UNMUTED");

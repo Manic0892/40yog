@@ -73,13 +73,13 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		
 		triggeredBy: function(triggered, other) {
 			if (other.name=='winTrigger') {
-				this.endOfLevel();
+				this.endOfLevel(true);
 			}
 		},
 		
 		endOfLevel: function(win) {
 			if (win) {
-				ig.game.loadLevelDeferred(LevelWin);
+				ig.game.loadLevelDeferred(LevelWin2);
 			} else {
 				ig.game.loadLevelDeferred(LevelMainMenu);
 			}
