@@ -1,5 +1,5 @@
 ig.module( 'game.levels.1' )
-.requires( 'impact.image','game.entities.healthPowerup','game.entities.couch','game.entities.playerL1','game.entities.enemyBedbug','game.entities.trigger','game.entities.text','game.entities.level1Logic','game.entities.flamePickup','game.entities.winFlag' )
+.requires( 'impact.image','game.entities.healthPowerup','game.entities.couch','game.entities.playerL1','game.entities.flamePickup','game.entities.enemyBedbug','game.entities.winFlag','game.entities.level1Logic','game.entities.text','game.entities.trigger' )
 .defines(function(){
 Level1=/*JSON[*/{
 	"entities": [
@@ -10,8 +10,18 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityCouch",
+			"x": 12752,
+			"y": 512
+		},
+		{
+			"type": "EntityCouch",
 			"x": 11400,
 			"y": 380
+		},
+		{
+			"type": "EntityCouch",
+			"x": 11160,
+			"y": 384
 		},
 		{
 			"type": "EntityHealthPowerup",
@@ -25,18 +35,8 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityCouch",
-			"x": 12752,
-			"y": 512
-		},
-		{
-			"type": "EntityCouch",
 			"x": 11444,
 			"y": -64
-		},
-		{
-			"type": "EntityCouch",
-			"x": 11160,
-			"y": 384
 		},
 		{
 			"type": "EntityPlayerL1",
@@ -47,135 +47,34 @@ Level1=/*JSON[*/{
 			}
 		},
 		{
-			"type": "EntityEnemyBedbug",
-			"x": 1768,
-			"y": 384
+			"type": "EntityFlamePickup",
+			"x": 7436,
+			"y": 368
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 6176,
-			"y": 128
+			"x": 13028,
+			"y": 512
+		},
+		{
+			"type": "EntityWinFlag",
+			"x": 13996,
+			"y": 636
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 2676,
-			"y": 384
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 7688,
-			"y": 384
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 11240,
-			"y": -64
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 5936,
-			"y": 128
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 5024,
-			"y": 256
-		},
-		{
-			"type": "EntityTrigger",
-			"x": 3016,
-			"y": -984,
-			"settings": {
-				"size": {
-					"x": 192,
-					"y": 428
-				},
-				"target": {
-					"1": "story2"
-				}
-			}
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 4768,
-			"y": 256
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 11928,
-			"y": -64
-		},
-		{
-			"type": "EntityText",
-			"x": 5596,
-			"y": -460,
-			"settings": {
-				"name": "story3",
-				"val": "What I really need is something to burn them out."
-			}
-		},
-		{
-			"type": "EntityTrigger",
-			"x": 7904,
-			"y": -964,
-			"settings": {
-				"size": {
-					"x": 292,
-					"y": 436
-				},
-				"target": {
-					"1": "story4"
-				}
-			}
-		},
-		{
-			"type": "EntityTrigger",
-			"x": 13972,
-			"y": 604,
-			"settings": {
-				"size": {
-					"x": 104,
-					"y": 104
-				},
-				"name": "winTrigger",
-				"target": {
-					"1": "PlayerLevel1"
-				}
-			}
-		},
-		{
-			"type": "EntityText",
-			"x": 3240,
-			"y": -324,
-			"settings": {
-				"name": "story2",
-				"val": "There are a fucking lot of them.  They hurt, too."
-			}
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 12920,
-			"y": 508
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 11824,
-			"y": -68
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 9516,
-			"y": 120
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 2424,
-			"y": 384
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 11892,
+			"x": 1108,
 			"y": 380
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11612,
+			"y": -64
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 12512,
+			"y": 512
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -183,23 +82,9 @@ Level1=/*JSON[*/{
 			"y": 512
 		},
 		{
-			"type": "EntityEnemyBedbug",
-			"x": 3828,
-			"y": 256
-		},
-		{
 			"type": "EntityLevel1Logic",
 			"x": -8,
 			"y": 288
-		},
-		{
-			"type": "EntityText",
-			"x": 8036,
-			"y": -148,
-			"settings": {
-				"name": "story4",
-				"val": "That blowtorch might work... but how to get it?"
-			}
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -207,18 +92,8 @@ Level1=/*JSON[*/{
 			"y": 256
 		},
 		{
-			"type": "EntityFlamePickup",
-			"x": 7436,
-			"y": 368
-		},
-		{
 			"type": "EntityEnemyBedbug",
 			"x": 2036,
-			"y": 380
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 8248,
 			"y": 380
 		},
 		{
@@ -232,37 +107,13 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 13028,
-			"y": 512
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 11096,
 			"y": -64
-		},
-		{
-			"type": "EntityTrigger",
-			"x": 5312,
-			"y": -1104,
-			"settings": {
-				"size": {
-					"x": 404,
-					"y": 308
-				},
-				"target": {
-					"1": "story3"
-				}
-			}
 		},
 		{
 			"type": "EntityEnemyBedbug",
 			"x": 10084,
 			"y": 92
-		},
-		{
-			"type": "EntityWinFlag",
-			"x": 13996,
-			"y": 636
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -271,18 +122,8 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 10812,
-			"y": 372
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 10688,
 			"y": 316
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 1108,
-			"y": 380
 		},
 		{
 			"type": "EntityEnemyBedbug",
@@ -291,28 +132,13 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 11168,
-			"y": -64
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 11340,
 			"y": -68
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 11612,
-			"y": -64
-		},
-		{
-			"type": "EntityEnemyBedbug",
 			"x": 4780,
 			"y": 48
-		},
-		{
-			"type": "EntityEnemyBedbug",
-			"x": 4892,
-			"y": 56
 		},
 		{
 			"type": "EntityTrigger",
@@ -330,22 +156,196 @@ Level1=/*JSON[*/{
 		},
 		{
 			"type": "EntityEnemyBedbug",
-			"x": 12512,
-			"y": 512
+			"x": 5024,
+			"y": 256
 		},
 		{
 			"type": "EntityEnemyBedbug",
 			"x": 3772,
 			"y": -4
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 4768,
+			"y": 256
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 1768,
+			"y": 384
+		},
+		{
+			"type": "EntityText",
+			"x": 8036,
+			"y": -148,
+			"settings": {
+				"name": "story4",
+				"val": "That blowtorch might work... but how to get it?"
+			}
+		},
+		{
+			"type": "EntityTrigger",
+			"x": 3016,
+			"y": -984,
+			"settings": {
+				"size": {
+					"x": 192,
+					"y": 428
+				},
+				"target": {
+					"1": "story2"
+				}
+			}
+		},
+		{
+			"type": "EntityText",
+			"x": 5596,
+			"y": -460,
+			"settings": {
+				"name": "story3",
+				"val": "What I really need is something to burn them out."
+			}
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 6176,
+			"y": 128
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 8248,
+			"y": 380
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11928,
+			"y": -64
+		},
+		{
+			"type": "EntityTrigger",
+			"x": 13972,
+			"y": 604,
+			"settings": {
+				"size": {
+					"x": 104,
+					"y": 104
+				},
+				"name": "winTrigger",
+				"target": {
+					"1": "PlayerLevel1"
+				}
+			}
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 2676,
+			"y": 384
+		},
+		{
+			"type": "EntityTrigger",
+			"x": 5312,
+			"y": -1104,
+			"settings": {
+				"size": {
+					"x": 404,
+					"y": 308
+				},
+				"target": {
+					"1": "story3"
+				}
+			}
+		},
+		{
+			"type": "EntityTrigger",
+			"x": 7904,
+			"y": -964,
+			"settings": {
+				"size": {
+					"x": 292,
+					"y": 436
+				},
+				"target": {
+					"1": "story4"
+				}
+			}
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 12920,
+			"y": 508
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 7688,
+			"y": 384
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 10812,
+			"y": 372
+		},
+		{
+			"type": "EntityText",
+			"x": 3240,
+			"y": -324,
+			"settings": {
+				"name": "story2",
+				"val": "There are a fucking lot of them.  They hurt, too."
+			}
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 9516,
+			"y": 120
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11240,
+			"y": -64
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11168,
+			"y": -64
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11824,
+			"y": -68
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 11892,
+			"y": 380
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 5936,
+			"y": 128
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 4892,
+			"y": 56
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 2424,
+			"y": 384
+		},
+		{
+			"type": "EntityEnemyBedbug",
+			"x": 3828,
+			"y": 256
 		}
 	],
 	"layer": [
 		{
 			"name": "skyLayer",
-			"width": 1,
-			"height": 1,
+			"width": 8,
+			"height": 6,
 			"linkWithCollision": false,
-			"visible": 0,
+			"visible": 1,
 			"tilesetName": "media/tileset_bg_2.png",
 			"repeat": true,
 			"preRender": true,
@@ -353,32 +353,12 @@ Level1=/*JSON[*/{
 			"tilesize": 64,
 			"foreground": false,
 			"data": [
-				[1]
-			]
-		},
-		{
-			"name": "sunLayer",
-			"width": 10,
-			"height": 10,
-			"linkWithCollision": false,
-			"visible": 0,
-			"tilesetName": "media/sun.png",
-			"repeat": false,
-			"preRender": true,
-			"distance": "100",
-			"tilesize": 64,
-			"foreground": false,
-			"data": [
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,1,2,0,0,0,0,0,0],
-				[0,0,3,4,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0]
+				[17,18,19,20,21,22,23,24],
+				[25,26,27,28,29,30,31,32],
+				[33,34,35,36,37,38,39,40],
+				[41,42,43,44,45,46,47,48],
+				[49,50,51,52,53,54,55,56],
+				[57,58,59,60,61,62,63,64]
 			]
 		},
 		{
@@ -653,5 +633,5 @@ Level1=/*JSON[*/{
 		}
 	]
 }/*]JSON*/;
-Level1Resources=[new ig.Image('media/tileset_bg_2.png'), new ig.Image('media/sun.png'), new ig.Image('media/tileset_bg_2.png'), new ig.Image('media/building.png'), new ig.Image('media/building.png'), new ig.Image('media/Tileset2.png'), new ig.Image('media/Tileset2.png')];
+Level1Resources=[new ig.Image('media/tileset_bg_2.png'), new ig.Image('media/tileset_bg_2.png'), new ig.Image('media/building.png'), new ig.Image('media/building.png'), new ig.Image('media/Tileset2.png'), new ig.Image('media/Tileset2.png')];
 });
