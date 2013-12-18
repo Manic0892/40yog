@@ -10,7 +10,7 @@ ig.module(
 		ignorePause: true,
 		
 		sounds: [],
-		stopped: false,
+		prevVol: 0,
 		
 		add: function(sound) {
 			this.sounds.push(sound);
@@ -32,17 +32,16 @@ ig.module(
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
+			this.prevVol = ig.soundManager.volume;
 		},
 		
 		update: function() {
 			this.parent();
-			if (ig.soundManager.volume <= 0) {
+			if (this.prevVol != ig.soundManager.volume) {
 				this.stop();
-				this.stopped = true;
-			} else if (this.stopped) {
 				this.play();
-				this.stopped = false;
 			}
+			this.prevVol = ig.soundManager.volume;
 		},
 		
 		loadLevel: function() {
