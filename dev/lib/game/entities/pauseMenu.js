@@ -16,27 +16,23 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu').defines(func
 				ig.game.getEntitiesByType(EntityPauseMenu)[0].kill(); //Fuck, this is hacky.
 			}},
 			{text:'MUSIC +',exec:function() {
-				var newVol = ig.music.volume * 10;
-				newVol += 1;
-				ig.music.volume = newVol/10;
+				ig.music.volume += .1;
+				ig.music.volume = Math.ceil(ig.music.volume * 10) / 10;
 				if (ig.music.volume > 1) ig.music.volume = 1;
 			}},
 			{text:'MUSIC -',exec:function() {
-				var newVol = ig.music.volume * 10;
-				newVol -= 1;
-				ig.music.volume = newVol/10;
+				ig.music.volume -= .1;
+				ig.music.volume = Math.floor(ig.music.volume * 10) / 10;
 				if (ig.music.volume < 0) ig.music.volume = 0;
 			}},
 			{text:'SOUND +',exec:function() {
-				var newVol = ig.soundManager.volume * 10;
-				newVol += 1;
-				ig.soundManager.volume = newVol/10;
+				ig.soundManager.volume += .1;
+				ig.soundManager.volume = Math.ceil(ig.soundManager.volume * 10) / 10;
 				if (ig.soundManager.volume > 1) ig.soundManager.volume = 1;
 			}},
 			{text:'SOUND -',exec:function() {
-				var newVol = ig.soundManager.volume * 10;
-				newVol -= 1;
-				ig.soundManager.volume = newVol/10;
+				ig.soundManager.volume -= .1;
+				ig.soundManager.volume = Math.floor(ig.soundManager.volume * 10) / 10;
 				if (ig.soundManager.volume < 0) ig.soundManager.volume = 0;
 			}},
 			//{text:'TOGGLE MUSIC',exec:function() {
