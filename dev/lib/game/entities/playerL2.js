@@ -43,6 +43,10 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 					this.vel.y = 700;
 				else
 					this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
+			} else {
+				this.accel.x = 0;
+				this.vel.x = 0;
+				this.vel.y = 0;
 			}
 			this.parent();
 		},
@@ -72,8 +76,12 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		triggeredBy: function(triggered, other) {
-			if (other.name=='winTrigger') {
-				this.endOfLevel(true);
+			if (other.name=='closingCutsceneTrigger') {
+				//this.endOfLevel(true);
+				var prop = ig.game.getEntityByName("cutsceneProp2");
+				prop.pos.x = this.pos.x + this.size.x - prop.size.x;
+				prop.pos.y = this.pos.y - prop.size.y;
+				this.enabled = false;
 			}
 		},
 		

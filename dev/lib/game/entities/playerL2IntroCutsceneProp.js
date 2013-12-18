@@ -21,19 +21,26 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 		update: function() {
 			this.parent();
 			if (this.currWaypoint != null) {
-				if (this.currWaypoint.pos.x > this.pos.x) {
-					this.pos.x += 2;
-				} else if (this.currWaypoint.pos.x < this.pos.x) {
-					this.pos.x -= 2;
+				if (Math.abs(this.currWaypoint.pos.x - this.pos.x) > 2) {
+					if (this.currWaypoint.pos.x > this.pos.x) {
+						this.pos.x += 2;
+					} else if (this.currWaypoint.pos.x < this.pos.x) {
+						this.pos.x -= 2;
+					}
 				}
 				
-				if (this.currWaypoint.pos.y > this.pos.y) {
-					this.pos.y += 2;
-				} else if (this.currWaypoint.pos.y < this.pos.y) {
-					this.pos.y -= 2;
+				if (Math.abs(this.currWaypoint.pos.y - this.pos.y) > 2) {
+					if (this.currWaypoint.pos.y > this.pos.y) {
+						this.pos.y += 2;
+					} else if (this.currWaypoint.pos.y < this.pos.y) {
+						this.pos.y -= 2;
+					}
 				}
+					
 				var ninetyDegrees = 90 * (Math.PI/180);
-				var angle = Math.atan2(this.currWaypoint.pos.y - this.pos.y + ig.game.screen.y, this.currWaypoint.pos.x - this.pos.x + ig.game.screen.x);
+				var x1,x2,y1,y2;
+				//if (this.currWaypoint.pos.y > )
+				var angle = Math.atan2(this.currWaypoint.pos.y - this.pos.y, this.currWaypoint.pos.x - this.pos.x);
 				angle += ninetyDegrees;
 				this.currentAnim.angle = angle;
 			}
@@ -43,8 +50,12 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 			if (other.hasNextWaypoint) {
 				this.currWaypoint = ig.game.getEntityByName(other.nextWaypoint);
 			} else {
-				ig.game.getEntityByName('PlayerL2').enable();
-				this.kill();
+				if (this.opening) {
+					ig.game.getEntityByName('PlayerL2').enable();
+					this.kill();
+				} else {
+					ig.game.loadLevelDeferred(LevelWin2);
+				}
 			}
 		}
 	});
