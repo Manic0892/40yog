@@ -82,6 +82,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				prop.pos.x = this.pos.x + this.size.x - prop.size.x;
 				prop.pos.y = this.pos.y - prop.size.y;
 				this.enabled = false;
+				this.loopingSoundManager.stop();
 			}
 		},
 		

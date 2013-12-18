@@ -99,15 +99,6 @@ ig.module(
 			
 			this.arm.attacheeUpdate(this.pos.x, this.pos.y, this.flip);
 			//console.log(this.arm.pos, this.pos);
-			
-			
-			
-			var collisionMapRef = ig.game.collisionMap;
-			
-			if (this.pos.y > collisionMapRef.height*collisionMapRef.tilesize + 400) {
-				ig.music.stop();
-				this.endOfLevel(false);
-			}
 		},
 		
 		receiveDamage: function(amount, other) {

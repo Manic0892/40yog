@@ -6,6 +6,7 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		cooldown: 5,
 		
 		gruntSound: new ig.Sound('media/sound/grunt.*'),
+		splatSound: new ig.Sound('media/sound/splat.*'),
 		
 		flameActive: false,
 		
@@ -30,6 +31,13 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 			this.parent();
 			
 			this.soundCD--;
+			var collisionMapRef = ig.game.collisionMap;
+			
+			if (this.pos.y > collisionMapRef.height*collisionMapRef.tilesize + 400) {
+				ig.music.stop();
+				this.splatSound.play();
+				this.endOfLevel(false);
+			}
 		},
 		
 		triggeredBy: function(triggered, other) {
