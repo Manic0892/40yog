@@ -2,7 +2,9 @@ ig.module('game.entities.levelWinLogic1').requires('game.entities.levelWinLogic'
 	EntityLevelWinLogic1 = EntityLevelWinLogic.extend({
 		text: "Lil' Schmitty defeated the bedbugs.\nNow it's time to make some money.",
 		
-		nextLevel:Level2
+		nextLevel:Level2,
+		
+		beat: "l1"
 	});
 	
 	

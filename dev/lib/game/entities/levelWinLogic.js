@@ -21,6 +21,8 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 		size: {x:64, y:64},
 		offset: {x:0,y:0},
 		
+		beat: "l0",
+		
 		nextLevel:null,
 		
 		init: function(x,y,settings) {
@@ -32,6 +34,7 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 			if (!ig.global.wm) {
 				ig.game.spawnEntity(EntityWinMenu,0,0,{nextLevel:this.nextLevel});
 				ig.game.clearColor = '#fff';
+				$.cookie(this.beat, "beat", {expires: 99999, path:'/'});
 			}
 		},
 		

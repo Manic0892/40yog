@@ -2,7 +2,9 @@ ig.module('game.entities.levelWinLogic2').requires('game.entities.levelWinLogic'
 	EntityLevelWinLogic2 = EntityLevelWinLogic.extend({
 		text: "Congratulations!\nYou beat the game.\n",
 		
-		nextLevel:null
+		nextLevel:null,
+		
+		beat: "l2"
 	});
 	
 	
