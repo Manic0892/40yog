@@ -4,14 +4,10 @@ ig.module('game.entities.mainMenu').requires('game.entities.menu').defines(funct
 		
 		items: [
 			{text:'PLAY',exec:function() {
-				ig.game.loadLevel(LevelIntro1);
-			}}, /*{text:'OPTIONS', exec:function() {
-				console.log('clicked options');
-			}}, {text:'HOW TO PLAY', exec:function() {
-				ig.game.loadLevel(LevelHowToPlay)
-			}}, {text: 'L2_DEBUG', exec:function() {
-				ig.game.loadLevel(Level2);
-			}}*/
+				ig.game.loadLevelDeferred(LevelIntro1);
+			}}, {text:'LEVEL SELECT', exec:function() {
+				ig.game.loadLevelDeferred(LevelSelectMenu);
+			}}
 		],
 		
 		initYOffset: 128,
