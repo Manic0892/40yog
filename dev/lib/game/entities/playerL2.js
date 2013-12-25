@@ -17,6 +17,16 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		health:3,
 		gravityFactor:0,
 		
+		
+		
+		hitTimer: new ig.Timer(),
+		hitFlashDuration: 3,
+		hitFlashTick: .5,
+		hitFlashCurrTick: 0,
+		hitFlashAlpha: .3,
+		
+		
+		
 		enabled: false,
 		
 		init: function(x,y,settings) {
@@ -48,6 +58,19 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				this.vel.x = 0;
 				this.vel.y = 0;
 			}
+			
+			//hit flashing code
+			if (this.hitTimer.delta() < 0) {
+				this.hitFlashCurrTick += this.hitTimer.tick();
+				if (this.hitFlashCurrTick >= this.hitFlashTick) {
+					this.currentAnim.alpha == this.hitFlashAlpha ? this.currentAnim.alpha = 1 : this.currentAnim.alpha = this.hitFlashAlpha;
+					this.hitFlashCurrTick = 0;
+				}
+			} else {
+				this.currentAnim.alpha = 1;
+			}
+			
+			
 			this.parent();
 		},
 			
@@ -59,16 +82,24 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		check: function(other) {
 			if (other.health > 0) {
 				this.crashSound.play();
-				this.receiveDamage(1);
-				if (this.health == 2) {
+				if (this.health == 3) {
 					this.currentAnim = this.anims.damage1;
 				}
-				if (this.health == 1) {
+				if (this.health == 2) {
 					this.currentAnim = this.anims.damage2;
 				}
+				this.receiveDamage(1);
 				this.vel.x -= 200;
 				other.kill();
 			}
+		},
+		
+		receiveDamage: function(amount, other) {
+			this.hitTimer.set(this.hitFlashDuration);
+			this.hitTimer.tick();
+			this.currentAnim.alpha = this.hitFlashAlpha;
+			this.hitFlashCurrTick = 0;
+			this.parent(amount, other);
 		},
 		
 		kill: function() {

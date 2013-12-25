@@ -25,6 +25,12 @@ ig.module(
 		maxHealth: 100,
 		cooldown: 40,
 		
+		hitTimer: new ig.Timer(),
+		hitFlashDuration: 3,
+		hitFlashTick: .5,
+		hitFlashCurrTick: 0,
+		hitFlashAlpha: .3,
+		
 		zIndex: -9,
 		
 		init: function( x, y, settings ) {
@@ -93,11 +99,21 @@ ig.module(
 			
 			if (this.cooldown > 0)
 				this.cooldown--;
-							
+				
+			//hit flashing code
+			if (this.hitTimer.delta() < 0) {
+				this.hitFlashCurrTick += this.hitTimer.tick();
+				if (this.hitFlashCurrTick >= this.hitFlashTick) {
+					this.currentAnim.alpha == this.hitFlashAlpha ? this.currentAnim.alpha = 1 : this.currentAnim.alpha = this.hitFlashAlpha;
+					this.hitFlashCurrTick = 0;
+				}
+			} else {
+				this.currentAnim.alpha = 1;
+			}
 			// move!
 			this.parent();
 			
-			this.arm.attacheeUpdate(this.pos.x, this.pos.y, this.flip);
+			this.arm.attacheeUpdate(this.pos.x, this.pos.y, this.flip, this.currentAnim.alpha);
 			//console.log(this.arm.pos, this.pos);
 		},
 		
@@ -106,6 +122,10 @@ ig.module(
 				ig.music.stop();
 				this.endOfLevel(false);
 			}
+			this.hitTimer.set(this.hitFlashDuration);
+			this.hitTimer.tick();
+			this.currentAnim.alpha = this.hitFlashAlpha;
+			this.hitFlashCurrTick = 0;
 			this.parent(amount, other);
 		},
 		
@@ -182,9 +202,10 @@ ig.module(
 			this.parent();
 		},
 		
-		attacheeUpdate: function(x,y, shouldFlip) { //you can't just set the pos of the arm to the pos of the attachee.  What the fuck?
+		attacheeUpdate: function(x,y, shouldFlip, alpha) { //you can't just set the pos of the arm to the pos of the attachee.  What the fuck?
 			this.pos = {x:x+10, y:y+25};
 			this.flip = shouldFlip;
+			this.currentAnim.alpha = alpha;
 		},
 		
 		draw: function() {
