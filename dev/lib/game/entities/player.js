@@ -118,15 +118,17 @@ ig.module(
 		},
 		
 		receiveDamage: function(amount, other) {
-			if (this.health - amount <= 0) {
-				ig.music.stop();
-				this.endOfLevel(false);
+			if (this.hitTimer.delta() >= 0) {
+				if (this.health - amount <= 0) {
+					ig.music.stop();
+					this.endOfLevel(false);
+				}
+				this.hitTimer.set(this.hitFlashDuration);
+				this.hitTimer.tick();
+				this.currentAnim.alpha = this.hitFlashAlpha;
+				this.hitFlashCurrTick = 0;
+				this.parent(amount, other);
 			}
-			this.hitTimer.set(this.hitFlashDuration);
-			this.hitTimer.tick();
-			this.currentAnim.alpha = this.hitFlashAlpha;
-			this.hitFlashCurrTick = 0;
-			this.parent(amount, other);
 		},
 		
 		healthPowerup: function(amount) {

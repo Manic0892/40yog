@@ -82,14 +82,16 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		check: function(other) {
 			if (other.health > 0) {
 				this.crashSound.play();
-				if (this.health == 3) {
-					this.currentAnim = this.anims.damage1;
+				if (this.hitTimer.delta() >= 0) {
+					if (this.health == 3) {
+						this.currentAnim = this.anims.damage1;
+					}
+					if (this.health == 2) {
+						this.currentAnim = this.anims.damage2;
+					}
+					this.receiveDamage(1);
+					this.vel.x -= 200;
 				}
-				if (this.health == 2) {
-					this.currentAnim = this.anims.damage2;
-				}
-				this.receiveDamage(1);
-				this.vel.x -= 200;
 				other.kill();
 			}
 		},
