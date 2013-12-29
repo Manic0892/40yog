@@ -24,6 +24,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		hitFlashTick: .5,
 		hitFlashCurrTick: 0,
 		hitFlashAlpha: .3,
+		hitFlashCurrAlpha: 1,
 		
 		
 		
@@ -63,9 +64,10 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			if (this.hitTimer.delta() < 0) {
 				this.hitFlashCurrTick += this.hitTimer.tick();
 				if (this.hitFlashCurrTick >= this.hitFlashTick) {
-					this.currentAnim.alpha == this.hitFlashAlpha ? this.currentAnim.alpha = 1 : this.currentAnim.alpha = this.hitFlashAlpha;
+					this.hitFlashCurrAlpha == this.hitFlashAlpha ? this.hitFlashCurrAlpha = 1 : this.hitFlashCurrAlpha = this.hitFlashAlpha;
 					this.hitFlashCurrTick = 0;
 				}
+				this.currentAnim.alpha = this.hitFlashCurrAlpha;
 			} else {
 				this.currentAnim.alpha = 1;
 			}
@@ -99,7 +101,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		receiveDamage: function(amount, other) {
 			this.hitTimer.set(this.hitFlashDuration);
 			this.hitTimer.tick();
-			this.currentAnim.alpha = this.hitFlashAlpha;
+			this.hitFlashCurrAlpha = this.hitFlashAlpha;
 			this.hitFlashCurrTick = 0;
 			this.parent(amount, other);
 		},

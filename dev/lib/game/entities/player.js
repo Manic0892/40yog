@@ -30,6 +30,7 @@ ig.module(
 		hitFlashTick: .5,
 		hitFlashCurrTick: 0,
 		hitFlashAlpha: .3,
+		hitFlashCurrAlpha: 1,
 		
 		zIndex: -9,
 		
@@ -104,9 +105,10 @@ ig.module(
 			if (this.hitTimer.delta() < 0) {
 				this.hitFlashCurrTick += this.hitTimer.tick();
 				if (this.hitFlashCurrTick >= this.hitFlashTick) {
-					this.currentAnim.alpha == this.hitFlashAlpha ? this.currentAnim.alpha = 1 : this.currentAnim.alpha = this.hitFlashAlpha;
+					this.hitFlashCurrAlpha == this.hitFlashAlpha ? this.hitFlashCurrAlpha = 1 : this.hitFlashCurrAlpha = this.hitFlashAlpha;
 					this.hitFlashCurrTick = 0;
 				}
+				this.currentAnim.alpha = this.hitFlashCurrAlpha;
 			} else {
 				this.currentAnim.alpha = 1;
 			}
@@ -125,7 +127,7 @@ ig.module(
 				}
 				this.hitTimer.set(this.hitFlashDuration);
 				this.hitTimer.tick();
-				this.currentAnim.alpha = this.hitFlashAlpha;
+				this.hitFlashCurrAlpha = this.hitFlashAlpha;
 				this.hitFlashCurrTick = 0;
 				this.parent(amount, other);
 			}
