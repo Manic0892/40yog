@@ -19,6 +19,8 @@ ig.module(
 	'game.levels.win2',
 	
 	//'plugins.gui',
+	'plugins.empika.entity_utilities',
+	'plugins.empika.game_utilities',
 	'plugins.pause',
 	'plugins.betterLoadLevel'
 )
