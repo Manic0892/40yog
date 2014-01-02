@@ -2,14 +2,16 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 	EntitySlider = ig.Entity.extend({
 		minLabel: '0%',
 		maxLabel: '100%',
-		height: 10,
-		width: 200,
+		title: 'Slider',
+		height: 30,
+		width: 300,
 		strokeWidth: 4,
 		barColor: '#afafaf',
 		strokeColor: '#000',
 		handleColor: '#afafaf',
 		
-		font: new ig.Font('media/04b03.font.png'),
+		labelFont: new ig.Font('media/bebas_neue_40_black.png'),
+		titleFont: new ig.Font('media/bebas_neue_25_black.png'),
 		textYOffset: 3,
 		
 		_wmDrawBox: true,
@@ -25,7 +27,7 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			this.parent(x,y,settings);
 			this.absolute = settings.absolute;
 			if (!ig.global.wm) {
-				this.handle = ig.game.spawnEntity(EntitySliderHandle, this.pos.x, this.pos.y, {range:this.width, strokeWidth: this.strokeWidth});
+				this.handle = ig.game.spawnEntity(EntitySliderHandle, this.pos.x, this.pos.y, {parent:this});
 				ig.game.sortEntitiesDeferred();
 			}
 		},
@@ -49,10 +51,14 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			ig.system.context.lineWidth = this.strokeWidth;
 			ig.system.context.strokeStyle= this.strokeColor;
 			ig.system.context.stroke();
-			var minLabelWidth = this.font.widthForString(this.minLabel);
-			var labelHeight = this.font.heightForString(this.minLabel);
-			this.font.draw(this.minLabel, x-minLabelWidth - this.strokeWidth, y + this.strokeWidth);
-			this.font.draw(this.maxLabel, x + this.width + this.strokeWidth, y + this.strokeWidth);
+			
+			
+			var minLabelWidth = this.labelFont.widthForString(this.minLabel);
+			var labelHeight = this.labelFont.heightForString(this.minLabel);
+			this.labelFont.draw(this.minLabel, x-minLabelWidth - this.strokeWidth, y+this.height/2-labelHeight/2);
+			this.labelFont.draw(this.maxLabel, x + this.width + this.strokeWidth, y+this.height/2-labelHeight/2);
+			
+			
 		},
 		
 		sliderLogic: function() {
@@ -84,9 +90,10 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			//this.maxVel.x = this.speed;
 			//this.maxVel.y = this.speed;
 			this.parent(x,y,settings);
-			this.finalY = this.pos.y - settings.strokeWidth/2;
+			this.parent = settings.parent;
+			this.finalY = this.pos.y - this.parent.strokeWidth/2;
 			this.minX = this.pos.x + this.strokeWidth;
-			this.maxX = this.pos.x + settings.range - this.strokeWidth - this.width;
+			this.maxX = this.pos.x + this.parent.range - this.strokeWidth - this.width;
 			this.size.x = this.width + this.strokeWidth;
 			this.size.y = this.height + this.strokeWidth;
 		},
