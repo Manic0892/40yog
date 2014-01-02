@@ -1,3 +1,6 @@
 [submodule "dev/serv"]
 	path = dev/serv
 	url = https://github.com/Manic0892/python-impact.git
+[submodule "built"]
+	path = built
+	url = https://github.com/Manic0892/40yog_built.git
