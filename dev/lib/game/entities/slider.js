@@ -18,14 +18,13 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		_wmBoxColor: "rgba(255,255,255,0.3)",
 		size:{x:64,y:64},
 		
-		zIndex:1,
+		zIndex:10000,
 		gravityFactor:0,
 		ignorePause: true,
 		
 		init: function(x,y,settings) {
 			x -= this.width/2;
 			this.parent(x,y,settings);
-			this.absolute = settings.absolute;
 			if (!ig.global.wm) {
 				this.handle = ig.game.spawnEntity(EntitySliderHandle, this.pos.x, this.pos.y, {parent:this});
 				ig.game.sortEntitiesDeferred();
@@ -40,10 +39,8 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		draw: function() {
 			var x = this.pos.x;
 			var y = this.pos.y;
-			if (!this.absolute) {
-				x -= ig.game.screen.x;
-				y -= ig.game.screen.y;
-			}
+			x -= ig.game.screen.x;
+			y -= ig.game.screen.y;
 			ig.system.context.beginPath();
 			ig.system.context.rect(x,y,this.width, this.height);
 			var grd = ig.system.context.createLinearGradient(x,y,x+this.width,y+this.height);
@@ -78,14 +75,13 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 	});
 	
 	EntitySliderHandle = ig.Entity.extend({
-		height:40,
+		height:45,
 		width:10,
 		strokeWidth: 1,
-		barColor: '#afafaf',
-		strokeColor: '#f2f2f2',
 		handleColor: '#afafaf',
+		strokeColor: '#000',
 		val:1,
-		zIndex:2,
+		zIndex:10001,
 		size:{x:16,y:16},
 		gravityFactor: 0,
 		ignorePause:true,
@@ -93,15 +89,16 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 
 		
 		init: function(x,y,settings) {
-			//this.maxVel.x = this.speed;
-			//this.maxVel.y = this.speed;
 			this.parent(x,y,settings);
 			this.parent = settings.parent;
-			this.finalY = this.pos.y - this.parent.strokeWidth/2;
+			//this.finalY = this.pos.y + this.parent.height/2 - this.height/2;  Centers it on the slider.
+			this.finalY = this.pos.y;
 			this.minX = this.pos.x + this.strokeWidth;
 			this.maxX = this.pos.x + this.parent.width - this.strokeWidth - this.width;
 			this.size.x = this.width + this.strokeWidth;
 			this.size.y = this.height + this.strokeWidth;
+			
+			this.pos.x = (this.parent.initVal * (this.maxX - this.minX)) + this.minX;
 		},
 		
 		update: function() {
@@ -116,13 +113,11 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		draw: function() {
 			var x = this.pos.x;
 			var y = this.pos.y;
-			if (!this.absolute) {
-				x -= ig.game.screen.x;
-				y -= ig.game.screen.y;
-			}
+			x -= ig.game.screen.x;
+			y -= ig.game.screen.y;
 			ig.system.context.beginPath();
 			ig.system.context.rect(x,y,this.width, this.height);
-			ig.system.context.fillStyle = this.barColor;
+			ig.system.context.fillStyle = this.handleColor;
 			ig.system.context.fill();
 			ig.system.context.lineWidth = this.strokeWidth;
 			ig.system.context.strokeStyle= this.strokeColor;
