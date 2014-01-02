@@ -11,7 +11,7 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		handleColor: '#afafaf',
 		
 		labelFont: new ig.Font('media/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/bebas_neue_25_black.png'),
+		titleFont: new ig.Font('media/bebas_neue_40_black.png'),
 		textYOffset: 3,
 		
 		_wmDrawBox: true,
@@ -46,7 +46,10 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			}
 			ig.system.context.beginPath();
 			ig.system.context.rect(x,y,this.width, this.height);
-			ig.system.context.fillStyle = this.barColor;
+			var grd = ig.system.context.createLinearGradient(x,y,x+this.width,y+this.height);
+			grd.addColorStop(0, '#000');
+			grd.addColorStop(1, '#fff');
+			ig.system.context.fillStyle = grd;
 			ig.system.context.fill();
 			ig.system.context.lineWidth = this.strokeWidth;
 			ig.system.context.strokeStyle= this.strokeColor;
@@ -57,6 +60,9 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			var labelHeight = this.labelFont.heightForString(this.minLabel);
 			this.labelFont.draw(this.minLabel, x-minLabelWidth - this.strokeWidth, y+this.height/2-labelHeight/2);
 			this.labelFont.draw(this.maxLabel, x + this.width + this.strokeWidth, y+this.height/2-labelHeight/2);
+			
+			var titleHeight = this.titleFont.heightForString(this.title);
+			this.titleFont.draw(this.title, x, y-titleHeight);
 			
 			
 		},
@@ -93,7 +99,7 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			this.parent = settings.parent;
 			this.finalY = this.pos.y - this.parent.strokeWidth/2;
 			this.minX = this.pos.x + this.strokeWidth;
-			this.maxX = this.pos.x + this.parent.range - this.strokeWidth - this.width;
+			this.maxX = this.pos.x + this.parent.width - this.strokeWidth - this.width;
 			this.size.x = this.width + this.strokeWidth;
 			this.size.y = this.height + this.strokeWidth;
 		},
