@@ -1,4 +1,4 @@
-ig.module('game.entities.pauseMenu').requires('game.entities.menu').defines(function(){
+ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entities.slider').defines(function(){
 	EntityPauseMenu = EntityMenu.extend({
 		name: 'pauseMenu',
 		ignorePause: true,
@@ -54,6 +54,13 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu').defines(func
 		
 		ySpacing: 50,
 		
+		init: function(x,y,settings) {
+			this.parent(x,y,settings);
+			x = ig.game.screen.x + ig.system.width/2;
+			y = ig.game.screen.y + ig.system.height/2;
+			this.slider = ig.game.spawnEntity(EntitySlider, x, y);
+		},
+		
 		update: function() {
 			this.parent();
 			if (ig.input.pressed('pause') && this.safetyCD <= 0) {
@@ -74,6 +81,11 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu').defines(func
 				this.statusFont.draw(soundStatus, 50, 50, ig.Font.ALIGN.LEFT);
 				this.statusFont.draw(musicStatus, ig.system.width-50, 50, ig.Font.ALIGN.RIGHT);
 			}
+			this.parent();
+		},
+		
+		kill: function() {
+			this.slider.kill();
 			this.parent();
 		}
 	});

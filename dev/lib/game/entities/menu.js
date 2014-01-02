@@ -63,7 +63,7 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 				}
 				
 				ig.input.initMouse();
-				ig.input.bind(ig.KEY.MOUSE1, 'shoot');
+				ig.input.bind(ig.KEY.MOUSE1, 'lbtn');
 				
 				ig.game.clearColor = this.clearColor;
 			}
@@ -86,7 +86,7 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 				this.clickCD[i]--; //*See below
 			}
 			
-			if (ig.input.state('shoot') && this.currSelected != null && this.clickCD[this.currSelected] <= 0) {
+			if (ig.input.state('lbtn') && this.currSelected != null && this.clickCD[this.currSelected] <= 0) {
 				this.clickCD[this.currSelected] = this.defClickCD; //*I fucking hate this shit which is only here to prevent spamming unintentionally.  It's impossible to click for fewer than a few frames.  This should hackishly fix the issue, though.
 				this.items[this.currSelected].exec();
 			}

@@ -77,7 +77,7 @@ ig.module(
 			}
 			
 			// shoot
-			if( ig.input.state('shoot') && this.cooldown == 0) {
+			if( ig.input.state('lbtn') && this.cooldown == 0) {
 				this.shoot();
 			}
 			

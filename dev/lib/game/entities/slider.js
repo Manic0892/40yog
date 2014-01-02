@@ -17,12 +17,16 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		size:{x:64,y:64},
 		
 		zIndex:1,
+		gravityFactor:0,
+		ignorePause: true,
 		
 		init: function(x,y,settings) {
+			x -= this.width/2;
 			this.parent(x,y,settings);
 			this.absolute = settings.absolute;
 			if (!ig.global.wm) {
 				this.handle = ig.game.spawnEntity(EntitySliderHandle, this.pos.x, this.pos.y, {range:this.width, strokeWidth: this.strokeWidth});
+				ig.game.sortEntitiesDeferred();
 			}
 		},
 		
@@ -52,7 +56,12 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		},
 		
 		sliderLogic: function() {
-			console.log(this.handle.val);
+			//console.log(this.handle.val);
+		},
+		
+		kill: function() {
+			this.handle.kill();
+			this.parent();
 		}
 	});
 	
@@ -66,6 +75,8 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		val:1,
 		zIndex:2,
 		size:{x:16,y:16},
+		gravityFactor: 0,
+		ignorePause:true,
 		
 
 		

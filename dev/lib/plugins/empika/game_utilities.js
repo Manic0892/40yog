@@ -23,8 +23,8 @@ ig.module(
     
     // Return an array of entities that are under the mouse
     entitiesUnderMouse: function(){
-      var mouse_x = ig.input.mouse.x;
-      var mouse_y = ig.input.mouse.y;
+      var mouse_x = ig.input.mouse.x + ig.game.screen.x;
+      var mouse_y = ig.input.mouse.y + ig.game.screen.y;
 
       var entities = this.entities;
       var under_mouse = [];
