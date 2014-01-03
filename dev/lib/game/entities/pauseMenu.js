@@ -41,8 +41,8 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 			this.parent(x,y,settings);
 			x = ig.game.screen.x + ig.system.width/2;
 			y = ig.game.screen.y + ig.system.height/2;
-			this.musicSlider = ig.game.spawnEntity(EntityMusicSlider, x, y - 125);
-			this.soundSlider = ig.game.spawnEntity(EntitySoundSlider,x,y - 40);
+			this.musicSlider = ig.game.spawnEntity(EntityMusicSlider, x, y - 115);
+			this.soundSlider = ig.game.spawnEntity(EntitySoundSlider,x,y - 30);
 		},
 		
 		update: function() {
