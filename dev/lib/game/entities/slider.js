@@ -106,7 +106,7 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			this.pos.y = this.finalY;
 			if (this.pos.x < this.minX) this.pos.x = this.minX;
 			if (this.pos.x > this.maxX) this.pos.x = this.maxX;
-			this.val = (this.pos.x-this.minX) / (this.maxX - this.minX);
+			this.val = (this.pos.x).map(this.minX,this.maxX,0,1);
 			this.parent();
 		},
 		
