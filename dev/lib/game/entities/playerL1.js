@@ -1,9 +1,8 @@
 ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entities.fireParticleDamage').defines(function() {
 	EntityPlayerL1 = EntityPlayer.extend({
 		fireSound: new ig.Sound('media/sound/fire2.*'),
-		maxSoundCD: 35,
-		soundCD: 0,
-		cooldown: 5,
+		soundTimer: new ig.Timer(35/60),
+		defShootCD: 2/60,
 		
 		gruntSound: new ig.Sound('media/sound/grunt.*'),
 		splatSound: new ig.Sound('media/sound/splat.*'),
@@ -30,7 +29,6 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		update: function() {
 			this.parent();
 			
-			this.soundCD--;
 			var collisionMapRef = ig.game.collisionMap;
 			
 			if (this.pos.y > collisionMapRef.height*collisionMapRef.tilesize + 400) {
@@ -50,10 +48,9 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		shoot: function() {
 			if (this.flameActive) {
 				ig.game.spawnEntity( EntityFireParticleDamage, this.pos.x+this.size.x/2, this.pos.y+this.size.y/2, {flip:this.flip, d:{x:ig.input.mouse.x, y:ig.input.mouse.y}, vel:this.vel} );
-				this.cooldown = 2;
-				if (this.soundCD <= 0) {
+				if (this.soundTimer.delta() >= 0) {
 					this.fireSound.play();
-					this.soundCD = this.maxSoundCD;
+					this.soundTimer.reset();
 				}
 			}
 		},

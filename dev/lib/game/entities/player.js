@@ -23,7 +23,8 @@ ig.module(
 		jump: 1000,
 		health: 100,
 		maxHealth: 100,
-		cooldown: 40,
+		shootTimer: new ig.Timer(40/60),
+		defShootCD: 40/60,
 		
 		hitTimer: new ig.Timer(),
 		hitFlashDuration: 3,
@@ -77,8 +78,9 @@ ig.module(
 			}
 			
 			// shoot
-			if( ig.input.state('lbtn') && this.cooldown == 0) {
+			if( ig.input.state('lbtn') && this.shootTimer.delta() >= 0) {
 				this.shoot();
+				this.shootTimer.set(this.defShootCD);
 			}
 			
 			
@@ -97,9 +99,6 @@ ig.module(
 			}
 			
 			this.currentAnim.flip.x = this.flip;
-			
-			if (this.cooldown > 0)
-				this.cooldown--;
 				
 			//hit flashing code
 			if (this.hitTimer.delta() < 0) {
@@ -139,10 +138,6 @@ ig.module(
 		
 		shoot: function() {
 			console.log('shooting...');
-		//	ig.game.spawnEntity( EntityBullet, this.pos.x+this.size.x/2, this.pos.y+this.size.y/2, {flip:this.flip, d:{x:ig.input.mouse.x, y:ig.input.mouse.y}} );
-		//	this.gunshot.play();
-		//	this.cooldown = 20;
-		//	this.arm.fire();
 		},
 		
 		pickup: function(other) {

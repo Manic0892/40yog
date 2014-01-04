@@ -1,8 +1,5 @@
 ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 	EntityMenu = ig.Entity.extend({
-		//STUB--should replace mainMenu, winMenu and howToPlay menus
-		//TODO
-		
 		name: 'menu',
 		
 		font: new ig.Font( 'media/bebas_neue_100_black.png' ),
@@ -16,7 +13,7 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 		],
 		
 		clickCD: [], //*See below
-		defClickCD: 20,
+		defClickCD: .25,
 		
 		hitboxList: [],
 		
@@ -59,7 +56,7 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 					
 					this.hitboxList.push(new hitbox(pos1, pos2, i));
 					
-					this.clickCD.push(this.defClickCD); //*See below
+					this.clickCD.push(new ig.Timer(this.defClickCD)); //*See below
 				}
 				
 				ig.input.initMouse();
@@ -82,12 +79,8 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 				}
 			}
 			
-			for (var i = 0; i < this.clickCD.length; i++) {
-				this.clickCD[i]--; //*See below
-			}
-			
-			if (ig.input.state('lbtn') && this.currSelected != null && this.clickCD[this.currSelected] <= 0) {
-				this.clickCD[this.currSelected] = this.defClickCD; //*I fucking hate this shit which is only here to prevent spamming unintentionally.  It's impossible to click for fewer than a few frames.  This should hackishly fix the issue, though.
+			if (ig.input.state('lbtn') && this.currSelected != null && this.clickCD[this.currSelected].delta() >= 0) {
+				this.clickCD[this.currSelected].reset(); //*I fucking hate this shit which is only here to prevent spamming unintentionally.  It's impossible to click for fewer than a few frames.  This should hackishly fix the issue, though.
 				this.items[this.currSelected].exec();
 			}
 		},

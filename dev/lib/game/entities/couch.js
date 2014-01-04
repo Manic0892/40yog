@@ -15,7 +15,7 @@ ig.module('game.entities.couch').requires('impact.entity', 'game.entities.enemyB
 		
 		bulletDamage: false,
 		
-		spawnCD: 200,
+		spawnCD: 3.5,
 				
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -25,7 +25,7 @@ ig.module('game.entities.couch').requires('impact.entity', 'game.entities.enemyB
 			this.addAnim('dead', 1, [2]);
 			
 			this.currentAnim = this.anims.init;
-			this.currSpawnCD = this.spawnCD;
+			this.spawnTimer = new ig.Timer(this.spawnCD);
 		},
 		
 		update: function() {
@@ -39,13 +39,12 @@ ig.module('game.entities.couch').requires('impact.entity', 'game.entities.enemyB
 				this.currentAnim = this.anims.dead;
 			}
 			
-			this.currSpawnCD--;
-			if (this.currSpawnCD < 0 && this.health > 0) {
+			if (this.spawnTimer.delta() >= 0 && this.health > 0) {
 				var playerPos = ig.game.getEntitiesByType(EntityPlayer)[0].pos;
 				if (Math.random() > .5 && playerPos.x > this.pos.x - 500 && playerPos.x < this.pos.x + 500 && playerPos.y > this.pos.y - 500 && playerPos.y < this.pos.y + 500) {
 					this.spawnEnemy();
 				}
-				this.currSpawnCD = this.spawnCD;
+				this.spawnTimer.reset();
 			}
 		},
 		

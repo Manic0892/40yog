@@ -5,7 +5,7 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 		_wmBoxColor: 'rgba(0, 0, 255, 0.4)',
 		
 		ignorePause: true,
-		levelMusic: new ig.Sound('media/sound/rock_loop.*'),
+		levelMusic: new ig.Sound('media/sound/rock_loop.*', false),
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);

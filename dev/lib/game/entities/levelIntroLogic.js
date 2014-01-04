@@ -5,7 +5,7 @@ ig.module('game.entities.levelIntroLogic').requires('impact.entity', 'impact.ima
 			size: {x:976, y:235},
 			
 			gravityFactor: 0,
-			alphaIterator: .008,
+			time:1.25,
 			
 			init: function(x,y,settings) {
 				this.parent(x,y,settings);
@@ -19,17 +19,14 @@ ig.module('game.entities.levelIntroLogic').requires('impact.entity', 'impact.ima
 				this.pos.x = ig.system.width/2 - this.size.x/2;
 				this.pos.y = ig.system.height/2 - this.size.y/2;
 				this.currentAnim.alpha = 0;
+				this.timer = new ig.Timer(this.time);
 			},
 			
 			update: function() {
 				this.parent();
-				this.currentAnim.alpha += this.alphaIterator;
-				if (this.currentAnim.alpha > 1){
-					this.alphaIterator *= -1;
-				} else if (this.currentAnim.alpha < 0) {
-					ig.game.loadLevel(LevelMainMenu);
-					this.currentAnim.alpha = 0;
-				}
+				this.currentAnim.alpha = Math.abs(this.timer.delta()).map(this.time,0,0,1);
+				this.currentAnim.alpha = this.currentAnim.alpha.limit(0,1);
+				if (this.timer.delta() >= this.time) ig.game.loadLevelDeferred(LevelMainMenu);
 			},
 			
 			draw: function() {

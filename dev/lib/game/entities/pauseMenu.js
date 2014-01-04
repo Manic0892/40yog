@@ -3,7 +3,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		name: 'pauseMenu',
 		ignorePause: true,
 		
-		safetyCD: 20, //this is here to fix bug where it's spawned and then kills itself but misses toggling pause again.  dumb bug.
+		safetyTimer: .25, //this is here to fix bug where it's spawned and then kills itself but misses toggling pause again.  dumb bug.
 		
 		//statusFont: new ig.Font('media/bebas_neue_25_black.png'),
 		
@@ -43,15 +43,15 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 			y = ig.game.screen.y + ig.system.height/2;
 			this.musicSlider = ig.game.spawnEntity(EntityMusicSlider, x, y - 115);
 			this.soundSlider = ig.game.spawnEntity(EntitySoundSlider,x,y - 30);
+			this.safetyTimer = new ig.Timer(this.safetyTimer);
 		},
 		
 		update: function() {
 			this.parent();
-			if (ig.input.pressed('pause') && this.safetyCD <= 0) {
+			if (ig.input.pressed('pause') && this.safetyTimer.delta() >= 0) {
 				ig.game.togglePause();
 				this.kill();
 			}
-			this.safetyCD--;
 		},
 		
 		draw: function() {
@@ -79,9 +79,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		title: 'Music',
 		
 		init: function(x,y,settings) {
-			console.log(this.initVal);
 			this.initVal = ig.music.volume;
-			console.log(this.initVal);
 			this.parent(x,y,settings);
 		},
 		

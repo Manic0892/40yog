@@ -6,20 +6,17 @@ ig.module('game.entities.powerup').requires('impact.entity').defines(function() 
 		
 		powerupSound: new ig.Sound('media/sound/yrrt.*'),
 		
-		maxX:0,
-		maxY:5,
-		minX:0,
-		minY:-5,
-		currX:0,
-		currY:0,
-		
-		xUp : false,
-		yUp :false,
-		
 		_wmIgnore: true,
 		
 		size: {x:32,y:32},
 		offset: {x:0,y:0},
+		gravityFactor: 0,
+		
+		xDelta: 0,
+		yDelta: 20,
+		bobTime: .5,
+		
+		timer: null,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -28,35 +25,28 @@ ig.module('game.entities.powerup').requires('impact.entity').defines(function() 
 			
 			this.currentAnim=this.anims.idle;
 			
-			this.startX = this.pos.x;
-			this.startY = this.pos.y;
+			
+			this.xDelta = {low: this.pos.x, high: this.pos.x - this.xDelta};
+			this.yDelta = {low: this.pos.y, high: this.pos.y - this.yDelta}; //High as in high point on map, not high as in higher number.
+			
+			this.timer = new ig.Timer();
+			
+			this.timer.set(this.bobTime);
 		},
 		
-		update: function() { //this could be a lot cleaner
-			if (this.xUp) {
-				this.currX++;
-				if (this.currX >= this.maxX)
-					this.xUp = !this.xUp;
-			} else {
-				this.currX--;
-				if (this.currX <= this.minX)
-					this.xUp = !this.xUp;
-			}
-			
-			if (this.yUp) {
-				this.currY++;
-				if (this.currY >= this.maxY)
-					this.yUp = !this.yUp;
-			} else {
-				this.currY--;
-				if (this.currY <= this.minY)
-					this.yUp = !this.yUp;
-			}
-			
-			this.pos.x = this.startX + this.currX;
-			this.pos.y = this.startY + this.currY;
-			
+		update: function() {
 			this.parent();
+			var currTime = Math.abs(this.timer.delta());
+			this.pos.x = currTime.map(0, this.bobTime, this.xDelta.low, this.xDelta.high);
+			this.pos.y = currTime.map(0, this.bobTime, this.yDelta.low, this.yDelta.high);
+			if (this.timer.delta() >= this.bobTime) this.timer.reset();
+			
+		},
+		
+		check: function(other) {
+			this.powerupSound.play();
+			this.powerup(other);
+			this.parent(other);
 		}
 	});
 });

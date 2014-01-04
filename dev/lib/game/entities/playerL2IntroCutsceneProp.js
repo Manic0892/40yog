@@ -36,12 +36,10 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 						this.pos.y -= 2;
 					}
 				}
-					
-				var ninetyDegrees = 90 * (Math.PI/180);
 				var x1,x2,y1,y2;
 				//if (this.currWaypoint.pos.y > )
 				var angle = Math.atan2(this.currWaypoint.pos.y - this.pos.y, this.currWaypoint.pos.x - this.pos.x);
-				angle += ninetyDegrees;
+				angle += (90).toRad();
 				this.currentAnim.angle = angle;
 			}
 		},

@@ -28,11 +28,8 @@ ig.module('game.entities.text').requires('impact.entity').defines(function() {
 		
 		update: function() {
 			this.parent();
-			if (this.activated && this.timer != null) {
-				if (this.timer.delta() >= 0) {
-					this.activated = false;
-					this.timer = null;
-				}
+			if (this.activated && this.timer != null && this.timer.delta() >= 0) {
+				this.kill();
 			} else if (this.activated && this.timer == null) {
 				this.timer = new ig.Timer(this.time);
 			}
