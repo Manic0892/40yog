@@ -6,6 +6,8 @@ ig.module('game.entities.healthPowerup').requires('game.entities.powerup').defin
 		
 		animSheet: new ig.AnimationSheet( 'media/health.png', 32, 32 ),
 		
+		playSoundOnTouch: false,
+		
 		powerup: function(other) {
 			if (other.health < other.maxHealth) {
 				other.healthPowerup(50);

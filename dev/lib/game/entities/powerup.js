@@ -5,6 +5,7 @@ ig.module('game.entities.powerup').requires('impact.entity').defines(function() 
 		checkAgainst: ig.Entity.TYPE.A,
 		
 		powerupSound: new ig.Sound('media/sound/yrrt.*'),
+		playSoundOnTouch: true,
 		
 		_wmIgnore: true,
 		
@@ -44,7 +45,7 @@ ig.module('game.entities.powerup').requires('impact.entity').defines(function() 
 		},
 		
 		check: function(other) {
-			this.powerupSound.play();
+			if (this.playSoundOnTouch) this.powerupSound.play();
 			this.powerup(other);
 			this.parent(other);
 		}
