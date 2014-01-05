@@ -40,6 +40,12 @@ ig.module(
 		
 		init: function() {
 			this.loadLevel(LevelIntro);
+			ig.input.bind( ig.KEY.A, 'a' );
+			ig.input.bind( ig.KEY.D, 'd' );
+			ig.input.bind( ig.KEY.W, 'w' );
+			ig.input.bind( ig.KEY.SPACE, 'space');
+			ig.input.bind(ig.KEY.ESC, 'esc');
+			ig.input.bind(ig.KEY.MOUSE1, 'lbtn');
 		},
 		
 		update: function() {

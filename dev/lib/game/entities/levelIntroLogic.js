@@ -27,6 +27,7 @@ ig.module('game.entities.levelIntroLogic').requires('impact.entity', 'impact.ima
 				this.currentAnim.alpha = Math.abs(this.timer.delta()).map(this.time,0,0,1);
 				this.currentAnim.alpha = this.currentAnim.alpha.limit(0,1);
 				if (this.timer.delta() >= this.time) ig.game.loadLevelDeferred(LevelMainMenu);
+				if (ig.input.pressed('space') || ig.input.pressed('lbtn') || ig.input.pressed('esc')) ig.game.loadLevelDeferred(LevelMainMenu);
 			},
 			
 			draw: function() {
