@@ -1,4 +1,4 @@
-ig.module('game.entities.menu').requires('impact.entity').defines(function() {
+ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor').defines(function() {
 	EntityMenu = ig.Entity.extend({
 		name: 'menu',
 		
