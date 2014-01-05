@@ -40,6 +40,8 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 		
 		clearColor: '#fff',
 		
+		defaultCursor: 0,
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			
@@ -56,6 +58,8 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 					
 					this.hitboxList.push(new hitbox(pos1, pos2, i));
 					
+					ig.game.spawnEntity(EntityHitbox, pos1.x + ig.game.screen.x, pos1.y+ig.game.screen.y, {width:width, height:height}); //This should eventually be expanded to replace the other hitbox system.
+					
 					this.clickCD.push(new ig.Timer(this.defClickCD)); //*See below
 				}
 				
@@ -63,6 +67,16 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 				ig.input.bind(ig.KEY.MOUSE1, 'lbtn');
 				
 				ig.game.clearColor = this.clearColor;
+				
+				if (settings && settings.parentLevel) {
+					this.parentLevel = settings.parentLevel;
+					this.cursor = this.parentLevel.cursor;
+				} else if (ig.game.getEntityByName('cursor')) {
+					this.cursor = ig.game.getEntityByName('cursor').def;
+				} else {
+					this.cursor = ig.game.spawnEntity(EntityCursor, 0, 0, {def: this.defaultCursor});
+				}
+				this.cursor.def = this.defaultCursor;
 			}
 		},
 		
@@ -101,6 +115,28 @@ ig.module('game.entities.menu').requires('impact.entity').defines(function() {
 		
 		createHitbox: function(xy1,xy2,key) {
 			this.hitboxList.push(new hitbox(xy1,xy2,key));
+		},
+		
+		kill: function() {
+			if (this.parentLevel)
+				this.cursor.def = this.parentLevel.defaultCursor;
+			this.parent();
+		}
+	});
+	
+	//This should eventually be expanded to replace the other hitbox system.
+	EntityHitbox = ig.Entity.extend({
+		type: ig.Entity.TYPE.A,
+		collides: ig.Entity.COLLIDES.NEVER,
+		
+		size: {x:0,y:0},
+		gravityFactor: 0,
+		
+		cursor: 2,
+		
+		init: function(x,y,settings) {
+			this.size = {x:settings.width, y:settings.height};
+			this.parent(x,y,settings);
 		}
 	});
 });

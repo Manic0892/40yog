@@ -32,8 +32,9 @@ ig.module(
         var entity = entities[x];
         var pos_x = entity.pos.x;
         var pos_y = entity.pos.y;
+        var isDetectable = !entity.undetectableByMouse;
         if( pos_x <= mouse_x && mouse_x <= pos_x + entity.size.x &&
-            pos_y <= mouse_y && mouse_y <= pos_y + entity.size.y ){
+            pos_y <= mouse_y && mouse_y <= pos_y + entity.size.y && isDetectable){
           under_mouse.push(entity);
         }
       }
