@@ -138,7 +138,8 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		gravityFactor: 0,
 		collides: ig.Entity.COLLIDES.NONE,
 		
-		lifetime: 1.3,
+		lifetime: .4,
+		emptyString: '',
 		maxVel: {x:100,y:100},
 		friction: {x:0, y:0},
 		
