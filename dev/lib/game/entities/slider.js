@@ -86,7 +86,9 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		gravityFactor: 0,
 		ignorePause:true,
 		
-
+		type: ig.Entity.TYPE.A,
+		
+		cursor: 2,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -95,8 +97,8 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			this.finalY = this.pos.y;
 			this.minX = this.pos.x + this.strokeWidth;
 			this.maxX = this.pos.x + this.parent.width - this.strokeWidth - this.width;
-			this.size.x = this.width + this.strokeWidth;
-			this.size.y = this.height + this.strokeWidth;
+			this.size.x = this.width + this.strokeWidth/2;
+			this.size.y = this.height + this.strokeWidth/2;
 			
 			this.pos.x = (this.parent.initVal * (this.maxX - this.minX)) + this.minX;
 		},

@@ -2,6 +2,8 @@ ig.module('game.entities.level2Logic').requires('game.entities.levelLogic').defi
 	EntityLevel2Logic = EntityLevelLogic.extend({
 		zIndex: 9999,
 		
+		defaultCursor: null,
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
