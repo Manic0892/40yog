@@ -85,6 +85,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		
 		sliderLogic: function() {
 			ig.music.volume = this.handle.val;
+			$.cookie("music", ig.music.volume, {expires: 99999, path:'/'});
 		}
 	});
 	
@@ -98,6 +99,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		
 		sliderLogic: function() {
 			ig.soundManager.volume = this.handle.val;
+			$.cookie("sound", ig.soundManager.volume, {expires: 99999, path:'/'});
 		}
 	});
 });

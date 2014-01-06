@@ -18,7 +18,6 @@ ig.module(
 	'game.levels.lose2',
 	'game.levels.win2',
 	
-	//'plugins.gui',
 	'plugins.empika.entity_utilities',
 	'plugins.empika.game_utilities',
 	'plugins.pause',
@@ -47,6 +46,13 @@ ig.module(
 			ig.input.bind(ig.KEY.ESC, 'esc');
 			ig.input.bind(ig.KEY.ENTER, 'enter');
 			ig.input.bind(ig.KEY.MOUSE1, 'lbtn');
+			
+			if ($.cookie("music")) {
+				ig.music.volume = Number($.cookie("music"));
+			}
+			if ($.cookie("sound")) {
+				ig.soundManager.volume = Number($.cookie("sound"));
+			}
 		},
 		
 		update: function() {
