@@ -10,14 +10,6 @@ ig.module('game.entities.level2Logic').requires('game.entities.levelLogic').defi
 			}
 		},
 		
-		bindKeys: function() {
-			ig.input.bind( ig.KEY.A, 'left' );
-			ig.input.bind( ig.KEY.D, 'right' );
-			ig.input.bind( ig.KEY.W, 'up');
-			ig.input.bind (ig.KEY.S, 'down');
-			ig.input.bind(ig.KEY.ESC, 'pause');
-		},
-		
 		updateScreenPos: function() {
 			var player = ig.game.getEntitiesByType( EntityPlayerL2 )[0];
 			var cutsceneProp = ig.game.getEntitiesByType(EntityPlayerL2IntroCutsceneProp);

@@ -35,6 +35,12 @@ ig.module('game.entities.levelLoseLogic').requires('impact.entity', 'game.entiti
 			}
 		},
 		
+		update: function() {
+			this.parent();
+			if (ig.input.pressed('enter')) ig.game.loadLevelDeferred(this.thisLevel);
+			if (ig.input.pressed('esc')) ig.game.loadLevelDeferred(LevelMainMenu);
+		},
+		
 		draw: function() {
 			this.parent();
 			

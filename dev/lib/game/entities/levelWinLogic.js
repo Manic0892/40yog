@@ -38,6 +38,12 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 			}
 		},
 		
+		update: function() {
+			this.parent();
+			if (ig.input.pressed('enter')) ig.game.loadLevelDeferred(this.nextLevel);
+			if (ig.input.pressed('esc')) ig.game.loadLevelDeferred(LevelMainMenu);
+		},
+		
 		draw: function() {
 			this.parent();
 			

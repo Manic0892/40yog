@@ -30,7 +30,7 @@ ig.module(
 		gravity:2000,
 		zoomLevel: 1,
 		
-		clearColor: '#ffffff',
+		clearColor: '#fff',
 		
 		// Load a font
 		font: new ig.Font( 'media/04b03.font.png' ),
@@ -39,20 +39,21 @@ ig.module(
 		
 		init: function() {
 			this.loadLevel(LevelIntro);
-			ig.input.bind(ig.KEY.A, 'a');
-			ig.input.bind(ig.KEY.D, 'd');
-			ig.input.bind(ig.KEY.W, 'w');
-			ig.input.bind(ig.KEY.SPACE, 'space');
+			ig.input.bind(ig.KEY.A, 'left');
+			ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
+			ig.input.bind(ig.KEY.D, 'right');
+			ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
+			ig.input.bind(ig.KEY.W, 'up');
+			ig.input.bind(ig.KEY.UP_ARROW, 'up')
+			ig.input.bind(ig.KEY.S, 'down');
+			ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
+			ig.input.bind(ig.KEY.SPACE, 'jump');
 			ig.input.bind(ig.KEY.ESC, 'esc');
 			ig.input.bind(ig.KEY.ENTER, 'enter');
 			ig.input.bind(ig.KEY.MOUSE1, 'lbtn');
 			
-			if ($.cookie("music")) {
-				ig.music.volume = Number($.cookie("music"));
-			}
-			if ($.cookie("sound")) {
-				ig.soundManager.volume = Number($.cookie("sound"));
-			}
+			if ($.cookie("music")) ig.music.volume = Number($.cookie("music"));
+			if ($.cookie("sound")) ig.soundManager.volume = Number($.cookie("sound"));
 		},
 		
 		update: function() {

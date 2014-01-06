@@ -48,7 +48,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		
 		update: function() {
 			this.parent();
-			if (ig.input.pressed('pause') && this.safetyTimer.delta() >= 0) {
+			if (ig.input.pressed('esc') && this.safetyTimer.delta() >= 0) {
 				ig.game.togglePause();
 				this.kill();
 			}

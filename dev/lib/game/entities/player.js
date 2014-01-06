@@ -73,7 +73,7 @@ ig.module(
 			
 			
 			// jump
-			if( this.standing && ig.input.state('jump') ) {
+			if( this.standing && (ig.input.state('jump') || ig.input.state('up')) ) {
 				this.vel.y = -this.jump;
 			}
 			
@@ -171,34 +171,6 @@ ig.module(
 			this.pos.y = y;
 
 			this.attachedTo = settings.attachee;
-		},
-		
-		update: function() {
-			//console.log(this.currentAnim);
-			//if (this.currentAnim) {
-			//	this.currentAnim.flip.x = this.flip;
-			//	
-			//	if (this.firingAnimCD < 0) {
-			//		this.currentAnim = this.anims.notShooting;
-			//	} else {
-			//		this.currentAnim = this.anims.shooting;
-			//	}			
-			//	
-			//	var angle = Math.atan2(ig.input.mouse.y - this.pos.y + ig.game.screen.y, ig.input.mouse.x - this.pos.x + ig.game.screen.x);
-			//	
-			//	if (this.flip) {
-			//		this.pos.x -= this.attachedTo.size.x - 10;
-			//		this.currentAnim.pivot.x = this.size.x;
-			//		angle += Math.PI;
-			//	} else {
-			//		this.currentAnim.pivot.x = 0;
-			//	}
-			//	
-			//	this.currentAnim.angle = angle;
-			//}
-			
-			
-			this.parent();
 		},
 		
 		attacheeUpdate: function(x,y, shouldFlip, alpha) { //you can't just set the pos of the arm to the pos of the attachee.  What the fuck?

@@ -19,25 +19,17 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 				ig.music.add(this.levelMusic);
 				ig.music.play();
 				
-				this.bindKeys();
 				this.cursor = ig.game.spawnEntity(EntityCursor, 0, 0, {def:this.defaultCursor});
 			}
 		},
+		
 		update: function() {
 			this.parent();
-			if (ig.input.pressed('pause') && !ig.game.paused) {
+			if (ig.input.pressed('esc') && !ig.game.paused) {
 				ig.game.togglePause();
 				ig.game.spawnEntity(EntityPauseMenu, 0, 0, {parentLevel: this});
 			}
 			this.updateScreenPos();
-		},
-		
-		bindKeys: function() {
-			ig.input.bind( ig.KEY.A, 'left' );
-			ig.input.bind( ig.KEY.D, 'right' );
-			ig.input.bind( ig.KEY.W, 'jump' );
-			ig.input.bind(ig.KEY.MOUSE1, 'lbtn');
-			ig.input.bind(ig.KEY.ESC, 'pause');
 		},
 		
 		updateScreenPos: function() {
