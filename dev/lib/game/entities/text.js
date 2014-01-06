@@ -7,7 +7,7 @@ ig.module('game.entities.text').requires('impact.entity').defines(function() {
 		
 		ignorePause: false,
 		
-		font: new ig.Font( 'media/impact_bitmap_25pt.png' ),
+		font: new ig.Font( 'media/bebas_neue_25_black.png' ),
 		alignment: ig.Font.ALIGN.CENTER,
 		
 		time: 2,
