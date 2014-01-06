@@ -3,7 +3,7 @@ cd ./dev/tools
 cd ../..
 mv ./dev/game.min.js ./built/lib
 cp -r ./dev/media ./built/
-cp -r ./dev/lib/utilities ./built/lib/utilities
+cp -r ./dev/lib/utilities ./built/lib
 cd ./built/lib
 mv game.min.js game.min.js.old
 echo 'Further minifying...  Requires UglifyJS2 (https://github.com/mishoo/UglifyJS2)'

@@ -3,4 +3,4 @@ cd ./dev/tools
 cd ../..
 mv ./dev/game.min.js ./built/lib
 cp -r ./dev/media ./built/
-cp -r ./dev/lib/utilities ./built/lib/utilities
+cp -r ./dev/lib/utilities ./built/lib
