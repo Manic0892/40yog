@@ -5,6 +5,8 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 		_wmBoxColor: 'rgba(0, 0, 255, 0.4)',
 		
 		ignorePause: true,
+		safetyTimer: .25, //dumb bug
+		
 		levelMusic: new ig.Sound('media/sound/rock_loop.*', false),
 		
 		defaultCursor: 1,
@@ -14,10 +16,10 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
-				ig.game.spawnEntity(EntityHealthbar);
-				
 				ig.music.add(this.levelMusic);
 				ig.music.play();
+				
+				this.safetyTimer = new ig.Timer(this.safetyTimer);
 				
 				this.cursor = ig.game.spawnEntity(EntityCursor, 0, 0, {def:this.defaultCursor});
 			}
@@ -25,7 +27,7 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 		
 		update: function() {
 			this.parent();
-			if (ig.input.pressed('esc') && !ig.game.paused) {
+			if (ig.input.pressed('esc') && !ig.game.paused && this.safetyTimer.delta() >= 0) {
 				ig.game.togglePause();
 				ig.game.spawnEntity(EntityPauseMenu, 0, 0, {parentLevel: this});
 			}

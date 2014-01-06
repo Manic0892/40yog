@@ -14,7 +14,9 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		items: [
 			{text:'RESUME', exec:function() {
 				ig.game.togglePause();
-				ig.game.getEntitiesByType(EntityPauseMenu)[0].kill(); //Fuck, this is hacky.
+				var parentEntity = ig.game.getEntitiesByType(EntityPauseMenu)[0]; //Fuck, this is hacky.
+				parentEntity.parentLevel.safetyTimer.reset();
+				parentEntity.kill();
 			}},
 			{text:'',exec:function() {
 			}},
@@ -50,6 +52,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 			this.parent();
 			if (ig.input.pressed('esc') && this.safetyTimer.delta() >= 0) {
 				ig.game.togglePause();
+				this.parentLevel.safetyTimer.reset();
 				this.kill();
 			}
 		},
