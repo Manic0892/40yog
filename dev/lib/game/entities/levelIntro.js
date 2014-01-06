@@ -48,6 +48,9 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 		update: function() {
 			this.parent();
 			this.currentAnim = this.anims.idle;
+			if (ig.input.pressed('enter')) {
+				ig.game.loadLevelDeferred(this.levelToLoad);
+			}
 		},
 		
 		draw: function() {
