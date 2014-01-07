@@ -56,8 +56,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 					
 					var xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
 					var yPos = this.initYOffset+i*this.ySpacing + ig.game.screen.y;
-					
-					this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, xPos, yPos, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont}));
+					this.spawnMenuItem(i,width,height,xPos,yPos,settings);
 				}
 				
 				ig.game.clearColor = this.clearColor;
@@ -72,6 +71,10 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 				}
 				this.cursor.def = this.defaultCursor;
 			}
+		},
+		
+		spawnMenuItem: function(i,width,height,x,y,settings) {
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, x, y, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont}));
 		},
 		
 		update: function() {

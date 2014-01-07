@@ -9,6 +9,7 @@ ig.module(
 	'game.levels.intro',
 	'game.levels.mainMenu',
 	'game.levels.selectMenu',
+	'game.levels.optionsMenu',
 	'game.levels.intro1',
 	'game.levels.1',
 	'game.levels.lose1',

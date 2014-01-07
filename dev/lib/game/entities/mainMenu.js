@@ -7,6 +7,8 @@ ig.module('game.entities.mainMenu').requires('game.entities.menu').defines(funct
 				ig.game.loadLevelDeferred(LevelIntro1);
 			}}, {text:'LEVEL SELECT', exec:function() {
 				ig.game.loadLevelDeferred(LevelSelectMenu);
+			}}, {text:'OPTIONS', exec:function() {
+				ig.game.loadLevelDeferred(LevelOptionsMenu);
 			}}
 		],
 		

@@ -97,29 +97,11 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 			}});
 			this.initYOffset = ig.system.height - 100;
 			
-			if (!ig.global.wm) {
-				for (var i = 0; i < this.items.length; i++) {
-					var width = this.font.widthForString(this.items[i].text);
-					var height = this.font.heightForString(this.items[i].text);
-					
-					var xPos = this.initXOffset + ig.system.width/2 - width/2;
-					var yPos = this.initYOffset+i*this.ySpacing;
-					
-					this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, xPos + ig.game.screen.x, yPos+ig.game.screen.y, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont, levelToLoad: settings.levelToLoad}));
-				}
-				
-				ig.game.clearColor = this.clearColor;
-				
-				if (settings && settings.parentLevel) {
-					this.parentLevel = settings.parentLevel;
-					this.cursor = this.parentLevel.cursor;
-				} else if (ig.game.getEntityByName('cursor')) {
-					this.cursor = ig.game.getEntityByName('cursor').def;
-				} else {
-					this.cursor = ig.game.spawnEntity(EntityCursor, 0, 0, {def: this.defaultCursor});
-				}
-				this.cursor.def = this.defaultCursor;
-			}
+			this.parent(x,y,settings);
+		},
+		
+		spawnMenuItem: function(i,width,height,x,y,settings) {
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, x + ig.game.screen.x, y+ig.game.screen.y, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont, levelToLoad: settings.levelToLoad}));
 		}
 	});
 	
