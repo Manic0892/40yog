@@ -12,8 +12,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 			}}
 		],
 		
-		clickCD: [], //*See below
-		defClickCD: .25,
+		clickCD: .25,
 		
 		hitboxList: [],
 		
@@ -42,6 +41,8 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 		
 		defaultCursor: 0,
 		
+		menuItems: [],
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			
@@ -53,18 +54,11 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 					var width = this.font.widthForString(this.items[i].text);
 					var height = this.font.heightForString(this.items[i].text);
 					
-					var pos1 = {x:ig.system.width/2 - width/2 + this.initXOffset, y:this.initYOffset+i*this.ySpacing};
-					var pos2 = {x:ig.system.width/2 + width/2 + this.initXOffset, y:this.initYOffset+i*this.ySpacing+height};
+					var xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
+					var yPos = this.initYOffset+i*this.ySpacing + ig.game.screen.y;
 					
-					this.hitboxList.push(new hitbox(pos1, pos2, i));
-					
-					ig.game.spawnEntity(EntityHitbox, pos1.x + ig.game.screen.x, pos1.y+ig.game.screen.y, {width:width, height:height}); //This should eventually be expanded to replace the other hitbox system.
-					
-					this.clickCD.push(new ig.Timer(this.defClickCD)); //*See below
+					this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, xPos, yPos, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont}));
 				}
-				
-				ig.input.initMouse();
-				ig.input.bind(ig.KEY.MOUSE1, 'lbtn');
 				
 				ig.game.clearColor = this.clearColor;
 				
@@ -82,39 +76,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 		
 		update: function() {
 			this.parent();
-			
 			this.currentAnim = this.anims.idle;
-			
-			this.currSelected = null;
-			
-			for (var i = 0; i < this.hitboxList.length; i++) {
-				if (this.hitboxList[i].isTouching(ig.input.mouse.x, ig.input.mouse.y)) {
-					this.currSelected = this.hitboxList[i].key;
-				}
-			}
-			
-			if (ig.input.state('lbtn') && this.currSelected != null && this.clickCD[this.currSelected].delta() >= 0) {
-				this.clickCD[this.currSelected].reset(); //*I fucking hate this shit which is only here to prevent spamming unintentionally.  It's impossible to click for fewer than a few frames.  This should hackishly fix the issue, though.
-				this.items[this.currSelected].exec();
-			}
-		},
-		
-		draw: function() {
-			this.parent();
-			
-			if (!ig.global.wm) {
-				for (var i = 0; i < this.items.length; i++) {
-					if (i != this.currSelected)
-						this.font.draw(this.items[i].text, this.initXOffset + ig.system.width/2, this.initYOffset + i*this.ySpacing, this.alignment);
-					else
-						this.redFont.draw(this.items[i].text, this.initXOffset + ig.system.width/2, this.initYOffset + i*this.ySpacing, this.alignment);
-				}
-			}
-		},
-		
-		
-		createHitbox: function(xy1,xy2,key) {
-			this.hitboxList.push(new hitbox(xy1,xy2,key));
 		},
 		
 		kill: function() {
@@ -124,41 +86,44 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 		}
 	});
 	
-	//This should eventually be expanded to replace the other hitbox system.
-	EntityHitbox = ig.Entity.extend({
+	EntityMenuItem = ig.Entity.extend({
+		zIndex: 1000,
 		type: ig.Entity.TYPE.A,
 		collides: ig.Entity.COLLIDES.NEVER,
+		checkAgainst: ig.Entity.TYPE.BOTH,
+		
+		ignorePause: true,
 		
 		size: {x:0,y:0},
 		gravityFactor: 0,
 		
 		cursor: 2,
 		
+		selected: false,
+		
 		init: function(x,y,settings) {
 			this.size = {x:settings.width, y:settings.height};
 			this.parent(x,y,settings);
+			
+			this.text = settings.text;
+			this.exec = settings.exec;
+			this.font = settings.font;
+			this.redFont = settings.redFont;
+			this.clickCD = new ig.Timer(settings.clickCD);
+		},
+		
+		update: function() {
+			if (ig.input.pressed("lbtn") && this.selected)
+				this.exec();
+			this.selected = false;
+		},
+		
+		check: function(other) {
+			if (other.isCursor) this.selected = true;
+		},
+		
+		draw: function() {
+			this.selected ? this.redFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment);
 		}
 	});
 });
-
-var hitbox = function(xy1,xy2,key) {
-	this.pos1 = {};
-	this.pos2 = {};
-	this.pos1.x = xy1.x;
-	this.pos1.y = xy1.y;
-	this.pos2.x = xy2.x;
-	this.pos2.y = xy2.y;
-	
-	this.key = key;
-	
-	this.isTouching = function(x,y) {
-		return (x > this.pos1.x && x < this.pos2.x && y > this.pos1.y && y < this.pos2.y);
-	}
-}
-
-
-/*
- *
- *This could all be done better with entities and using native hitbox detection--but this might work better for text, so I'm trying it out this way
- *
- */

@@ -63,10 +63,6 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 				ig.system.context.rect(0, 0, ig.system.width, ig.system.height);
 				ig.system.context.fillStyle = '#5f5f5f';
 				ig.system.context.fill();
-				//var soundStatus = "SOUND: " + (ig.soundManager.volume == 0 ? "MUTED" : ig.soundManager.volume*100 + "%");
-				//var musicStatus = "MUSIC: " + (ig.music.volume == 0 ? "MUTED" : ig.music.volume*100 + "%");
-				//this.statusFont.draw(soundStatus, 50, 50, ig.Font.ALIGN.LEFT);
-				//this.statusFont.draw(musicStatus, ig.system.width-50, 50, ig.Font.ALIGN.RIGHT);
 			}
 			this.parent();
 		},
@@ -74,6 +70,9 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		kill: function() {
 			this.musicSlider.kill();
 			this.soundSlider.kill();
+			for (var i = 0; i < this.menuItems.length; i++) {
+				this.menuItems[i].kill();
+			}
 			this.parent();
 		}
 	});

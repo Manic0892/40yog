@@ -2,7 +2,7 @@ ig.module('game.entities.cursor').requires('impact.entity').defines(function() {
 	EntityCursor = ig.Entity.extend({
 		checkAgainst: ig.Entity.TYPE.BOTH,
 		collides: ig.Entity.COLLIDES.NEVER,
-		type: ig.Entity.TYPE.NONE,
+		type: ig.Entity.TYPE.A,
 		
 		name:'cursor',
 		
@@ -12,6 +12,7 @@ ig.module('game.entities.cursor').requires('impact.entity').defines(function() {
 		ignorePause:true,
 		
 		undetectableByMouse: true, //fix for drag and drop plugin
+		isCursor: true,
 		
 		animSheet: new ig.AnimationSheet('media/cursor.png', 32, 32),
 		

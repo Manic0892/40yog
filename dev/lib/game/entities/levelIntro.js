@@ -78,8 +78,6 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 	EntityPlayMenu = EntityMenu.extend({
 		name: 'playMenu',
 		
-		safetyCD: 20, //this is here to fix bug where it's spawned and then kills itself but misses toggling pause again.  dumb bug.
-		
 		font: new ig.Font('media/bebas_neue_75_white.png'),
 		redFont: new ig.Font('media/bebas_neue_75_red.png'),
 		
@@ -93,21 +91,41 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 		alignment: ig.Font.ALIGN.CENTER,
 		
 		init: function(x,y,settings) {
-			this.levelToLoad = settings.levelToLoad;
-			this.items.push({text:'PLAY', levelToLoad: this.levelToLoad, exec:function() {
+			this.addAnim('idle', 1, [0]);
+			this.items.push({text:'PLAY', exec:function() {
 				ig.game.loadLevelDeferred(this.levelToLoad);
 			}});
 			this.initYOffset = ig.system.height - 100;
-			this.parent();
-		},
-		
-		update: function() {
-			this.parent();
-			this.safetyCD--;
-		},
-		
-		draw: function() {
-			this.parent();
+			
+			if (!ig.global.wm) {
+				for (var i = 0; i < this.items.length; i++) {
+					var width = this.font.widthForString(this.items[i].text);
+					var height = this.font.heightForString(this.items[i].text);
+					
+					var xPos = this.initXOffset + ig.system.width/2 - width/2;
+					var yPos = this.initYOffset+i*this.ySpacing;
+					
+					this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, xPos + ig.game.screen.x, yPos+ig.game.screen.y, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont, levelToLoad: settings.levelToLoad}));
+				}
+				
+				ig.game.clearColor = this.clearColor;
+				
+				if (settings && settings.parentLevel) {
+					this.parentLevel = settings.parentLevel;
+					this.cursor = this.parentLevel.cursor;
+				} else if (ig.game.getEntityByName('cursor')) {
+					this.cursor = ig.game.getEntityByName('cursor').def;
+				} else {
+					this.cursor = ig.game.spawnEntity(EntityCursor, 0, 0, {def: this.defaultCursor});
+				}
+				this.cursor.def = this.defaultCursor;
+			}
+		}
+	});
+	
+	EntityPlayMenuItem = EntityMenuItem.extend({
+		init: function(x,y,settings) {
+			this.parent(x,y,settings);
 		}
 	});
 });
