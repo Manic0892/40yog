@@ -1,8 +1,11 @@
-ig.module( 
-	'game.main' 
-)
-.requires(
+ig.module('game.main').requires(
 	'plugins.perpixel',
+	'plugins.entitytype',
+	
+	'plugins.empika.entity_utilities',
+	'plugins.empika.game_utilities',
+	'plugins.pause',
+	'plugins.betterLoadLevel',
 	
 	'impact.debug.debug',
 	
@@ -17,18 +20,10 @@ ig.module(
 	'game.levels.intro2',
 	'game.levels.2',
 	'game.levels.lose2',
-	'game.levels.win2',
-	
-	'plugins.empika.entity_utilities',
-	'plugins.empika.game_utilities',
-	'plugins.pause',
-	'plugins.betterLoadLevel',
-	'plugins.entitytype'
-)
-.defines(function(){
+	'game.levels.win2'
+).defines(function(){
 
 	MyGame = ig.Game.extend({
-		
 		gravity:2000,
 		zoomLevel: 1,
 		
