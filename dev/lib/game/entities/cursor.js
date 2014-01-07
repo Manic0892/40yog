@@ -2,7 +2,7 @@ ig.module('game.entities.cursor').requires('impact.entity').defines(function() {
 	EntityCursor = ig.Entity.extend({
 		checkAgainst: ig.Entity.TYPE.BOTH,
 		collides: ig.Entity.COLLIDES.NEVER,
-		type: ig.Entity.TYPE.A,
+		type: ig.Entity.TYPE.get('cursor'),
 		
 		name:'cursor',
 		

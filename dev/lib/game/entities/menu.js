@@ -93,7 +93,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 		zIndex: 1000,
 		type: ig.Entity.TYPE.A,
 		collides: ig.Entity.COLLIDES.NEVER,
-		checkAgainst: ig.Entity.TYPE.BOTH,
+		checkAgainst: ig.Entity.TYPE.get('cursor'),
 		
 		ignorePause: true,
 		

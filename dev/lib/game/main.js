@@ -22,7 +22,8 @@ ig.module(
 	'plugins.empika.entity_utilities',
 	'plugins.empika.game_utilities',
 	'plugins.pause',
-	'plugins.betterLoadLevel'
+	'plugins.betterLoadLevel',
+	'plugins.entitytype'
 )
 .defines(function(){
 
