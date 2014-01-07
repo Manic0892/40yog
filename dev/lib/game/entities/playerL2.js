@@ -41,7 +41,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 				
 				this.loopingSoundManager = ig.game.spawnEntity(EntityLoopingSoundManager, 0, 0);
 				
-				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 40, yOffset: this.size.y/2});
+				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 20, yOffset: this.size.y/2});
 			}
 		},
 		
@@ -149,23 +149,18 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			
 			this.idleTimer = new ig.Timer();
 			
-			this.vel.x = Math.random()*80-40;
+			this.vel.x = Math.random()*200-100;
 			this.vel.y = Math.random()*200-100;
 			this.color = settings.color;
 		},
 		
 		reset: function( x, y, settings ) {
-			// This function is called when an instance of this class is
-			// resurrected from the entity pool.
-			// The parent implementation of reset() will reset the .pos to 
-			// the given x, y and will reset the .vel, .accel, .health and 
-			// some other properties.
 			this.parent( x, y, settings );
 			
 			this.idleTimer = new ig.Timer();
 			this.particleSize = Math.random()*10 + 40;
 			
-			this.vel.x = Math.random()*80-40;
+			this.vel.x = Math.random()*200-100;
 			this.vel.y = Math.random()*200-100;
 			this.color = settings.color;
 		},
@@ -229,17 +224,17 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			
 			if (this.anchor.health < 3) {
 				if (this.anchor.health == 2) {
-					this.particleColor = 50;
+					this.particleColor = 35;
 				}
 				if (this.anchor.health == 1) {
-					this.particleColor = 25;
+					this.particleColor = 15;
 				}
 				this.spawnParticle();
 			}
 		},
 		
 		spawnParticle: function() {
-				ig.game.spawnEntity(EntitySmokeParticle, this.pos.x+(Math.random()*10), this.pos.y+(Math.random()*10), {color: this.particleColor});
+				ig.game.spawnEntity(EntitySmokeParticle, this.pos.x+(Math.random()*20)-10, this.pos.y+(Math.random()*20)-10, {color: this.particleColor});
 		},
 		
 		draw: function() {
