@@ -1,8 +1,8 @@
 ig.module('game.entities.levelIntroLogic').requires('impact.entity', 'impact.image').defines(function() {
 		EntityLevelIntroLogic = ig.Entity.extend({
-			animSheet: new ig.AnimationSheet('media/Manic_Studios.png', 976, 235),
+			animSheet: new ig.AnimationSheet('media/Manic_Studios.png', 1000, 250),
 			
-			size: {x:976, y:235},
+			size: {x:1000, y:250},
 			
 			gravityFactor: 0,
 			time:1.25,
