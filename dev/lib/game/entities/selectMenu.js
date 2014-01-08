@@ -8,9 +8,9 @@ ig.module('game.entities.selectMenu').requires('game.entities.menu').defines(fun
 			}}
 		],
 		
-		initYOffset: 64,
+		initYOffset: 96,
 		
-		initXOffset: 192,
+		initXOffset: 256,
 		
 		init: function(x,y,settings) {
 			if ($.cookie("l1") == "beat") {

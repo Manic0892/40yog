@@ -11,6 +11,8 @@ ig.module('game.entities.cursor').requires('impact.entity').defines(function() {
 		
 		ignorePause:true,
 		
+		_wmIgnore: true,
+		
 		undetectableByMouse: true, //fix for drag and drop plugin
 		isCursor: true,
 		

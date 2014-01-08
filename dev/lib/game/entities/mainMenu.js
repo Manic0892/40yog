@@ -12,8 +12,8 @@ ig.module('game.entities.mainMenu').requires('game.entities.menu').defines(funct
 			}}
 		],
 		
-		initYOffset: 128,
+		initYOffset: 96,
 		
-		initXOffset: 192
+		initXOffset: 256
 	});
 });

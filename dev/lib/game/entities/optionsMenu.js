@@ -13,9 +13,9 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 			}}
 		],
 		
-		initYOffset: 450,
+		initYOffset: 296,
 		
-		initXOffset: 0,
+		initXOffset: 256,
 		
 		ySpacing: 50,
 		
@@ -24,8 +24,8 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 			if (!ig.global.wm) {
 				x = ig.game.screen.x + ig.system.width/2;
 				y = ig.game.screen.y + ig.system.height/2;
-				this.musicSlider = ig.game.spawnEntity(EntityMusicSlider_Options, x, y - 130);
-				this.soundSlider = ig.game.spawnEntity(EntitySoundSlider_Options,x,y);
+				this.musicSlider = ig.game.spawnEntity(EntityMusicSlider_Options, x + this.initXOffset, this.initYOffset - 170);
+				this.soundSlider = ig.game.spawnEntity(EntitySoundSlider_Options, x + this.initXOffset, this.initYOffset - 50);
 			}
 		}
 	});
