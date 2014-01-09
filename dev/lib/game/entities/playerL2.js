@@ -182,28 +182,23 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			this.parent();
 			var x = this.pos.x - ig.game.screen.x;
 			var y = this.pos.y - ig.game.screen.y;
-			
-			
-			//Old, deprecated way without gradients.
-			//Keeping it around in case it comes in handy later
-			
-			//ig.system.context.beginPath();
-			//ig.system.context.arc(x, y, this.particleSize, 0, Math.PI*2, true);
-			//ig.system.context.fillStyle = 'rgb(' + this.color + ',' + this.color + ',' + this.color + ')';
-			//ig.system.context.fill();
-			
-			
-			
 			//Okay, what the fuck now?  Defining a rect and then drawing makes performance shit its pants, but using fillRect doesn't.  I need to investigate this later.
 			
 			
-			//ig.system.context.rect(x-this.particleSize, y-this.particleSize, x+this.particleSize, y+this.particleSize);
-			var grd = ig.system.context.createRadialGradient(x,y, 0, x, y, this.particleSize);
-			grd.addColorStop(0, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',1)');
-			grd.addColorStop(.5, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',.7)');
-			grd.addColorStop(1, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',0)');
-			ig.system.context.fillStyle = grd;
-			ig.system.context.fillRect(x-this.particleSize, y-this.particleSize, x+this.particleSize, y+this.particleSize);
+			if (ig.global.graphics.gradient) {
+				//ig.system.context.rect(x-this.particleSize, y-this.particleSize, x+this.particleSize, y+this.particleSize);
+				var grd = ig.system.context.createRadialGradient(x,y, 0, x, y, this.particleSize);
+				grd.addColorStop(0, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',1)');
+				grd.addColorStop(.5, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',.7)');
+				grd.addColorStop(1, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',0)');
+				ig.system.context.fillStyle = grd;
+				ig.system.context.fillRect(x-this.particleSize, y-this.particleSize, x+this.particleSize, y+this.particleSize);
+			} else {
+				ig.system.context.beginPath();
+				ig.system.context.arc(x, y, this.particleSize, 0, Math.PI*2, true);
+				ig.system.context.fillStyle = 'rgb(' + this.color + ',' + this.color + ',' + this.color + ')';
+				ig.system.context.fill();
+			}
 		}
 		
 	});

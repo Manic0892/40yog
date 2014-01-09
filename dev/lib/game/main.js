@@ -51,6 +51,13 @@ ig.module('game.main').requires(
 			
 			if ($.cookie("music")) ig.music.volume = Number($.cookie("music"));
 			if ($.cookie("sound")) ig.soundManager.volume = Number($.cookie("sound"));
+			
+			ig.global.graphics = {};
+			
+			if ($.cookie("gradient"))
+				ig.global.graphics.gradient = Boolean($.cookie("gradient"));
+			else
+				ig.global.graphics.gradient = true;
 		},
 		
 		update: function() {

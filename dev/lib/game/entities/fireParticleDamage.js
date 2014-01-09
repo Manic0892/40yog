@@ -79,13 +79,20 @@ ig.module('game.entities.fireParticleDamage').requires('game.entities.particle',
 			//ig.system.context.rect(0, 0, ig.game.screen.width, ig.game.screen.height);
 			
 			// create radial gradient
-			var grd = ig.system.context.createRadialGradient(x, y, this.particleSize, x, y, this.particleSize+20);
-			grd.addColorStop(0, 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',1)');
-			grd.addColorStop(1, 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',0)');
-			
-			ig.system.context.fillStyle = grd;
-			var partSizeBuff = this.particleSize + 20; //This just ensures that we'll be drawing a large enough rectangle for the gradient to fill
-			ig.system.context.fillRect(x-partSizeBuff,y-partSizeBuff,x+partSizeBuff, y+partSizeBuff);
+			if (ig.global.graphics.gradient == true) {
+				var grd = ig.system.context.createRadialGradient(x, y, this.particleSize, x, y, this.particleSize+20);
+				grd.addColorStop(0, 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',1)');
+				grd.addColorStop(1, 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',0)');
+				
+				ig.system.context.fillStyle = grd;
+				var partSizeBuff = this.particleSize + 20; //This just ensures that we'll be drawing a large enough rectangle for the gradient to fill
+				ig.system.context.fillRect(x-partSizeBuff,y-partSizeBuff,x+partSizeBuff, y+partSizeBuff);
+			} else {
+				ig.system.context.beginPath();
+				ig.system.context.arc(x, y, this.particleSize, 0, Math.PI*2, true);
+				ig.system.context.fillStyle = 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
+				ig.system.context.fill();
+			}
 			
 
 		},
