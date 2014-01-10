@@ -50,14 +50,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 			
 			
 			if (!ig.global.wm) {
-				for (var i = 0; i < this.items.length; i++) {
-					var width = this.font.widthForString(this.items[i].text);
-					var height = this.font.heightForString(this.items[i].text);
-					
-					var xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
-					var yPos = this.initYOffset+i*this.ySpacing + ig.game.screen.y;
-					this.spawnMenuItem(i,width,height,xPos,yPos,settings);
-				}
+				this.spawnMenuItems(settings);
 				
 				ig.game.clearColor = this.clearColor;
 				
@@ -71,6 +64,17 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 				}
 				this.cursor.def = this.defaultCursor;
 			}
+		},
+		
+		spawnMenuItems: function(settings) {
+			for (var i = 0; i < this.items.length; i++) {
+					var width = this.font.widthForString(this.items[i].text);
+					var height = this.font.heightForString(this.items[i].text);
+					
+					var xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
+					var yPos = this.initYOffset+i*this.ySpacing + ig.game.screen.y;
+					this.spawnMenuItem(i,width,height,xPos,yPos,settings);
+				}
 		},
 		
 		spawnMenuItem: function(i,width,height,x,y,settings) {

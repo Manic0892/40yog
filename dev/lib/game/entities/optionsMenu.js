@@ -17,24 +17,69 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 		
 		initXOffset: 256,
 		
-		ySpacing: 50,
+		ySpacing: 100,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
 				x = ig.game.screen.x + ig.system.width/2;
 				y = ig.game.screen.y + ig.system.height/2;
-				this.musicSlider = ig.game.spawnEntity(EntityMusicSlider_Options, x + this.initXOffset, this.initYOffset - 170);
-				this.soundSlider = ig.game.spawnEntity(EntitySoundSlider_Options, x + this.initXOffset, this.initYOffset - 50);
+				this.musicSlider = ig.game.spawnEntity(EntityMusicSliderOptions, x + this.initXOffset, 50);
+				this.soundSlider = ig.game.spawnEntity(EntitySoundSliderOptions, x + this.initXOffset, 150);
+			}
+		},
+		
+		spawnMenuItems: function(settings) {
+			var text;
+			ig.global.graphics.gradient == true ? text = "GRADIENT ON" : text = "GRADIENT OFF";
+			var exec = function() {
+				ig.global.graphics.gradient = !ig.global.graphics.gradient;
+				ig.global.graphics.gradient == true ? this.text = "GRADIENT ON" : this.text = "GRADIENT OFF";
+				$.cookie("gradient", ig.global.graphics.gradient, {expires: 99999, path:'/'});
+			}
+			var width = this.font.widthForString("GRADIENT OFF");
+			var height = this.font.heightForString("GRADIENT OFF");
+			var xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
+			var yPos = this.initYOffset+-1*this.ySpacing + ig.game.screen.y;
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItemGraphicsOptions, xPos, yPos, {width:width, height:height, text: text, exec: exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont, initXOffset: this.initXOffset}));
+			for (var i = 0; i < this.items.length; i++) {
+				width = this.font.widthForString(this.items[i].text);
+				height = this.font.heightForString(this.items[i].text);
+				xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
+				yPos = this.initYOffset+i*this.ySpacing + ig.game.screen.y;
+				this.spawnMenuItem(i,width,height,xPos,yPos,settings);
 			}
 		}
 	});
 	
-	EntityMusicSlider_Options = EntitySlider.extend({
+	EntityMenuItemGraphicsOptions = EntityMenuItem.extend({
+		init: function(x,y,settings) {
+			this.parent(x,y,settings);
+		},
+		
+		update: function() {
+			if (ig.input.pressed("lbtn") && this.selected)
+				this.exec();
+			this.selected = false;
+			var width = this.font.widthForString(this.text);
+			this.size.x = width;
+			this.pos.x = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
+		},
+		
+		check: function(other) {
+			if (other.isCursor) this.selected = true;
+		},
+		
+		draw: function() {
+			this.selected ? this.redFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment);
+		}
+	});
+	
+	EntityMusicSliderOptions = EntitySlider.extend({
 		title: 'Music',
 		
 		labelFont: new ig.Font('media/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/bebas_neue_75_black.png'),
+		titleFont: new ig.Font('media/bebas_neue_40_black.png'),
 		
 		init: function(x,y,settings) {
 			this.initVal = ig.music.volume;
@@ -47,11 +92,11 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 		}
 	});
 	
-	EntitySoundSlider_Options = EntitySlider.extend({
+	EntitySoundSliderOptions = EntitySlider.extend({
 		title: 'Sound',
 		
 		labelFont: new ig.Font('media/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/bebas_neue_75_black.png'),
+		titleFont: new ig.Font('media/bebas_neue_40_black.png'),
 		
 		init: function(x,y,settings) {
 			this.initVal = ig.soundManager.volume;

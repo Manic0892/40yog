@@ -55,7 +55,7 @@ ig.module('game.main').requires(
 			ig.global.graphics = {};
 			
 			if ($.cookie("gradient"))
-				ig.global.graphics.gradient = Boolean($.cookie("gradient"));
+				ig.global.graphics.gradient = ($.cookie("gradient") == "true");
 			else
 				ig.global.graphics.gradient = true;
 		},
