@@ -16,7 +16,12 @@ wm.config = {
 		// 'entityFiles': ['lib/game/powerups/*.js', 'lib/game/entities/*.js']
 		'entityFiles': [
 			/*'lib/plusplus/entities/*.js',*/ //This should remain commented out until Impact++ integration
-			'lib/game/entities/*.js'
+			'lib/game/entities/*.js',
+			'lib/game/entities/*/*.js',
+			'lib/game/entities/*/*/*.js',
+			'lib/game/entities/*/*/*/*.js',
+			'lib/game/entities/*/*/*/*/*.js',
+			'lib/game/entities/*/*/*/*/*/*.js',
 		],
 		
 		// The default path for the level file selection box
