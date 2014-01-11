@@ -1,5 +1,5 @@
-ig.module('game.entities.levelIntroLogic').requires('impact.entity', 'impact.image').defines(function() {
-		EntityLevelIntroLogic = ig.Entity.extend({
+ig.module('game.entities.gameIntro').requires('impact.entity', 'impact.image').defines(function() {
+		EntityGameIntro = ig.Entity.extend({
 			animSheet: new ig.AnimationSheet('media/Manic_Studios.png', 1000, 250),
 			
 			size: {x:1000, y:250},

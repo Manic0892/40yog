@@ -1,5 +1,5 @@
 ig.module( 'game.levels.intro' )
-.requires( 'impact.image','game.entities.levelIntroLogic' )
+.requires( 'impact.image','game.entities.gameIntro' )
 .defines(function(){
-LevelIntro=/*JSON[*/{"entities":[{"type":"EntityLevelIntroLogic","x":352,"y":224,"settings":{"name":"LevelIntroLogic"}}],"layer":[]}/*]JSON*/;
+LevelIntro=/*JSON[*/{"entities":[{"type":"EntityGameIntro","x":352,"y":224,"settings":{"name":"GameIntro"}}],"layer":[]}/*]JSON*/;
 });
