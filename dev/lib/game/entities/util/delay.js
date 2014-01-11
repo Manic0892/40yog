@@ -18,13 +18,7 @@ target.1, target.2 ... target.n
 	the delay.
 */
 
-ig.module(
-	'game.entities.delay'
-)
-.requires(
-	'impact.entity'
-)
-.defines(function(){
+ig.module('game.entities.util.delay').requires('impact.entity').defines(function(){
 
 EntityDelay = ig.Entity.extend({
 	_wmDrawBox: true,
