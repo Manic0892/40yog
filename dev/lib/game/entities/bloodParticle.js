@@ -1,22 +1,4 @@
-/*
-Base entity class for particle entities. Subclass your own particles from
-this class. See the EntityDebrisParticle in debris.js for an example.
-
-Particle entities will kill themselfs after #lifetime# seconds. #fadetime#
-seconds before the #lifetime# ends, they will start to fade out.
-
-The velocity of a particle is randomly determined by its initial .vel 
-properties. Its Animation will start at a random frame.
-*/
-
-ig.module(
-	'game.entities.bloodParticle'
-)
-.requires(
-	'game.entities.particle'
-)
-.defines(function(){
-
+ig.module('game.entities.bloodParticle').requires('game.entities.particle').defines(function(){
 	EntityBloodParticle = EntityParticle.extend({
 		alpha: 1,
 		
@@ -62,6 +44,4 @@ ig.module(
 			ig.system.context.fill();
 		}
 	});
-
-
 });

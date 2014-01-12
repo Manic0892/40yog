@@ -35,8 +35,6 @@ ig.module('game.entities.ashParticleRising').requires('game.entities.ashParticle
 			this.vel.y = -100 - Math.random()*25;
 			this.vel.x = Math.random()*200 - 100;
 			
-			//this.particleSize = Math.random()*5;
-			
 			this.idleTimer = new ig.Timer();
 		},
 		

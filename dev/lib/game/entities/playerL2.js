@@ -4,15 +4,15 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		collides: ig.Entity.COLLIDES.ACTIVE,
 		checkAgainst: ig.Entity.TYPE.B,
 		
-		animSheet: new ig.AnimationSheet( 'media/car.png', 261, 128),
+		animSheet: new ig.AnimationSheet( 'media/images/sprites/car.png', 261, 128),
 		
 		maxVel: {x:750,y:400},
 		size: {x:261, y:128},
 		friction: {x:0,y:2000},
 		
-		crashSound: new ig.Sound('media/sound/crash.*'),
+		crashSound: new ig.Sound('media/sounds/crash.*'),
 		
-		carSound: new ig.Sound('media/sound/inside_car.*', false),
+		carSound: new ig.Sound('media/sounds/inside_car.*', false),
 		
 		health:3,
 		gravityFactor:0,

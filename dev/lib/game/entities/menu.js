@@ -2,9 +2,9 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 	EntityMenu = ig.Entity.extend({
 		name: 'menu',
 		
-		font: new ig.Font( 'media/bebas_neue_100_black.png' ),
+		font: new ig.Font( 'media/fonts/bebas_neue_100_black.png' ),
 	
-		redFont: new ig.Font('media/bebas_neue_100_red.png'),
+		redFont: new ig.Font('media/fonts/bebas_neue_100_red.png'),
 		
 		items: [
 			{text:'HELLO, WORLD!',exec:function() {
@@ -29,7 +29,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 		_wmDrawBox: true,
 		_wmBoxColor: 'rgba(255, 0, 0, 0.4)',
 		
-		animSheet: new ig.AnimationSheet('media/null.png',64,64),
+		animSheet: new ig.AnimationSheet('media/images/null.png',64,64),
 		
 		collision: ig.Entity.COLLIDES.NONE,
 		type: ig.Entity.TYPE.NONE,

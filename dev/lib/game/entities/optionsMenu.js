@@ -4,8 +4,8 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 		
 		safetyTimer: .25, //this is here to fix bug where it's spawned and then kills itself but misses toggling pause again.  dumb bug.
 		
-		font: new ig.Font('media/bebas_neue_100_black.png'),
-		redFont: new ig.Font('media/bebas_neue_100_red.png'),
+		font: new ig.Font('media/fonts/bebas_neue_100_black.png'),
+		redFont: new ig.Font('media/fonts/bebas_neue_100_red.png'),
 		
 		items: [
 			{text:'MAIN MENU', exec:function() {
@@ -78,8 +78,8 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 	EntityMusicSliderOptions = EntitySlider.extend({
 		title: 'Music',
 		
-		labelFont: new ig.Font('media/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/bebas_neue_40_black.png'),
+		labelFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
+		titleFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
 		
 		init: function(x,y,settings) {
 			this.initVal = ig.music.volume;
@@ -95,8 +95,8 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 	EntitySoundSliderOptions = EntitySlider.extend({
 		title: 'Sound',
 		
-		labelFont: new ig.Font('media/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/bebas_neue_40_black.png'),
+		labelFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
+		titleFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
 		
 		init: function(x,y,settings) {
 			this.initVal = ig.soundManager.volume;

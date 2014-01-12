@@ -1,6 +1,6 @@
 ig.module('game.entities.levelLoseLogic').requires('impact.entity', 'game.entities.menu', 'game.levels.mainMenu').defines(function(){
 	EntityLevelLoseLogic = ig.Entity.extend({
-		font: new ig.Font( 'media/bebas_neue_50_black.png' ),
+		font: new ig.Font( 'media/fonts/bebas_neue_50_black.png' ),
 		
 		initYOffset: 25,
 		
@@ -11,7 +11,7 @@ ig.module('game.entities.levelLoseLogic').requires('impact.entity', 'game.entiti
 		_wmDrawBox: true,
 		_wmBoxColor: 'rgba(0, 125, 125, 0.4)',
 		
-		animSheet: new ig.AnimationSheet('media/null.png',64,64),
+		animSheet: new ig.AnimationSheet('media/images/null.png',64,64),
 		
 		text: "Oh no!\nYou lost!\nPlay again?",
 		
@@ -53,7 +53,7 @@ ig.module('game.entities.levelLoseLogic').requires('impact.entity', 'game.entiti
 	EntityLoseMenu = EntityMenu.extend({
 		name: 'loseMenu',
 		
-		redFont: new ig.Font('media/bebas_neue_100_white.png'), //this is just silly
+		redFont: new ig.Font('media/fonts/bebas_neue_100_white.png'), //this is just silly
 		
 		items: [
 			{text:'MAIN MENU',exec:function() {

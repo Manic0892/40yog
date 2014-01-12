@@ -1,8 +1,4 @@
-ig.module(
-	'game.entities.enemyBedbug'
-).requires(
-	'game.entities.enemy'/*,'plugins.perpixel' */
-).defines(function() {
+ig.module('game.entities.enemyBedbug').requires('game.entities.enemy'/*,'plugins.perpixel' */).defines(function() {
 	EntityEnemyBedbug = EntityEnemy.extend({
 		type: ig.Entity.TYPE.B,
 		checkAgainst: ig.Entity.TYPE.A,
@@ -17,7 +13,7 @@ ig.module(
 		
 		health:50,
 		
-		animSheet: new ig.AnimationSheet( 'media/bedbug.png', 64, 64 ),
+		animSheet: new ig.AnimationSheet( 'media/images/sprites/bedbug.png', 64, 64 ),
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);

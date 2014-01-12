@@ -2,6 +2,6 @@ ig.module('game.entities.winFlag').requires('game.entities.staticImage').defines
 	EntityWinFlag = EntityStaticImage.extend({
 		_wmIgnore: false,
 		
-		animSheet: new ig.AnimationSheet('media/winFlag.png',64,64)
+		animSheet: new ig.AnimationSheet('media/images/sprites/winFlag.png',64,64)
 	});
 });

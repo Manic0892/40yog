@@ -10,8 +10,8 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		strokeColor: '#000',
 		handleColor: '#afafaf',
 		
-		labelFont: new ig.Font('media/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/bebas_neue_40_black.png'),
+		labelFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
+		titleFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
 		textYOffset: 3,
 		
 		_wmDrawBox: true,

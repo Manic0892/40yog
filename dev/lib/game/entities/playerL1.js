@@ -1,11 +1,11 @@
 ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entities.fireParticleDamage').defines(function() {
 	EntityPlayerL1 = EntityPlayer.extend({
-		fireSound: new ig.Sound('media/sound/fire2.*'),
+		fireSound: new ig.Sound('media/sounds/fire2.*'),
 		soundTimer: new ig.Timer(35/60),
 		defShootCD: .001,
 		
-		gruntSound: new ig.Sound('media/sound/grunt.*'),
-		splatSound: new ig.Sound('media/sound/splat.*'),
+		gruntSound: new ig.Sound('media/sounds/grunt.*'),
+		splatSound: new ig.Sound('media/sounds/splat.*'),
 		
 		flameActive: false,
 		
@@ -73,7 +73,7 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 	});
 	
 	EntityArmL1 = EntityArm.extend({
-		animSheet: new ig.AnimationSheet('media/arm_l1.png',24,8),
+		animSheet: new ig.AnimationSheet('media/images/sprites/arm_l1.png',24,8),
 		size: {x:24,y:8},
 		
 		init: function(x,y,settings) {

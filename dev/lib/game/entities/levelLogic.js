@@ -7,7 +7,7 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 		ignorePause: true,
 		safetyTimer: .25, //dumb bug
 		
-		levelMusic: new ig.Sound('media/sound/rock_loop.*', false),
+		levelMusic: new ig.Sound('media/sounds/rock_loop.*', false),
 		
 		defaultCursor: 1,
 		

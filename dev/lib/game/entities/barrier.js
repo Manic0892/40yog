@@ -1,7 +1,7 @@
 ig.module('game.entities.barrier').requires('impact.entity').defines(function() {
 	EntityBarrier = ig.Entity.extend({
 		size: {x:38,y:141},
-		animSheet: new ig.AnimationSheet('media/barrier_comp.png', 38,141),
+		animSheet: new ig.AnimationSheet('media/images/sprites/barrier_comp.png', 38,141),
 		maxVel: {x:0,y:0},
 		gravityFactor:0,
 		health: 1,

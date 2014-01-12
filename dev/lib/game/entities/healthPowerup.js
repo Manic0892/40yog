@@ -4,7 +4,7 @@ ig.module('game.entities.healthPowerup').requires('game.entities.powerup').defin
 		
 		zIndex: -10,
 		
-		animSheet: new ig.AnimationSheet( 'media/health.png', 32, 32 ),
+		animSheet: new ig.AnimationSheet( 'media/images/sprites/health.png', 32, 32 ),
 		
 		playSoundOnTouch: false,
 		

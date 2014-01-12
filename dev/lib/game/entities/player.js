@@ -1,7 +1,4 @@
-ig.module(
-	'game.entities.player'
-).requires(
-	'game.entities.character'
+ig.module('game.entities.player').requires('game.entities.character'
 ).defines(function() {
 	EntityPlayer = EntityCharacter.extend({
 		
@@ -9,7 +6,7 @@ ig.module(
 		
 		maxVel: {x: 400, y: 400},
 		
-		animSheet: new ig.AnimationSheet( 'media/player.png', 32, 64 ),
+		animSheet: new ig.AnimationSheet( 'media/images/sprites/player.png', 32, 64 ),
 		
 		//arm: new EntityArm(this.x,this.y, {attachee: this}),
 		
@@ -150,7 +147,7 @@ ig.module(
 	});
 	
 	EntityArm = ig.Entity.extend({
-		animSheet: new ig.AnimationSheet('media/arm.png', 32, 8),
+		animSheet: new ig.AnimationSheet('media/images/sprites/arm.png', 32, 8),
 		size: {x:32, y:8},
 		type: ig.Entity.TYPE.NONE,
 		collides: ig.Entity.COLLIDES.NONE,

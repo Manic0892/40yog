@@ -1,6 +1,6 @@
 ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entities.menu').defines(function(){
 	EntityLevelWinLogic = ig.Entity.extend({
-		font: new ig.Font( 'media/bebas_neue_50_black.png' ),
+		font: new ig.Font( 'media/fonts/bebas_neue_50_black.png' ),
 		
 		initYOffset: 25,
 		
@@ -11,7 +11,7 @@ ig.module('game.entities.levelWinLogic').requires('impact.entity', 'game.entitie
 		_wmDrawBox: true,
 		_wmBoxColor: 'rgba(0, 125, 125, 0.4)',
 		
-		animSheet: new ig.AnimationSheet('media/null.png',64,64),
+		animSheet: new ig.AnimationSheet('media/images/null.png',64,64),
 		
 		text: "Congratulations!\nYou won!\nPlay again?",
 		

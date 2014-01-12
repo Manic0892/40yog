@@ -7,8 +7,8 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		
 		//statusFont: new ig.Font('media/bebas_neue_25_black.png'),
 		
-		font: new ig.Font('media/bebas_neue_50_black.png'),
-		redFont: new ig.Font('media/bebas_neue_50_red.png'),
+		font: new ig.Font('media/fonts/bebas_neue_50_black.png'),
+		redFont: new ig.Font('media/fonts/bebas_neue_50_red.png'),
 		zIndex:999,
 		
 		items: [

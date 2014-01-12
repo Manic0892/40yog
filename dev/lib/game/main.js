@@ -22,7 +22,6 @@ ig.module('game.main').requires(
 	'game.levels.lose2',
 	'game.levels.win2'
 ).defines(function(){
-
 	MyGame = ig.Game.extend({
 		gravity:2000,
 		zoomLevel: 1,
@@ -30,7 +29,7 @@ ig.module('game.main').requires(
 		clearColor: '#fff',
 		
 		// Load a font
-		font: new ig.Font( 'media/04b03.font.png' ),
+		font: new ig.Font( 'media/fonts/04b03.font.png' ),
 		scale: 1,
 		
 		

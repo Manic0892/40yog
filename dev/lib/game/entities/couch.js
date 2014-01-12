@@ -1,6 +1,6 @@
 ig.module('game.entities.couch').requires('impact.entity', 'game.entities.enemyBedbug').defines(function() {
 	EntityCouch = ig.Entity.extend({
-		animSheet: new ig.AnimationSheet('media/couch.png', 128, 64),
+		animSheet: new ig.AnimationSheet('media/images/sprites/couch.png', 128, 64),
 		
 		size: {x:128,y: 64},
 		
@@ -55,8 +55,6 @@ ig.module('game.entities.couch').requires('impact.entity', 'game.entities.enemyB
 		kill: function() {
 			//just keeps you from losing the couch when it's dead
 			this.dead = true;
-			console.log(this.health);
-			console.log('triggered');
 		},
 		
 		receiveSunDamage: function(damage, other) {

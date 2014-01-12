@@ -6,7 +6,7 @@ ig.module('game.entities.weaponPickup').requires('game.entities.powerup').define
 		_wmBoxColor: 'rgba(255,224,122,0.4)',
 		_wmIgnore: true,
 		
-		animSheet: new ig.AnimationSheet('media/null.png',64,64),
+		animSheet: new ig.AnimationSheet('media/images/null.png',64,64),
 		
 		bobTime: 1.5,
 		

@@ -1,10 +1,4 @@
-ig.module(
-	'game.entities.loopingSoundManager'
-)
-.requires(
-	'impact.entity'
-)
-.defines(function () {
+ig.module('game.entities.loopingSoundManager').requires('impact.entity').defines(function () {
 	//I hate this shit right here.
 	EntityLoopingSoundManager = ig.Entity.extend({
 		ignorePause: true,

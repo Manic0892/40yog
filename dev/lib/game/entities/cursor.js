@@ -16,7 +16,7 @@ ig.module('game.entities.cursor').requires('impact.entity').defines(function() {
 		undetectableByMouse: true, //fix for drag and drop plugin
 		isCursor: true,
 		
-		animSheet: new ig.AnimationSheet('media/cursor.png', 32, 32),
+		animSheet: new ig.AnimationSheet('media/images/cursor.png', 32, 32),
 		
 		zIndex: 99999999999,
 		

@@ -7,15 +7,15 @@
  */
 ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.menu').defines(function(){
 	EntityLevelIntro = ig.Entity.extend({
-		titleFont: new ig.Font( 'media/bebas_neue_100_white.png' ),
-		descriptionFont: new ig.Font('media/bebas_neue_25_white.png'),
+		titleFont: new ig.Font( 'media/fonts/bebas_neue_100_white.png' ),
+		descriptionFont: new ig.Font('media/fonts/bebas_neue_25_white.png'),
 				
 		alignment: ig.Font.ALIGN.CENTER,
 				
 		_wmDrawBox: true,
 		_wmBoxColor: 'rgba(0, 125, 125, 0.4)',
 		
-		animSheet: new ig.AnimationSheet('media/null.png',64,64),
+		animSheet: new ig.AnimationSheet('media/images/null.png',64,64),
 		
 		titleText: 'Sample Level Title',
 		
@@ -78,8 +78,8 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 	EntityPlayMenu = EntityMenu.extend({
 		name: 'playMenu',
 		
-		font: new ig.Font('media/bebas_neue_75_white.png'),
-		redFont: new ig.Font('media/bebas_neue_75_red.png'),
+		font: new ig.Font('media/fonts/bebas_neue_75_white.png'),
+		redFont: new ig.Font('media/fonts/bebas_neue_75_red.png'),
 		
 		items: [],
 		
