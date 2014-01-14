@@ -1,3 +1,5 @@
+//Blood particle entity--currently unused.
+
 ig.module('game.entities.bloodParticle').requires('game.entities.particle').defines(function(){
 	EntityBloodParticle = EntityParticle.extend({
 		alpha: 1,
