@@ -16,6 +16,7 @@ ig.module('game.entities.bloodParticle').requires('game.entities.particle').defi
 		init: function( x, y, settings ) {
 			this.pos.x = x;
 			this.pos.y = y;
+			//Randomize settings to allow for a nice non-uniform look
 			this.vel.x = (settings.dx/20)*Math.random()/.3;
 			this.vel.y = (settings.dy/20)*Math.random()/.3;
 			
@@ -38,6 +39,7 @@ ig.module('game.entities.bloodParticle').requires('game.entities.particle').defi
 		},
 		draw: function() {
 			this.parent();
+			//Correct for position in screen pixels instead of game pixels, since we're using the canvas to draw the particles.
 			var x = this.pos.x - ig.game.screen.x;
 			var y = this.pos.y - ig.game.screen.y;
 			ig.system.context.beginPath();
