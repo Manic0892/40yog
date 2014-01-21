@@ -1,8 +1,5 @@
 ig.module('game.entities.enemyBedbug').requires('game.entities.enemy'/*,'plugins.perpixel' */).defines(function() {
 	EntityEnemyBedbug = EntityEnemy.extend({
-		type: ig.Entity.TYPE.B,
-		checkAgainst: ig.Entity.TYPE.A,
-		
 		collides: ig.Entity.COLLIDES.PASSIVE,
 		
 		maxVel: {x: 400, y: 400},
