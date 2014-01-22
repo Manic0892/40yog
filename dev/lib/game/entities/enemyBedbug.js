@@ -1,3 +1,5 @@
+//Bedbug entity.  Used primarily on level 1.  Bedbugs are both placed on the level initially and spawned by couches.  They move side to side and hurt the player if they touch them.  Killed by the flamethrower on level 1.
+
 ig.module('game.entities.enemyBedbug').requires('game.entities.enemy'/*,'plugins.perpixel' */).defines(function() {
 	EntityEnemyBedbug = EntityEnemy.extend({
 		collides: ig.Entity.COLLIDES.PASSIVE,
@@ -21,30 +23,20 @@ ig.module('game.entities.enemyBedbug').requires('game.entities.enemy'/*,'plugins
 		},
 		
 		update: function() {
-			if( !ig.game.collisionMap.getTile(
-					this.pos.x + (this.flip ? +4 : this.size.x -4),
-					this.pos.y + this.size.y+1
-				)
-			) {
+			//If the bedbug has reached the edge of a platform or has hit a wall and needs to turn around
+			if(!ig.game.collisionMap.getTile(this.pos.x + (this.flip ? +4 : this.size.x -4), this.pos.y + this.size.y+1))
 				this.flip = !this.flip;
-			}
-			if(ig.game.collisionMap.getTile(this.pos.x + (this.flip ?- 4 : this.size.x+4),this.pos.y + 10)) {
+			if(ig.game.collisionMap.getTile(this.pos.x + (this.flip ?- 4 : this.size.x+4),this.pos.y + 10))
 				this.flip = !this.flip;
-			}
 			
+			//Go left or right
 			var xdir = this.flip ? -1 : 1;
 			this.vel.x = this.speed * xdir;
 			
 			this.parent();
 		},
 		
-		receiveSunDamage: function(damage, other) {
-			this.receiveDamage(damage, other);
-			for (i = 0; i < 1; i++) {
-				ig.game.spawnEntity(EntityAshParticle, this.pos.x, this.pos.y, {width: this.size.x, height: this.size.y});
-			}
-		},
-		
+		//If the bedbug hits Entity.TYPE.A, it deals 10 damage to it and kills itself.
 		check: function( other ) {
 			other.receiveDamage( 10, this );
 			this.kill();
