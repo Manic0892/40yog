@@ -1,6 +1,18 @@
 @font-face {
 	font-family: 'bebasneue';
-	src: url('/media/site/fonts/BebasNeue.otf');
+	src: url('/site/fonts/BebasNeue.otf');
+}
+
+/*Page*/
+#pagewrapper {
+	font-family:'bebasneue';
+	text-align:center;
+}
+#headTitle{
+	font-size:125px;
+}
+#podcastPromotion{
+	font-size:40px;
 }
 html,body {
 	background-color: #333;
@@ -10,13 +22,8 @@ html,body {
 	padding: 0;
 	font-size: 75px;
 }
-#pagewrapper {
-	font-family:'bebasneue';
-	text-align:center;
-}
-#headTitle{
-	font-size:125px;
-}
+
+/*Links*/
 a {
 	color:#fff;
 }
@@ -33,6 +40,7 @@ a:active{
 	color:#f00;
 }
 
+/*Game*/
 #canvas {
 	/*position: absolute;*/
 	left: 0;
