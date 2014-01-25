@@ -1,5 +1,5 @@
 @font-face {
-	font-family: bebasneue;
+	font-family: 'bebasneue';
 	src: url('/media/site/fonts/BebasNeue.otf');
 }
 html,body {
@@ -11,7 +11,7 @@ html,body {
 	font-size: 75px;
 }
 #pagewrapper {
-	font-family:bebasneue;
+	font-family:'bebasneue';
 	text-align:center;
 }
 #headTitle{
