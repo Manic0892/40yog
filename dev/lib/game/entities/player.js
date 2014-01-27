@@ -131,6 +131,8 @@ ig.module('game.entities.player').requires('game.entities.character'
 		
 		healthPowerup: function(amount) {
 			this.health += amount;
+			if (this.health > this.maxHealth)
+				this.health = this.maxHealth;
 		},
 		
 		shoot: function() {
