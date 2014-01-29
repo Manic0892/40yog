@@ -229,6 +229,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		spawnParticle: function() {
+			if (this.anchor.enabled) //Stop the car from smoking when stopped.  This both fixes an issue where multiple smoke particles would slow down the game and make the second cutscene take a long time, and makes more sense--why would the car be smoking when it's off?
 				ig.game.spawnEntity(EntitySmokeParticle, this.pos.x+(Math.random()*20)-10, this.pos.y+(Math.random()*20)-10, {color: this.particleColor});
 		},
 		
