@@ -1,3 +1,5 @@
+//Level intro for level 1 -- BEDBUGS
+
 ig.module('game.entities.levelIntro1').requires('game.entities.levelIntro', 'game.levels.1').defines(function(){
 	EntityLevelIntro1 = EntityLevelIntro.extend({
 		titleText: 'BEDBUGS',
@@ -6,6 +8,6 @@ ig.module('game.entities.levelIntro1').requires('game.entities.levelIntro', 'gam
 		
 		levelToLoad: Level1,
 		
-		clip: new ig.Sound('media/sounds/level1_intro_bedbug.*')
+		clip: new ig.Sound('media/sounds/level1_intro_bedbug.*') //Sound clip from the podcast talking about bedbugs.  Should be shorter.
 	});
 });

@@ -1,3 +1,5 @@
+//Level intro for level 2 -- TRAVIS BARBECUE
+
 ig.module('game.entities.levelIntro2').requires('game.entities.levelIntro', 'game.levels.2').defines(function(){
 	EntityLevelIntro2 = EntityLevelIntro.extend({
 		titleText: 'TRAVIS BARBECUE',
