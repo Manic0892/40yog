@@ -2,8 +2,6 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 	EntityOptionsMenu = EntityMenu.extend({
 		name: 'optionsMenu',
 		
-		safetyTimer: .25, //this is here to fix bug where it's spawned and then kills itself but misses toggling pause again.  dumb bug.
-		
 		font: new ig.Font('media/fonts/bebas_neue_100_black.png'),
 		redFont: new ig.Font('media/fonts/bebas_neue_100_red.png'),
 		
@@ -41,7 +39,7 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 			var height = this.font.heightForString("GRADIENT OFF");
 			var xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
 			var yPos = this.initYOffset+-1*this.ySpacing + ig.game.screen.y;
-			this.menuItems.push(ig.game.spawnEntity(EntityMenuItemGraphicsOptions, xPos, yPos, {width:width, height:height, text: text, exec: exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont, initXOffset: this.initXOffset}));
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItemGraphicsOptions, xPos, yPos, {width:width, height:height, text: text, exec: exec, font: this.font, redFont: this.redFont, initXOffset: this.initXOffset}));
 			for (var i = 0; i < this.items.length; i++) {
 				width = this.font.widthForString(this.items[i].text);
 				height = this.font.heightForString(this.items[i].text);

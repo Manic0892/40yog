@@ -84,7 +84,7 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 		
 		font: new ig.Font('media/fonts/bebas_neue_75_white.png'),
 		redFont: new ig.Font('media/fonts/bebas_neue_75_red.png'),
-		
+
 		items: [],
 		
 		initXOffset: 0,
@@ -106,7 +106,7 @@ ig.module('game.entities.levelIntro').requires('impact.entity', 'game.entities.m
 		},
 		
 		spawnMenuItem: function(i,width,height,x,y,settings) {
-			this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, x + ig.game.screen.x, y+ig.game.screen.y, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, clickCD: this.clickCD, font: this.font, redFont: this.redFont, levelToLoad: settings.levelToLoad}));
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, x + ig.game.screen.x, y+ig.game.screen.y, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, font: this.font, redFont: this.redFont, levelToLoad: settings.levelToLoad}));
 		}
 	});
 });
