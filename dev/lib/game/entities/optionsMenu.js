@@ -1,3 +1,5 @@
+//Options menu.  Used on the options screen in the main menu.
+
 ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.entities.slider').defines(function() {
 	EntityOptionsMenu = EntityMenu.extend({
 		name: 'optionsMenu',
