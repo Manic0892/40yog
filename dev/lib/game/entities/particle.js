@@ -7,6 +7,8 @@ seconds before the #lifetime# ends, they will start to fade out.
 
 The velocity of a particle is randomly determined by its initial .vel 
 properties. Its Animation will start at a random frame.
+
+This is taken from the ImpactJS Biolab Entities Pack.
 */
 
 ig.module('game.entities.particle').requires('impact.entity').defines(function(){
@@ -22,7 +24,7 @@ ig.module('game.entities.particle').requires('impact.entity').defines(function()
 		checkAgainst: ig.Entity.TYPE.NONE,
 		collides: ig.Entity.COLLIDES.LITE,
 		
-		lifetime: 5,
+		lifetime: 5, //Lifetime in seconds of particle
 		fadetime: 1,
 		bounciness: 0.6,
 		friction: {x:20, y: 0}
