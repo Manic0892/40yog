@@ -205,6 +205,8 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 	
 	EntitySmokeParticleSpawner = EntityParticleSpawner.extend({
 		
+		timer: 0,
+		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			this.anchor = settings.anchor;
@@ -216,7 +218,9 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			this.parent();
 			this.pos.x = this.anchor.pos.x + this.xOffset;
 			this.pos.y = this.anchor.pos.y + this.yOffset;
-			
+		},
+		
+		spawnParticleUpdate: function() {
 			if (this.anchor.health < 3) {
 				if (this.anchor.health == 2) {
 					this.particleColor = 35;
