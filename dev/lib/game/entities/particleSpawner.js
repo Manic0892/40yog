@@ -20,6 +20,7 @@ ig.module('game.entities.particleSpawner').requires('game.entities.particle', 'i
 			this.spawnParticleUpdate();
 		},
 		
+		//Spawn particle update.  This is separated to its own function so that subclassed objects can tweak it.  This is used in smokeParticleSpawner in playerL2 to spawn particles based on health instead of time.
 		spawnParticleUpdate: function() {
 			if (this.timer.delta() >= 0) {
 				this.spawnParticle();
