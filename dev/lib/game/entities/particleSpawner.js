@@ -12,7 +12,7 @@ ig.module('game.entities.particleSpawner').requires('game.entities.particle', 'i
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
-			this.timer = new ig.Timer(this.timer);
+			this.timer = new ig.Timer(this.timer); //Initialize the timer to the correct number of seconds
 		},
 		
 		update: function() {
@@ -28,6 +28,7 @@ ig.module('game.entities.particleSpawner').requires('game.entities.particle', 'i
 			}
 		},
 		
+		//Spawn the particle.  Triggered by spawnParticleUpdate.
 		spawnParticle: function() {
 			ig.game.spawnEntity(this.particleToSpawn, this.pos.x, this.pos.y);
 		}
