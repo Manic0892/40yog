@@ -2,7 +2,7 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 	EntityPlayerL1 = EntityPlayer.extend({
 		fireSound: new ig.Sound('media/sounds/fire2.*'),
 		soundTimer: new ig.Timer(35/60),
-		defShootCD: .001,
+		shootTimer: .001,
 		
 		gruntSound: new ig.Sound('media/sounds/grunt.*'),
 		splatSound: new ig.Sound('media/sounds/splat.*'),

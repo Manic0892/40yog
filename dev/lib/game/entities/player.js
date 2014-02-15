@@ -1,44 +1,49 @@
-ig.module('game.entities.player').requires('game.entities.character'
-).defines(function() {
+//Player base entity class.  Should b used for any player.
+
+ig.module('game.entities.player').requires('game.entities.character').defines(function() {
 	EntityPlayer = EntityCharacter.extend({
 		
 		size:{x:32,y:64},
 		
 		maxVel: {x: 400, y: 400},
 		
-		animSheet: new ig.AnimationSheet( 'media/images/sprites/player.png', 32, 64 ),
+		animSheet: new ig.AnimationSheet( 'media/images/sprites/player.png', 32, 64 ), //Default spritesheet.  Lil' Schmitty with one arm.
 		
-		//arm: new EntityArm(this.x,this.y, {attachee: this}),
-		
-		type:ig.Entity.TYPE.A,
+		type:ig.Entity.TYPE.A, //Player type
 		collides: ig.Entity.COLLIDES.PASSIVE,
 		
-		flip: false,
-		accelGround: 2000,
-		friction: {x:2000, y:0},
-		accelAir: 1000,
-		jump: 1000,
+		flip: false, //Boolean for if it's facing the default direction (left) or flipped (right)
+		accelGround: 2000, //X acceleration rate when moving on ground
+		friction: {x:2000, y:0}, //Friction.  We want to slow down when moving left-right but not when jumping.
+		accelAir: 1000, //X acceleration rate when moving through the air
+		jump: 1000, //Velocity to apply when the jump key is pressed
 		health: 100,
-		maxHealth: 100,
-		shootTimer: new ig.Timer(40/60),
-		defShootCD: 40/60,
+		maxHealth: 100, //maxHealth is used to draw the percentage of health in the healthbar, as well as to make sure the player is not healed past a certain point by healthPowerUp
+		shootTimer: 40/60, //Time between shots
 		
-		hitTimer: new ig.Timer(),
-		hitFlashDuration: 3,
-		hitFlashTick: .5,
-		hitFlashCurrTick: 0,
-		hitFlashAlpha: .3,
-		hitFlashCurrAlpha: 1,
+		hitTimer: new ig.Timer(), //Time between hits
+		hitFlashDuration: 3, //Time the player should be flashing when hit.  The player is also invincible during this time.
+		hitFlashTick: .5, //Time between flashes
+		hitFlashCurrTick: 0, //Current time between flashes
+		hitFlashAlpha: .3, //Alpha for the flash
+		hitFlashCurrAlpha: 1, //Current alpha for the flash
 		
-		zIndex: -9,
+		zIndex: -9, //Drawn before most things
 		
 		init: function( x, y, settings ) {
 			this.parent( x, y, settings );
 			
-			if (!ig.global.wm)
+			if (!ig.global.wm) {
 				this.spawnArm();
+				this.shootTimer = new ig.Timer(this.shootTimer);
+			}
 			
-			// Add the animations
+			// Add the default animations
+			this.addAnims();
+		},
+		
+		//Add the default animations
+		addAnims: function() {
 			this.addAnim( 'idle', .5, [0,1,2,3] );
 			this.addAnim( 'run', 0.25, [4,5,6,7,8,9] );
 		},
@@ -70,14 +75,14 @@ ig.module('game.entities.player').requires('game.entities.character'
 			
 			
 			// jump
-			if( this.standing && (ig.input.state('jump') || ig.input.state('up')) ) {
+			if( this.standing && (ig.input.pressed('jump') || ig.input.pressed('up')) ) {
 				this.vel.y = -this.jump;
 			}
 			
 			// shoot
 			if( ig.input.state('lbtn') && this.shootTimer.delta() >= 0) {
 				this.shoot();
-				this.shootTimer.set(this.defShootCD);
+				this.shootTimer.reset();
 			}
 			
 			
