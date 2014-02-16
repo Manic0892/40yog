@@ -34,8 +34,8 @@ ig.module('game.entities.player').requires('game.entities.character').defines(fu
 			this.parent( x, y, settings );
 			
 			if (!ig.global.wm) {
-				this.spawnArm();
-				this.shootTimer = new ig.Timer(this.shootTimer);
+				this.spawnArm(); //Spawn the arm
+				this.shootTimer = new ig.Timer(this.shootTimer); //Set the timer for shots.  This is used to dtermine how much time should occur between shots.
 			}
 			
 			// Add the default animations
