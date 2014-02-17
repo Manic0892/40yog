@@ -48,6 +48,7 @@ ig.module('game.entities.player').requires('game.entities.character').defines(fu
 			this.addAnim( 'run', 0.25, [4,5,6,7,8,9] );
 		},
 		
+		//Spawn the arm.  Player should probably have a subclass, playerWithArm, which should be used by all the players that use arms, like the one on level 1.
 		spawnArm: function() {
 			this.arm = ig.game.spawnEntity(EntityArm, this.pos.x,this.pos.y, {attachee: this});
 		},
