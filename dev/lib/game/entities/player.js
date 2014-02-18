@@ -54,20 +54,19 @@ ig.module('game.entities.player').requires('game.entities.character').defines(fu
 		},
 		
 		update: function() {
-			// move left or right
-			var accel = this.standing ? this.accelGround : this.accelAir;
-			if( ig.input.state('left') ) {
-				if (this.vel.x > 0) {
+			var accel = this.standing ? this.accelGround : this.accelAir; //Set the acceleration that will be applied based on if it's in the air or on the ground
+			if( ig.input.state('left') ) { //If the player wants to go left, go left
+				if (this.vel.x > 0) { //If moving right, apply friction.  Otherwise, the acceleration would negate friction.
 					this.vel.x -= this.friction.x/60;
 				}
-				this.accel.x = -accel;
-				this.flip = true;
+				this.accel.x = -accel; //Set the accel to go left
+				this.flip = true; //Set the character to flip the correct way
 			}
-			else if( ig.input.state('right') ) {
-				if (this.vel.x < 0) {
+			else if( ig.input.state('right') ) { //If the player wants to go right go right
+				if (this.vel.x < 0) {//If moving left, apply friction.  Otherwise, the acceleration would negate friction.
 					this.vel.x += this.friction.x/60;
 				}
-				this.accel.x = accel;
+				this.accel.x = accel; //Set the accel to go right
 				this.flip = false;
 			}
 			else {
