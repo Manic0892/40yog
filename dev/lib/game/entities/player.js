@@ -70,54 +70,51 @@ ig.module('game.entities.player').requires('game.entities.character').defines(fu
 				this.flip = false;
 			}
 			else {
-				this.accel.x = 0;
+				this.accel.x = 0; //If no key was pressed, set the acceleration to zero
 			}
 			
+			this.currentAnim.flip.x = this.flip; //Flip the current animation based on the flip variable that we checked for
 			
-			// jump
+			//If the player presses jump or up and is standing on the ground, apply a velocity to make them go into the air
 			if( this.standing && (ig.input.pressed('jump') || ig.input.pressed('up')) ) {
 				this.vel.y = -this.jump;
 			}
 			
-			// shoot
+			//If the player presses the shoot key and the current time between shots has been met, then shoot
 			if( ig.input.state('lbtn') && this.shootTimer.delta() >= 0) {
 				this.shoot();
-				this.shootTimer.reset();
+				this.shootTimer.reset(); //Reset the timer for the next time we check
 			}
 			
 			
-			// set the current animation, based on the player's speed
+			//Set the current animation, based on the current speed
 			if( this.vel.y < 0 ) {
-				this.currentAnim = this.anims.run;
+				this.currentAnim = this.anims.run; //Jump animation.  Should be a real animation instead of just the run animation.
 			}
 			else if( this.vel.y > 0 ) {
+				this.currentAnim = this.anims.run; //Fall animation.  Should be a real animation instead of just the run animation.
+			}
+			else if( this.vel.x != 0 ) { //If not standing still, play the run animation
 				this.currentAnim = this.anims.run;
 			}
-			else if( this.vel.x != 0 ) {
-				this.currentAnim = this.anims.run;
-			}
-			else {
+			else { //If not moving at all, stand still
 				this.currentAnim = this.anims.idle;
 			}
-			
-			this.currentAnim.flip.x = this.flip;
 				
-			//hit flashing code
+			//Make the player flash when hit by an enemy or enemy projectile.  This lets the player know that they were just hurt and are currently invulnerable.
 			if (this.hitTimer.delta() < 0) {
-				this.hitFlashCurrTick += this.hitTimer.tick();
-				if (this.hitFlashCurrTick >= this.hitFlashTick) {
+				this.hitFlashCurrTick += this.hitTimer.tick(); //Get the tick of the current alpha of the hit flash by checking the tick of the hit timer
+				if (this.hitFlashCurrTick >= this.hitFlashTick) { //If the current accumulated tick is greater than a set amount, change the alpha and reset the current flash tick
 					this.hitFlashCurrAlpha == this.hitFlashAlpha ? this.hitFlashCurrAlpha = 1 : this.hitFlashCurrAlpha = this.hitFlashAlpha;
 					this.hitFlashCurrTick = 0;
 				}
-				this.currentAnim.alpha = this.hitFlashCurrAlpha;
+				this.currentAnim.alpha = this.hitFlashCurrAlpha; //Set the alpha so we get a nice little flash going on
 			} else {
-				this.currentAnim.alpha = 1;
+				this.currentAnim.alpha = 1; //However, if the crrent hit timer has run out and the player is vulnerable to hits again, set to full alpha
 			}
-			// move!
 			this.parent();
 			
-			this.arm.attacheeUpdate(this.pos.x, this.pos.y, this.flip, this.currentAnim.alpha);
-			//console.log(this.arm.pos, this.pos);
+			this.arm.attacheeUpdate(this.pos.x, this.pos.y, this.flip, this.currentAnim.alpha); //Update the arm based on the new paramaters we just set
 		},
 		
 		receiveDamage: function(amount, other) {
