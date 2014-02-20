@@ -117,34 +117,39 @@ ig.module('game.entities.player').requires('game.entities.character').defines(fu
 			this.arm.attacheeUpdate(this.pos.x, this.pos.y, this.flip, this.currentAnim.alpha); //Update the arm based on the new paramaters we just set
 		},
 		
+		//Receive damage funcion. Modified to test for hit invincibility.
 		receiveDamage: function(amount, other) {
-			if (this.hitTimer.delta() >= 0) {
+			if (this.hitTimer.delta() >= 0) { //Make sure that the player's not still invinicible from a pervious hit
 				if (this.health - amount <= 0) {
-					ig.music.stop();
-					this.endOfLevel(false);
+					ig.music.stop(); //If ther player will be dead after this hit, stop the music.  This should be relegated to the level logic's loadLevel function.
+					this.endOfLevel(false); //Load something other than the win sceen.  Again, this should probably flip a switch in the level logic instead of handling it in the player.
 				}
-				this.hitTimer.set(this.hitFlashDuration);
+				this.hitTimer.set(this.hitFlashDuration); //Start the hit timer
 				this.hitTimer.tick();
-				this.hitFlashCurrAlpha = this.hitFlashAlpha;
-				this.hitFlashCurrTick = 0;
-				this.parent(amount, other);
+				this.hitFlashCurrAlpha = this.hitFlashAlpha; //Set the alpha to start flashing
+				this.hitFlashCurrTick = 0; //Reset
+				this.parent(amount, other); //Finally, apply the damage
 			}
 		},
 		
+		//Called when the player runs over a health powerup
 		healthPowerup: function(amount) {
-			this.health += amount;
+			this.health += amount; //Add the amount of health the powerup provides
 			if (this.health > this.maxHealth)
-				this.health = this.maxHealth;
+				this.health = this.maxHealth; //Make sure that the health doesn't go above the max health
 		},
 		
+		//Should be subclassed to a different player entity
 		shoot: function() {
 			console.log('shooting...');
 		},
 		
+		//Pick up a powerup
 		pickup: function(other) {
 			console.log('picked up' + other);
 		},
 		
+		//Called if the player wins or dies
 		endOfLevel: function(win) {
 			console.log("No end of level logic supplied.");
 		}
