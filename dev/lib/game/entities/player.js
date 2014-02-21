@@ -155,19 +155,20 @@ ig.module('game.entities.player').requires('game.entities.character').defines(fu
 		}
 	});
 	
+	//Arm entity.  This attaches to the player and is tethered to them.  This should probably be included in a subclass of player or deprecated entirely, since it's not necessary for a cartoony look.
 	EntityArm = ig.Entity.extend({
 		animSheet: new ig.AnimationSheet('media/images/sprites/arm.png', 32, 8),
-		size: {x:32, y:8},
+		size: {x:32, y:8}, //The arm ends up being pretty small
 		type: ig.Entity.TYPE.NONE,
-		collides: ig.Entity.COLLIDES.NONE,
+		collides: ig.Entity.COLLIDES.NONE, //Can't collide, or else it wouldn't layer properly onto the player entity
 		gravityFactor: 0,
 		
-		flip: false,
+		flip: false, //Flip boolean to make sure that it flips with the player
 		
-		zIndex: -8,
+		zIndex: -8, //Drawn after the player entity.  This ensures that it is on top of the player and doesn't stutter when updating.
 		
 		receiveDamage: function(amount, other) {
-			this.attachedTo.receiveDamage(amount,other);
+			this.attachedTo.receiveDamage(amount,other); //Apply damage to the player entity this is attahed to
 		},
 		
 		init: function(x,y,settings) {
@@ -176,17 +177,13 @@ ig.module('game.entities.player').requires('game.entities.character').defines(fu
 			this.pos.x = x;
 			this.pos.y = y;
 
-			this.attachedTo = settings.attachee;
+			this.attachedTo = settings.attachee; //Find out what this should attach to
 		},
 		
-		attacheeUpdate: function(x,y, shouldFlip, alpha) { //you can't just set the pos of the arm to the pos of the attachee.  What the fuck?
-			this.pos = {x:x+10, y:y+25};
-			this.flip = shouldFlip;
-			this.currentAnim.alpha = alpha;
-		},
-		
-		draw: function() {
-			this.parent();
+		attacheeUpdate: function(x,y, shouldFlip, alpha) {
+			this.pos = {x:x+10, y:y+25}; //Correctly position to the shoulder of the player
+			this.flip = shouldFlip;  //Set flip based on the player.  This is usually the player's current flip, so the arm flips around with the player.
+			this.currentAnim.alpha = alpha; //Set alpha based on the player.  This is usually the player's current alpha, so the arm flashes with the player.
 		}
 	});
 });
