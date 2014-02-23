@@ -9,23 +9,23 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		gruntSound: new ig.Sound('media/sounds/grunt.*'), //Hurt sound
 		splatSound: new ig.Sound('media/sounds/splat.*'), //Death sound
 		
-		flameActive: false,
+		flameActive: false, //Check if the flame is currently shooting
 		
-		maxVel: {x: 400, y: 10000000000000},
-		accelGround: 2000,
-		friction: {x:2000, y:0},
-		accelAir: 1000,
-		jump: 800,
+		maxVel: {x: 400, y: 10000000000000}, //Move a certain speed left-right, and practically infinitely quickly in air
+		accelGround: 2000, //Movement speed on ground
+		friction: {x:2000, y:0}, //Don't want any friction for jumping--let gravity do this instead.  Slow down x as quickly as you speed up.
+		accelAir: 1000, //Movement speed in air
+		jump: 800, //Velocity to apply for a jump
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
-				this.fireSound.volume = 1;
+				this.fireSound.volume = 1; //Set the volume to full
 			}
 		},
 		
 		spawnArm: function() {
-			this.arm = ig.game.spawnEntity(EntityArmL1, this.pos.x,this.pos.y, {attachee: this});
+			this.arm = ig.game.spawnEntity(EntityArmL1, this.pos.x,this.pos.y, {attachee: this}); //Spawn the arm and set it to attach to the player
 		},
 		
 		update: function() {
