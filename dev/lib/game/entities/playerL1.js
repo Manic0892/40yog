@@ -1,11 +1,13 @@
+//Player used on level 1.  Inherits from the base player entity
+
 ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entities.fireParticleDamage').defines(function() {
 	EntityPlayerL1 = EntityPlayer.extend({
-		fireSound: new ig.Sound('media/sounds/fire2.*'),
-		soundTimer: new ig.Timer(35/60),
-		shootTimer: .001,
+		fireSound: new ig.Sound('media/sounds/fire2.*'), //Played when shooting
+		soundTimer: new ig.Timer(35/60), //Time limit for when the fire sound shold play
+		shootTimer: .001, //Shoot very quickly
 		
-		gruntSound: new ig.Sound('media/sounds/grunt.*'),
-		splatSound: new ig.Sound('media/sounds/splat.*'),
+		gruntSound: new ig.Sound('media/sounds/grunt.*'), //Hurt sound
+		splatSound: new ig.Sound('media/sounds/splat.*'), //Death sound
 		
 		flameActive: false,
 		
