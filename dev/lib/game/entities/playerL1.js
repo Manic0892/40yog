@@ -33,15 +33,15 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 			
 			var collisionMapRef = ig.game.collisionMap;
 			
-			if (this.pos.y > collisionMapRef.height*collisionMapRef.tilesize + 400) {
+			if (this.pos.y > collisionMapRef.height*collisionMapRef.tilesize + 400) { //Kill the player if they get off the collision map.  This should be done with a special trigger that runs along the bottom of the level.
 				ig.music.stop();
-				this.splatSound.play();
-				this.endOfLevel(false);
+				this.splatSound.play(); //Splat on the pavement
+				this.endOfLevel(false); //End the level with win set to false
 			}
 		},
 		
 		triggeredBy: function(triggered, other) {
-			if (other.name=='winTrigger') {
+			if (other.name=='winTrigger') { //If you hit the win trigger, end the level with the win set to true
 				ig.music.stop();
 				this.endOfLevel(true);
 			}
