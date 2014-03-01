@@ -44,21 +44,21 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		update: function() {
-			if (this.enabled) {
-				this.accel.x=100;		
-				if (ig.input.state('left') || ig.input.state('up'))
+			if (this.enabled) { //If enabled, handle input
+				this.accel.x=100; //Start moving left
+				if (ig.input.state('left') || ig.input.state('up')) //Avoid obstacles by going towards the top of the screen
 					this.vel.y = -700;
-				else if (ig.input.state('right') || ig.input.state('down'))
+				else if (ig.input.state('right') || ig.input.state('down')) //Avoid obstacles by going towards the bottom of the screen
 					this.vel.y = 700;
-				else
-					this.vel.y = 0; //fuck dealing with acceleration and friction amirite?
-			} else {
+				else //Otherwise, stop moving up or down
+					this.vel.y = 0;
+			} else { //If not enabled, keep the car from moving
 				this.accel.x = 0;
 				this.vel.x = 0;
 				this.vel.y = 0;
 			}
 			
-			//hit flashing code
+			//Hit flashing code
 			if (this.hitTimer.delta() < 0) {
 				this.hitFlashCurrTick += this.hitTimer.tick();
 				if (this.hitFlashCurrTick >= this.hitFlashTick) {
@@ -73,16 +73,11 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 			
 			this.parent();
 		},
-			
-		
-		draw: function() {
-			this.parent();
-		},
 		
 		check: function(other) {
-			if (other.health > 0) {
+			if (other.health > 0) { //If the obstacle has health, play the crash sound and destroy the obstacle
 				this.crashSound.play();
-				if (this.hitTimer.delta() >= 0) {
+				if (this.hitTimer.delta() >= 0) { //If the player is vulnerable, damage the player and slow it down slightly
 					if (this.health == 3) {
 						this.currentAnim = this.anims.damage1;
 					}
@@ -97,7 +92,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		receiveDamage: function(amount, other) {
-			this.hitTimer.set(this.hitFlashDuration);
+			this.hitTimer.set(this.hitFlashDuration); //Set the player to be invincible
 			this.hitTimer.tick();
 			this.hitFlashCurrAlpha = this.hitFlashAlpha;
 			this.hitFlashCurrTick = 0;
@@ -105,7 +100,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		kill: function() {
-			this.endOfLevel();
+			this.endOfLevel(); //End the level as lose
 		},
 		
 		triggeredBy: function(triggered, other) {
