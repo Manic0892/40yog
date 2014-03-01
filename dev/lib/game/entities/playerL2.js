@@ -1,3 +1,5 @@
+//Player used on level 2.  Should inherit from base player entity.
+
 ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.particleSpawner', 'game.entities.particle', 'game.entities.loopingSoundManager', 'impact.entity-pool').defines(function() {
 	EntityPlayerL2 = ig.Entity.extend({
 		type: ig.Entity.TYPE.A,
@@ -10,14 +12,12 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		size: {x:261, y:128},
 		friction: {x:0,y:2000},
 		
-		crashSound: new ig.Sound('media/sounds/crash.*'),
+		crashSound: new ig.Sound('media/sounds/crash.*'), //Crash sound effect for when the player is injured
 		
-		carSound: new ig.Sound('media/sounds/inside_car.*', false),
+		carSound: new ig.Sound('media/sounds/inside_car.*', false), //Looping sound effect for driving.  This doesn't loop properly, but will hopefully be fixed in future versions of Impact.
 		
-		health:3,
-		gravityFactor:0,
-		
-		
+		health:3, //3 hits before you die
+		gravityFactor:0, //Can't have it moving without the player's input
 		
 		hitTimer: new ig.Timer(),
 		hitFlashDuration: 3,
@@ -26,22 +26,20 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		hitFlashAlpha: .3,
 		hitFlashCurrAlpha: 1,
 		
-		
-		
-		enabled: false,
+		enabled: false, //This allows the cutscenes at the beginning and end of the level.  The cutscene plays, the car is enabled, the level plays through, and the car is disabled through the ending cutscene.
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
-			this.addAnim('damage0', 1, [0]);
-			this.addAnim('damage1', 1, [1]);
-			this.addAnim('damage2', 1, [2]);
-			this.currentAnim = this.anims.damage0;
+			this.addAnim('damage0', 1, [0]); //Undamaged
+			this.addAnim('damage1', 1, [1]); //More damaged
+			this.addAnim('damage2', 1, [2]); //Fully damaged
+			this.currentAnim = this.anims.damage0; //Start undamaged
 			
 			if (!ig.global.wm) {
 				
-				this.loopingSoundManager = ig.game.spawnEntity(EntityLoopingSoundManager, 0, 0);
+				this.loopingSoundManager = ig.game.spawnEntity(EntityLoopingSoundManager, 0, 0); //Spawn a looping sound manager we'll use later for the car driving sound effect
 				
-				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 20, yOffset: this.size.y/2});
+				ig.game.spawnEntity(EntitySmokeParticleSpawner, this.pos.x, this.pos.y, {anchor: this, xOffset: this.size.x - 20, yOffset: this.size.y/2}); //Spawn a particle spawner that will start spawning smoke particles when the car's damaged
 			}
 		},
 		
