@@ -104,21 +104,23 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		},
 		
 		triggeredBy: function(triggered, other) {
-			if (other.name=='closingCutsceneTrigger') {
-				//this.endOfLevel(true);
-				var prop = ig.game.getEntityByName("cutsceneProp2");
+			if (other.name=='closingCutsceneTrigger') { //Triggered when it hits closingCutsceneTrigger
+				var prop = ig.game.getEntityByName("cutsceneProp2"); //Spawn the closing cutscene prop
+				//Position the prop
 				prop.pos.x = this.pos.x + this.size.x - prop.size.x;
 				prop.pos.y = this.pos.y - prop.size.y;
-				this.enabled = false;
-				this.loopingSoundManager.stop();
+				this.enabled = false; //Shut down the car so it doesn't move anymore
+				this.loopingSoundManager.stop(); //Stop the car sound effect since we've stopped
 			}
 		},
 		
+		//Start the main movement after the opening cutscene
 		enable: function() {
 			this.enabled = true;
 			this.loopingSoundManager.add(this.carSound);
 		},
 		
+		//End the level with either a win screen or a lose screen
 		endOfLevel: function(win) {
 			win ? ig.game.loadLevelDeferred(LevelWin2) : ig.game.loadLevelDeferred(LevelLose2);
 		}
