@@ -126,46 +126,48 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		}
 	});
 	
+	//Smoke particle that is spawned by EntitySmokeParticleSpawner when the car's damaged.
 	EntitySmokeParticle = EntityParticle.extend({
-		color: 50,
-		particleSize: 40,
+		color: 50, //RGB is set to this at each point to get a grayscale value at a certain darkness
+		particleSize: 40, //Size of the particle in pixels
 		
-		gravityFactor: 0,
+		gravityFactor: 0, //Make sure it doesn't go down--this would force it off the screen, which is bad since we're looking top-down
 		collides: ig.Entity.COLLIDES.NONE,
 		
-		lifetime: .4,
-		emptyString: '',
+		lifetime: .4, //Lifetime in seconds
 		maxVel: {x:100,y:100},
 		friction: {x:0, y:0},
 		
+		//First initialization
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
-			this.particleSize = Math.random()*10 + 40;
+			this.particleSize = Math.random()*10 + 40; //Randomize the size so we don't get a bunch of weird-looking circles
 			
-			this.idleTimer = new ig.Timer();
+			this.idleTimer = new ig.Timer(); //Timer that ticks down that we measure lifetime and fadetime against
 			
+			//Randomize x and y directions
 			this.vel.x = Math.random()*200-100;
 			this.vel.y = Math.random()*200-100;
-			this.color = settings.color;
+			this.color = settings.color; //Set the color to what EntitySmokeParticleSpawner wants--this depends on the health of the car
 		},
 		
+		//Reset when this is pulled out of the entity pool for re-use.  This is essentially just resetting things that might be different from when initially set.
 		reset: function( x, y, settings ) {
 			this.parent( x, y, settings );
 			
-			this.idleTimer = new ig.Timer();
-			this.particleSize = Math.random()*10 + 40;
+			this.idleTimer.reset();
 			
-			this.vel.x = Math.random()*200-100;
-			this.vel.y = Math.random()*200-100;
 			this.color = settings.color;
 		},
 		
 		update: function() {
-			
+			 
+			 //If the particle has lived past its lifetime, kill it
 			if( this.idleTimer.delta() > this.lifetime ) {
 				this.kill();
 				return;
 			}
+			//If the particle is completely offsceen, kill it
 			if (this.pos.x < ig.game.screen.x - this.particleSize) {
 				this.kill();
 				return;
@@ -175,13 +177,13 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		
 		draw: function() {
 			this.parent();
+			//Get positions in screen context, not game context, since we need to draw them properly using canvas drawing
 			var x = this.pos.x - ig.game.screen.x;
 			var y = this.pos.y - ig.game.screen.y;
+			
+			
 			//Okay, what the fuck now?  Defining a rect and then drawing makes performance shit its pants, but using fillRect doesn't.  I need to investigate this later.
-			
-			
 			if (ig.global.graphics.gradient) {
-				//ig.system.context.rect(x-this.particleSize, y-this.particleSize, x+this.particleSize, y+this.particleSize);
 				var grd = ig.system.context.createRadialGradient(x,y, 0, x, y, this.particleSize);
 				grd.addColorStop(0, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',1)');
 				grd.addColorStop(.5, 'rgba(' + this.color + ',' + this.color + ',' + this.color + ',.7)');
