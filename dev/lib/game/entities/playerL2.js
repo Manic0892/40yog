@@ -200,19 +200,22 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		
 	});
 	
+	//Particle spawner that continuously spawns smoke particles after the car takes damage.
 	EntitySmokeParticleSpawner = EntityParticleSpawner.extend({
 		
-		timer: 0,
+		timer: 0, //Time in seconds between particles being spawned.  Setting it to zero means that a particle will be spawned every frame.
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
-			this.anchor = settings.anchor;
+			this.anchor = settings.anchor; //Anchor.  This is the car.
+			//Offset to position the spawner above the hood of the car
 			this.xOffset = settings.xOffset;
 			this.yOffset = settings.yOffset;
 		},
 		
 		update: function() {
 			this.parent();
+			//Correctly position based on the coordinates of the anchor and the offset
 			this.pos.x = this.anchor.pos.x + this.xOffset;
 			this.pos.y = this.anchor.pos.y + this.yOffset;
 		},
@@ -220,24 +223,20 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		spawnParticleUpdate: function() {
 			if (this.anchor.health < 3) {
 				if (this.anchor.health == 2) {
-					this.particleColor = 35;
+					this.particleColor = 35; //Dark gray
 				}
 				if (this.anchor.health == 1) {
-					this.particleColor = 15;
+					this.particleColor = 15; //Darker gray, almost black
 				}
-				this.spawnParticle();
+				this.spawnParticle(); //Spawn the particle if it's damaged
 			}
 		},
 		
 		spawnParticle: function() {
 			if (this.anchor.enabled) //Stop the car from smoking when stopped.  This both fixes an issue where multiple smoke particles would slow down the game and make the second cutscene take a long time, and makes more sense--why would the car be smoking when it's off?
 				ig.game.spawnEntity(EntitySmokeParticle, this.pos.x+(Math.random()*20)-10, this.pos.y+(Math.random()*20)-10, {color: this.particleColor});
-		},
-		
-		draw: function() {
-			this.parent();
 		}
 	});
 	
-	ig.EntityPool.enableFor(EntitySmokeParticle);
+	ig.EntityPool.enableFor(EntitySmokeParticle); //Add it to the entity pool so we can reset old ones instead of recreating them all the time
 });
