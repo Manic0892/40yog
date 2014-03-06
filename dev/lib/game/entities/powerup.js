@@ -1,3 +1,5 @@
+//Powerup base entity.  Inherited by things like weapon and health pickups.
+
 ig.module('game.entities.powerup').requires('impact.entity').defines(function() {
 	EntityPowerup = ig.Entity.extend({
 		type: ig.Entity.TYPE.NONE,
