@@ -1,33 +1,37 @@
+//Base slider class.
+
 ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 	EntitySlider = ig.Entity.extend({
-		minLabel: '0%',
-		maxLabel: '100%',
-		title: 'Slider',
+		minLabel: '0%', //Default minimum label for the left side
+		maxLabel: '100%', //Default maximum label for the right side
+		title: 'Slider', //Displayed above the slider.  Explains what it does.
 		height: 30,
 		width: 300,
 		strokeWidth: 4,
+		useGradient: true, //Whether or not to use barColor as a solid fill or barColorGradient to create a linear gradient from low->high
 		barColor: '#afafaf',
-		strokeColor: '#000',
-		handleColor: '#afafaf',
+		barColorGradient: {low: '#000', high:'#fff'}, //Black->White
+		strokeColor: '#000', //Color of the stroke around the slider bar
+		handleColor: '#afafaf', //Color of the handle that's used for drag-and-drop value changes
 		
 		labelFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
 		titleFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
-		textYOffset: 3,
+		textYOffset: 3, //Amount to offset the text on the y axis to keep it aligned nicely
 		
 		_wmDrawBox: true,
 		_wmBoxColor: "rgba(255,255,255,0.3)",
 		size:{x:64,y:64},
 		
-		zIndex:10000,
+		zIndex:10000, //Drawn on top of everything else
 		gravityFactor:0,
-		ignorePause: true,
+		ignorePause: true, //Can't be disabled by pausing or the pause menu wouldn't work
 		
 		init: function(x,y,settings) {
 			x -= this.width/2;
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
-				this.handle = ig.game.spawnEntity(EntitySliderHandle, this.pos.x, this.pos.y, {parent:this});
-				ig.game.sortEntitiesDeferred();
+				this.handle = ig.game.spawnEntity(EntitySliderHandle, this.pos.x, this.pos.y, {parent:this}); //Spawn the handle that's used for drag-and-drop value changes
+				ig.game.sortEntitiesDeferred(); //Sort entities so the handle is guaranteed to be on top
 			}
 		},
 		
@@ -43,33 +47,36 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			y -= ig.game.screen.y;
 			ig.system.context.beginPath();
 			ig.system.context.rect(x,y,this.width, this.height);
-			var grd = ig.system.context.createLinearGradient(x,y,x+this.width,y+this.height);
-			grd.addColorStop(0, '#000');
-			grd.addColorStop(1, '#fff');
-			ig.system.context.fillStyle = grd;
+			if (this.useGradient) { //Use a linear gradient for low->high, or left->right
+				var grd = ig.system.context.createLinearGradient(x,y,x+this.width,y+this.height);
+				grd.addColorStop(0, this.barColorGradient.low);
+				grd.addColorStop(1, this.barColorGradient.high);
+				ig.system.context.fillStyle = grd;
+			} else { //Use solid fill color
+				ig.system.context.fillStyle = this.barColor;
+			}
 			ig.system.context.fill();
 			ig.system.context.lineWidth = this.strokeWidth;
 			ig.system.context.strokeStyle= this.strokeColor;
 			ig.system.context.stroke();
 			
-			
+			//Get the label width and height and draw the labels in the correct areas
 			var minLabelWidth = this.labelFont.widthForString(this.minLabel);
 			var labelHeight = this.labelFont.heightForString(this.minLabel);
 			this.labelFont.draw(this.minLabel, x-minLabelWidth - this.strokeWidth, y+this.height/2-labelHeight/2);
 			this.labelFont.draw(this.maxLabel, x + this.width + this.strokeWidth, y+this.height/2-labelHeight/2);
 			
+			//Get the title height and draw it in the correct area
 			var titleHeight = this.titleFont.heightForString(this.title);
 			this.titleFont.draw(this.title, x, y-titleHeight);
-			
-			
 		},
 		
+		//Main slider logic code goes here.  Called every tick.  Used to change slider values into game or engine options.  Doesn't do anything by default.
 		sliderLogic: function() {
-			//console.log(this.handle.val);
 		},
 		
 		kill: function() {
-			this.handle.kill();
+			this.handle.kill(); //Despawn the handle
 			this.parent();
 		}
 	});

@@ -5,7 +5,7 @@ ig.module('game.entities.playerL2IntroCutsceneProp').requires('impact.entity').d
 		type: ig.Entity.TYPE.A,
 		collides: ig.Entity.COLLIDES.NEVER,
 		checkAgainst: ig.Entity.TYPE.B,
-		gravityFactor: 0,v
+		gravityFactor: 0,
 		
 		animSheet: new ig.AnimationSheet( 'media/images/sprites/L2CutscenePlayerProp.png', 64, 55),
 		
