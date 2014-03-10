@@ -30,7 +30,7 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			x -= this.width/2;
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
-				this.handle = ig.game.spawnEntity(EntitySliderHandle, this.pos.x, this.pos.y, {parent:this}); //Spawn the handle that's used for drag-and-drop value changes
+				this.handle = ig.game.spawnEntity(EntitySliderHandle, this.pos.x, this.pos.y, {slider:this}); //Spawn the handle that's used for drag-and-drop value changes
 				ig.game.sortEntitiesDeferred(); //Sort entities so the handle is guaranteed to be on top
 			}
 		},
@@ -81,33 +81,34 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		}
 	});
 	
+	//Slider handle.  Spawned to actually allow control over the slider.
 	EntitySliderHandle = ig.Entity.extend({
 		height:45,
 		width:10,
 		strokeWidth: 1,
-		handleColor: '#afafaf',
-		strokeColor: '#000',
-		val:1,
-		zIndex:10001,
+		handleColor: '#afafaf', //Color of handle
+		strokeColor: '#000', //Color of border surrounding handle
+		val:1, //Initial value--defaults to 100%
+		zIndex:10001, //Draw on top of slider
 		size:{x:16,y:16},
 		gravityFactor: 0,
 		ignorePause:true,
 		
 		type: ig.Entity.TYPE.A,
 		
-		cursor: 2,
+		cursor: 2, //Pointer cursor
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
-			this.parent = settings.parent;
-			//this.finalY = this.pos.y + this.parent.height/2 - this.height/2;  Centers it on the slider.
+			this.slider = settings.slider; //Create link to parent slider
+			//Get max and min x positions, and the only y position since it shouldn't move on the y axis
 			this.finalY = this.pos.y;
 			this.minX = this.pos.x + this.strokeWidth;
-			this.maxX = this.pos.x + this.parent.width - this.strokeWidth - this.width;
+			this.maxX = this.pos.x + this.slider.width - this.strokeWidth - this.width;
 			this.size.x = this.width + this.strokeWidth/2;
 			this.size.y = this.height + this.strokeWidth/2;
 			
-			this.pos.x = (this.parent.initVal * (this.maxX - this.minX)) + this.minX;
+			this.pos.x = (this.slider.initVal * (this.maxX - this.minX)) + this.minX;
 		},
 		
 		update: function() {
@@ -115,6 +116,7 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 			this.pos.y = this.finalY;
 			if (this.pos.x < this.minX) this.pos.x = this.minX;
 			if (this.pos.x > this.maxX) this.pos.x = this.maxX;
+			//Translate position into value from 0 to 1.  We can use this in the main slider class to do other stuff.
 			this.val = (this.pos.x).map(this.minX,this.maxX,0,1);
 			this.parent();
 		},
@@ -122,6 +124,7 @@ ig.module('game.entities.slider').requires('impact.entity').defines(function() {
 		draw: function() {
 			var x = this.pos.x;
 			var y = this.pos.y;
+			//Get correct x and y positions for drawing on canvas, instead of game positioning
 			x -= ig.game.screen.x;
 			y -= ig.game.screen.y;
 			ig.system.context.beginPath();
