@@ -1,3 +1,5 @@
+//Static image.  Just displays an image that's not animated and doesn't collide.  Extended by other static images, like winFlag.
+
 ig.module('game.entities.staticImage').requires('impact.entity').defines(function() {
 	EntityStaticImage = ig.Entity.extend({
 		size:{x:64, y:64},
@@ -12,8 +14,6 @@ ig.module('game.entities.staticImage').requires('impact.entity').defines(functio
 		
 		animSheet: new ig.AnimationSheet('media/images/null.png',64,64),
 		
-		//This method causes the image to load when the entity is declared.  Perhaps should switch to multiple entities, each of which extends this class with different animsheets?
-				
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			this.addAnim('idle', 1, [0]);
