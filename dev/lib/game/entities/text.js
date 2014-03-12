@@ -1,3 +1,5 @@
+//Text entity.  Displays text when triggered.  Mostly obsolete, since sticking the text into the tilesheet works better.  Because of this the code won't be commented until it's actively used.
+
 ig.module('game.entities.text').requires('impact.entity').defines(function() {
 	EntityText = ig.Entity.extend({
 		size: {x:64,y:64},
