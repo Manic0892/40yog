@@ -12,7 +12,8 @@ ig.module('game.entities.fireParticleDamage').requires('game.entities.particle',
 		maxVel: {x:9999,y:9999}, //Essentially unlimited speed
 		
 		velMult: 500, //Used in order to change the particle's direction.  See below.
-		defParticleSize: 1,
+		defParticleSize: 10,
+		finalParticleSize: 40,
 		
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
@@ -51,7 +52,7 @@ ig.module('game.entities.fireParticleDamage').requires('game.entities.particle',
 		
 		update: function() {
 			//Make the particle larger.  Should probably scale with the timer instead of an iterator.
-			this.particleSize += 2;
+			this.particleSize = this.idleTimer.delta().map(0, this.lifetime, this.defParticleSize, this.finalParticleSize);
 			
 			if (this.idleTimer.delta() > this.lifetime) {
 				this.kill();
@@ -81,7 +82,7 @@ ig.module('game.entities.fireParticleDamage').requires('game.entities.particle',
 				ig.system.context.fillRect(x-partSizeBuff,y-partSizeBuff,x+partSizeBuff, y+partSizeBuff);
 			} else {
 				ig.system.context.beginPath();
-				ig.system.context.arc(x, y, this.particleSize + 20, 0, Math.PI*2, true);
+				ig.system.context.arc(x, y, this.particleSize, 0, Math.PI*2, true);
 				ig.system.context.fillStyle = 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + this.a + ')';
 				ig.system.context.fill();
 			}
