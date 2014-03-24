@@ -1,3 +1,6 @@
 [submodule "dev/serv"]
 	path = dev/serv
 	url = https://github.com/Manic0892/python-impact.git
+[submodule "dev/media"]
+	path = dev/media
+	url = https://github.com/Manic0892/40yog_media.git
