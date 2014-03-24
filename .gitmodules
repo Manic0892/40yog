@@ -4,3 +4,6 @@
 [submodule "dev/media"]
 	path = dev/media
 	url = https://github.com/Manic0892/40yog_media.git
+[submodule "built"]
+	path = built
+	url = https://github.com/Manic0892/40yog_built.git
