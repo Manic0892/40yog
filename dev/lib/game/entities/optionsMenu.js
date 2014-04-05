@@ -26,8 +26,8 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 				x = ig.game.screen.x + ig.system.width/2;
 				y = ig.game.screen.y + ig.system.height/2;
 				//Add music and sound sliders
-				this.musicSlider = ig.game.spawnEntity(EntityMusicSliderOptions, x + this.initXOffset, 50);
-				this.soundSlider = ig.game.spawnEntity(EntitySoundSliderOptions, x + this.initXOffset, 150);
+				this.musicSlider = ig.game.spawnEntity(EntitySliderMusic, x + this.initXOffset, 50);
+				this.soundSlider = ig.game.spawnEntity(EntitySliderSound, x + this.initXOffset, 150);
 			}
 		},
 		
@@ -77,42 +77,6 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 		
 		draw: function() {
 			this.selected ? this.redFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment);
-		}
-	});
-	
-	EntityMusicSliderOptions = EntitySlider.extend({
-		title: 'Music',
-		
-		labelFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
-		
-		init: function(x,y,settings) {
-			this.initVal = ig.music.volume; //Set the slider to the correct position for the current music volume
-			this.parent(x,y,settings);
-		},
-		
-		//Set the music volume and a cookie to persist across play sessions
-		sliderLogic: function() {
-			ig.music.volume = this.handle.val;
-			$.cookie("music", ig.music.volume, {expires: 99999, path:'/'});
-		}
-	});
-	
-	EntitySoundSliderOptions = EntitySlider.extend({
-		title: 'Sound',
-		
-		labelFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
-		
-		init: function(x,y,settings) {
-			this.initVal = ig.soundManager.volume; //Set the slider to the correct position for the current sound volume
-			this.parent(x,y,settings);
-		},
-		
-		//Set the sound volume and a cookie to persist across play sessions
-		sliderLogic: function() {
-			ig.soundManager.volume = this.handle.val;
-			$.cookie("sound", ig.soundManager.volume, {expires: 99999, path:'/'});
 		}
 	});
 });

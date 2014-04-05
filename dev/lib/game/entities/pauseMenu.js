@@ -1,6 +1,6 @@
 //Pause menu.  Spawned by the level entity when the game is paused.  Used to display options.
 
-ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entities.slider').defines(function(){
+ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entities.sliderMusic', 'game.entities.sliderSound').defines(function(){
 	EntityPauseMenu = EntityMenu.extend({
 		name: 'pauseMenu',
 		ignorePause: true, //Ignore the regular game pause.  Having this pause would keep it from working as intended.
@@ -46,8 +46,8 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 			x = ig.game.screen.x + ig.system.width/2;
 			y = ig.game.screen.y + ig.system.height/2;
 			//Spawn the music and sound sliders
-			this.musicSlider = ig.game.spawnEntity(EntityMusicSlider, x, y - 115);
-			this.soundSlider = ig.game.spawnEntity(EntitySoundSlider,x,y - 30);
+			this.musicSlider = ig.game.spawnEntity(EntitySliderMusic, x, y - 115);
+			this.soundSlider = ig.game.spawnEntity(EntitySliderSound,x,y - 30);
 			this.safetyTimer = new ig.Timer(this.safetyTimer); //Set the safety timer
 		},
 		
@@ -79,36 +79,6 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 				this.menuItems[i].kill();
 			}
 			this.parent();
-		}
-	});
-	
-	//Music slider.  Used to change the music volume.
-	EntityMusicSlider = EntitySlider.extend({
-		title: 'Music',
-		
-		init: function(x,y,settings) {
-			this.initVal = ig.music.volume; //Get the initial music volume to correctly set the slider
-			this.parent(x,y,settings);
-		},
-		
-		sliderLogic: function() {
-			ig.music.volume = this.handle.val; //Set the music volume to the correct value
-			$.cookie("music", ig.music.volume, {expires: 99999, path:'/'}); //Set the cookie so it's not lost between playthroughss
-		}
-	});
-	
-	//Sound slider.  Used to change the sound volume.
-	EntitySoundSlider = EntitySlider.extend({
-		title: 'Sound',
-		
-		init: function(x,y,settings) {
-			this.initVal = ig.soundManager.volume; //Get the initial sound volume to correctly set the slider
-			this.parent(x,y,settings);
-		},
-		
-		sliderLogic: function() {
-			ig.soundManager.volume = this.handle.val; //Set the sound manager volume to the correct value
-			$.cookie("sound", ig.soundManager.volume, {expires: 99999, path:'/'}); //Set the cookie so it's not lost between playthroughs
 		}
 	});
 });
