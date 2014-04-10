@@ -18,12 +18,9 @@
 
 //Sound slider.  Inherits from slider.
 
-ig.module('game.entities.sliderSound').requies('game.entities.slider').defines(function(){
+ig.module('game.entities.sliderSound').requires('game.entities.slider').defines(function(){
 	EntitySliderSound = EntitySlider.extend({
 		title: 'Sound',
-		
-		labelFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
-		titleFont: new ig.Font('media/fonts/bebas_neue_40_black.png'),
 		
 		init: function(x,y,settings) {
 			this.initVal = ig.soundManager.volume; //Set the slider to the correct position for the current sound volume

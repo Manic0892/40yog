@@ -1,14 +1,36 @@
+/*
+ * Copyright 2014 Sean McGeer
+ *
+ * This file is part of the 40 Year Old Game.
+ * The 40 Year Old Game is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The 40 Year Old Game is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with the 40 Year Old Game.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+//Main game file.  Loads the rest of the game.
+
 ig.module('game.main').requires(
-	'plugins.perpixel',
-	'plugins.entitytype',
+	'plugins.perpixel',  //Per pixel collision plugin
+	'plugins.entitytype', //Allow for more entity types than just A and B
 	
+	//Empika utils
 	'plugins.empika.entity_utilities',
 	'plugins.empika.game_utilities',
-	'plugins.pause',
-	'plugins.manic.betterLoadLevel',
+	'plugins.pause', //Allow for game loop pausing
+	'plugins.manic.betterLoadLevel', //Simple plugin that calls a function on every entity before loading the next level.  Used to stop sound effects from playing.
 	
-	'impact.debug.debug',
+	'impact.debug.debug', //Debug display.  Should be removed in final release.
 	
+	//Game levels
 	'game.levels.intro',
 	'game.levels.mainMenu',
 	'game.levels.selectMenu',
@@ -22,17 +44,15 @@ ig.module('game.main').requires(
 	'game.levels.lose2',
 	'game.levels.win2'
 ).defines(function(){
-	MyGame = ig.Game.extend({
+	game_40yog = ig.Game.extend({
 		gravity:2000,
 		zoomLevel: 1,
 		
-		clearColor: '#fff',
+		clearColor: '#fff', //Set background to default to white
 		
-		// Load a font
-		font: new ig.Font( 'media/fonts/04b03.font.png' ),
 		scale: 1,
 		
-		
+		//Bind keys and load intro screen--shows Manic Studios splash screen.  Also read preferences from saved cookies.
 		init: function() {
 			this.loadLevel(LevelIntro);
 			ig.input.bind(ig.KEY.A, 'left');
@@ -60,11 +80,9 @@ ig.module('game.main').requires(
 		},
 		
 		update: function() {
-			// Update all entities and backgroundMaps
 			this.parent();
 			
-			// Add your own, additional update code here
-			
+			//Center the camera on the player.  This should be done with a camera trap or something similar, instead of a dead-on look straight at the player.
 			var player = this.getEntitiesByType( EntityPlayer )[0];
 			if( player ) {
 				this.screen.x = player.pos.x - ig.system.width/2;
@@ -73,11 +91,7 @@ ig.module('game.main').requires(
 		},
 		
 		draw: function() {
-			// Draw all entities and backgroundMaps
-			//this.parent();
-			
-			
-			// Add your own drawing code here
+			//Zoom code.  Unused at this time, unless you change the zoom level in the console.  Reason: things get janky fast.
 			if (this.zoomLevel != 1) {
 				ig.system.context.save();
 				ig.system.context.scale(this.zoomLevel, this.zoomLevel);
@@ -85,7 +99,7 @@ ig.module('game.main').requires(
 				this.parent();
 				
 				ig.system.context.restore();
-			} else {
+			} else { //Defaults to normal zoom level
 				this.parent();
 			}
 			
@@ -96,43 +110,12 @@ ig.module('game.main').requires(
 			ig.system.height = ig.system.realHeight / zoomLevel;
 				
 			this.zoomLevel = zoomLevel;
-		},
-		
-		muteSound: function() {
-			ig.soundManager.volume = 0;
-		},
-		
-		unMuteSound: function() {
-			ig.soundManager.volume = 1;
-		},
-		
-		toggleSound: function() {
-			if (ig.soundManager.volume == 0)
-				this.unMuteSound();
-			else
-				this.muteSound();
-		},
-		
-		muteMusic: function() {
-			ig.music.volume = 0;
-		},
-		
-		unMuteMusic: function() {
-			ig.music.volume = 1;
-		},
-		
-		toggleMusic: function() {
-			if (ig.music.volume == 0)
-				this.unMuteMusic();
-			else
-				this.muteMusic();
 		}
 	});
 	
-	//ig.setNocache(true);
-	
+	//10 sound channels--this means that each sound can be played 10 times concurrently
 	ig.Sound.channels = 10;
 	
-	ig.main( '#canvas', MyGame, 60, 1024, 640, 1 );
+	ig.main( '#canvas', game_40yog, 60, 1024, 640, 1 ); //FPS=60 Res=1024/640 Scale=1
 
 });

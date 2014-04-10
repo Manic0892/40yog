@@ -18,7 +18,7 @@
 
 //Music slider.  Inherits from slider
 
-ig.module('game.entities.sliderMucis').requires('game.entities.sliderMusic'),defines(function(){	
+ig.module('game.entities.sliderMusic').requires('game.entities.slider').defines(function(){	
 	//Music slider.  Used to change the music volume.
 	EntitySliderMusic = EntitySlider.extend({
 		title: 'Music',
@@ -30,7 +30,7 @@ ig.module('game.entities.sliderMucis').requires('game.entities.sliderMusic'),def
 		
 		sliderLogic: function() {
 			ig.music.volume = this.handle.val; //Set the music volume to the correct value
-			$.cookie("music", ig.music.volume, {expires: 99999, path:'/'}); //Set the cookie so it's not lost between playthroughss
+			$.cookie("music", ig.music.volume, {expires: 99999, path:'/'}); //Set the cookie so it's not lost between playthroughs
 		}
 	});
 });
