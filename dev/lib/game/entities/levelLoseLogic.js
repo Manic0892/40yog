@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Sean McGeer
+ * Copyright 2014 Manic Studios
  *
  * This file is part of the 40 Year Old Game.
  *
