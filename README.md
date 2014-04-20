@@ -16,4 +16,4 @@ The build scripts are [build.sh](build.sh), [build_node.sh](build_node.sh), and 
 All assets that are used by the game are included in the [media repo](https://github.com/Manic0892/40yog_media), but the project files for these assets, as well as unused assets, can be found in [40yog_wkshp](https://github.com/Manic0892/40yog_wkshp).
 
 ###Licensing
-This project is licensed under the [Affero General Public License (AGPL)](http://www.gnu.org/licenses/agpl-3.0.html).  This license only applies to the project files in the repo that includes this README.  The submodules do not contain code that is licensed under the AGPL.
+This project is licensed under the [Affero General Public License (AGPL)](http://www.gnu.org/licenses/agpl-3.0.html).  This license only applies to the project files in the repo that includes this README.  The submodules do not contain code that is licensed under the AGPL, and their licenses should be reviewed if you decide to modify the project.
