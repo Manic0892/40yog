@@ -13,7 +13,7 @@ After you've done so, run one of the build scripts from the top level of the dir
 The build scripts are [build.sh](build.sh), [build_node.sh](build_node.sh), and [build_simple.sh](build_simple.sh).  All three require the ImpactJS build tools, available after purchasing a license.  build.sh requires http://javascript-minifier.com/ and its API to be online, but gives the smallest output file.  build_node.sh requires Node.js and [UglifyJS2](https://github.com/mishoo/UglifyJS2) to be installed, and gives a decently small output file.  build_simple.sh doesn't require anything except the aforementioned ImpactJS build tools, and gives the largest output file.
 
 ###Assets
-All assets that are used by the game are included in the [media repo](https://github.com/Manic0892/40yog_media), but the project files for these assets, as well as unused assets, can be found in [40yog_wkshp](https://github.com/Manic0892/40yog_wkshp).
+All assets that are used by the game are included in the [media repo](https://github.com/Manic0892/40yog_media), but the project files for these assets, as well as unused assets, can be found in the [workshop](https://github.com/Manic0892/40yog_wkshp).
 
 ###Licensing
 This project is licensed under the [Affero General Public License (AGPL)](http://www.gnu.org/licenses/agpl-3.0.html).  This license only applies to the project files in the repo that includes this README.  The submodules do not contain code that is licensed under the AGPL, and their licenses should be reviewed if you decide to modify the project.
