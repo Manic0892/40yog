@@ -27,7 +27,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		safetyTimer: .25, //This is here to fix bug where it's spawned and then kills itself but misses toggling pause again.  Dumb bug.
 		
 		font: new ig.Font('media/fonts/bebas_neue_50_black.png'),
-		redFont: new ig.Font('media/fonts/bebas_neue_50_red.png'),
+		selectedFont: new ig.Font('media/fonts/bebas_neue_50_red.png'),
 		zIndex:999, //Make sure it's drawn on top of everything in the level.
 		
 		items: [
@@ -118,7 +118,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 			height = this.font.heightForString("GRADIENT OFF");
 			xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
 			yPos = this.initYOffset+i*this.ySpacing + ig.game.screen.y;
-			this.menuItems.push(ig.game.spawnEntity(EntityMenuItemGraphicsOptions, xPos, yPos, {width:width, height:height, text: text, exec: exec, font: this.font, redFont: this.redFont, initXOffset: this.initXOffset})); //Use a special menu item entity that will change its width on updating to correctly draw GRAIDNET ON and GRADIENT OFF to the proper width and centered
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItemGraphicsOptions, xPos, yPos, {width:width, height:height, text: text, exec: exec, font: this.font, selectedFont: this.selectedFont, initXOffset: this.initXOffset})); //Use a special menu item entity that will change its width on updating to correctly draw GRAIDNET ON and GRADIENT OFF to the proper width and centered
 			
 			i++;
 			
@@ -133,7 +133,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 				ig.game.loadLevelDeferred(LevelMainMenu);
 				ig.music.stop();
 			};
-			this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, xPos, yPos, {width:width, height:height, text: text, exec: exec, font: this.font, redFont: this.redFont})); //Spawn a new menuItem
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, xPos, yPos, {width:width, height:height, text: text, exec: exec, font: this.font, selectedFont: this.selectedFont})); //Spawn a new menuItem
 		}
 	});
 	
@@ -157,7 +157,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 		},
 		
 		draw: function() {
-			this.selected ? this.redFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment);
+			this.selected ? this.selectedFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment);
 		}
 	});
 });

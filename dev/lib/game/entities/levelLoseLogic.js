@@ -76,7 +76,7 @@ ig.module('game.entities.levelLoseLogic').requires('impact.entity', 'game.entiti
 	EntityLoseMenu = EntityMenu.extend({
 		name: 'loseMenu',
 		
-		redFont: new ig.Font('media/fonts/bebas_neue_100_white.png'), //Use white font instead of red font for the menu.  This is because the background for the level lose screen is red.
+		selectedFont: new ig.Font('media/fonts/bebas_neue_100_white.png'),
 		
 		items: [
 			{text:'MAIN MENU',exec:function() {

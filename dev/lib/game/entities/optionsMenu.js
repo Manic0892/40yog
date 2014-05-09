@@ -24,7 +24,7 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 		name: 'optionsMenu',
 		
 		font: new ig.Font('media/fonts/bebas_neue_100_black.png'),
-		redFont: new ig.Font('media/fonts/bebas_neue_100_red.png'),
+		selectedFont: new ig.Font('media/fonts/bebas_neue_100_red.png'),
 		
 		//Start with an option to return to the main menu
 		items: [
@@ -64,7 +64,7 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 			var height = this.font.heightForString("GRADIENT OFF");
 			var xPos = this.initXOffset + ig.system.width/2 - width/2 + ig.game.screen.x;
 			var yPos = this.initYOffset+-1*this.ySpacing + ig.game.screen.y;
-			this.menuItems.push(ig.game.spawnEntity(EntityMenuItemGraphicsOptions, xPos, yPos, {width:width, height:height, text: text, exec: exec, font: this.font, redFont: this.redFont, initXOffset: this.initXOffset})); //Use a special menu item entity that will change its width on updating to correctly draw GRAIDNET ON and GRADIENT OFF to the proper width and centered
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItemGraphicsOptions, xPos, yPos, {width:width, height:height, text: text, exec: exec, font: this.font, selectedFont: this.selectedFont, initXOffset: this.initXOffset})); //Use a special menu item entity that will change its width on updating to correctly draw GRAIDNET ON and GRADIENT OFF to the proper width and centered
 			for (var i = 0; i < this.items.length; i++) {
 				width = this.font.widthForString(this.items[i].text);
 				height = this.font.heightForString(this.items[i].text);
@@ -95,7 +95,7 @@ ig.module('game.entities.optionsMenu').requires('game.entities.menu', 'game.enti
 		},
 		
 		draw: function() {
-			this.selected ? this.redFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment);
+			this.selected ? this.selectedFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment);
 		}
 	});
 });

@@ -25,7 +25,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 		
 		font: new ig.Font( 'media/fonts/bebas_neue_100_black.png' ),
 	
-		redFont: new ig.Font('media/fonts/bebas_neue_100_red.png'), //The default selected font is red.  This has been changed to white in levelLoseLogic, and so this should potentially be named "selectedFont."
+		selectedFont: new ig.Font('media/fonts/bebas_neue_100_red.png'),
 		
 		//Text and execution of different menu options
 		items: [
@@ -94,7 +94,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 		},
 		
 		spawnMenuItem: function(i,width,height,x,y,settings) {
-			this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, x, y, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, font: this.font, redFont: this.redFont})); //Spawn a new menuItem
+			this.menuItems.push(ig.game.spawnEntity(EntityMenuItem, x, y, {width:width, height:height, text: this.items[i].text, exec: this.items[i].exec, font: this.font, selectedFont: this.selectedFont})); //Spawn a new menuItem
 		},
 		
 		update: function() {
@@ -132,7 +132,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 			this.text = settings.text;
 			this.exec = settings.exec; //Code to be executed when this is clicked
 			this.font = settings.font;
-			this.redFont = settings.redFont; //Selected font.  Should be renamed from "redFont."
+			this.selectedFont = settings.selectedFont;
 		},
 		
 		update: function() {
@@ -146,7 +146,7 @@ ig.module('game.entities.menu').requires('impact.entity', 'game.entities.cursor'
 		},
 		
 		draw: function() {
-			this.selected ? this.redFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment); //If selected, draw the font in the same place as the invisible entity with a special font.  If unseletec, do the same thing but without the special font.
+			this.selected ? this.selectedFont.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment) : this.font.draw(this.text, this.pos.x - ig.game.screen.x, this.pos.y - ig.game.screen.y, this.alignment); //If selected, draw the font in the same place as the invisible entity with a special font.  If unseletec, do the same thing but without the special font.
 		}
 	});
 });
