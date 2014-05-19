@@ -117,6 +117,6 @@ ig.module('game.main').requires(
 	//10 sound channels--this means that each sound can be played 10 times concurrently
 	ig.Sound.channels = 10;
 	
-	ig.main( '#canvas', game_40yog, 60, 1024, 640, 1 ); //FPS=60 Res=1024/640 Scale=1
+	ig.main( '#game', game_40yog, 60, 1024, 640, 1 ); //FPS=60 Res=1024/640 Scale=1
 
 });
