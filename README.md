@@ -17,3 +17,6 @@ All assets that are used by the game are included in the [media repo](https://gi
 
 ###Licensing
 This project is licensed under the [Affero General Public License (AGPL)](http://www.gnu.org/licenses/agpl-3.0.html).  This license only applies to the project files in the repo that includes this README.  The submodules do not contain code that is licensed under the AGPL, and their licenses should be reviewed if you decide to modify the project.
+
+###Copyright
+All code is copyrighted but can be licensed under the AGPL.  All media files and other IP are property of their respective owners, most notably Mike Schmidt.
