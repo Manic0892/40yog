@@ -19,8 +19,8 @@
 
 //Level 2 logic.  Handles all the custom, non-Impact logic, such as centering on cutscenes.
 
-ig.module('game.entities.level2Logic').requires('game.entities.levelLogic').defines(function() {
-	EntityLevel2Logic = EntityLevelLogic.extend({
+ig.module('game.entities.levelLogic2').requires('game.entities.levelLogic').defines(function() {
+	EntityLevelLogic2 = EntityLevelLogic.extend({
 		zIndex: 9999, //Ensures it's drawn last every frame
 		
 		defaultCursor: null, //Don't draw the cursor at all

@@ -19,8 +19,8 @@
 
 //Level 1 Logic.  Handles all the custom, non-Impact logic.
 
-ig.module('game.entities.level1Logic').requires('game.entities.levelLogic').defines(function() {
-	EntityLevel1Logic = EntityLevelLogic.extend({
+ig.module('game.entities.levelLogic1').requires('game.entities.levelLogic').defines(function() {
+	EntityLevelLogic1 = EntityLevelLogic.extend({
 		init: function(x,y,settings) {
 			this.parent(x,y,settings);
 			if (!ig.global.wm) {
