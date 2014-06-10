@@ -19,8 +19,8 @@
 
 //Health powerup.  GIves the palye rhealth.
 
-ig.module('game.entities.healthPowerup').requires('game.entities.powerup').defines(function() {
-	EntityHealthPowerup = EntityPowerup.extend({
+ig.module('game.entities.powerupHealth').requires('game.entities.powerup').defines(function() {
+	EntityPowerupHealth = EntityPowerup.extend({
 		_wmIgnore: false,
 		
 		zIndex: -10,

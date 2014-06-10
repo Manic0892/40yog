@@ -17,10 +17,10 @@
  * along with the 40 Year Old Game.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Rising variety of ashParticle.  Used mostly when the flamethrower hits a bedbug in level one.
+//Rising variety of particleAsh.  Used mostly when the flamethrower hits a bedbug in level one.
 
-ig.module('game.entities.ashParticleRising').requires('game.entities.ashParticle','impact.entity-pool').defines(function(){
-	EntityAshParticleRising = EntityAshParticle.extend({
+ig.module('game.entities.particleAshRising').requires('game.entities.particleAsh','impact.entity-pool').defines(function(){
+	EntityParticleAshRising = EntityParticleAsh.extend({
 		gravityFactor: 0,
 		
 		init: function( x, y, settings ) {
@@ -52,5 +52,5 @@ ig.module('game.entities.ashParticleRising').requires('game.entities.ashParticle
 		}
 	});
 	
-	ig.EntityPool.enableFor(EntityAshParticleRising);
+	ig.EntityPool.enableFor(EntityParticleAshRising);
 });

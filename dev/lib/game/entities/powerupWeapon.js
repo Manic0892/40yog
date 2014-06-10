@@ -17,15 +17,25 @@
  * along with the 40 Year Old Game.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Flamethrower pickup.  Inherits from weapon pickup, in case other weapns need to be picked up in other levels, like a gun.
+//Weapon pickup entity.  Inherits from powerup.
 
-ig.module('game.entities.flamePickup').requires('game.entities.weaponPickup').defines(function() {
-	EntityFlamePickup = EntityWeaponPickup.extend({
-		size:{x:36, y:50},
+ig.module('game.entities.powerupWeapon').requires('game.entities.powerup').defines(function() {
+	EntityPowerupWeapon = EntityPowerup.extend({
+		size:{x:64, y:64},
 		
-		animSheet: new ig.AnimationSheet('media/images/sprites/blowtorch.png',36,50),
-		_wmIgnore: false,
+		_wmDrawBox: false,
+		_wmBoxColor: 'rgba(255,224,122,0.4)',
+		_wmIgnore: true,
 		
-		weaponType: 10210897109101 //Flame.  This is the base 10 ASCII encoding of "flame."  This might be changed to just a string later.
+		animSheet: new ig.AnimationSheet('media/images/null.png',64,64),
+		
+		bobTime: 1.5, //Time it takes to bob up and down
+		
+		powerup: function(other) {
+			if (other.pickup) { //If the other entity is a player, trigger the pickup for this and despawn the entity
+				other.pickup(this.weaponType);
+				this.kill();
+			}
+		}
 	});
 });

@@ -19,7 +19,7 @@
 
 //Player used on level 1.  Inherits from the base player entity
 
-ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entities.fireParticleDamage').defines(function() {
+ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entities.particleFireDamage').defines(function() {
 	EntityPlayerL1 = EntityPlayer.extend({
 		fireSound: new ig.Sound('media/sounds/fire2.*'), //Played when shooting
 		soundTimer: new ig.Timer(35/60), //Time limit for when the fire sound shold play
@@ -68,7 +68,7 @@ ig.module('game.entities.playerL1').requires('game.entities.player', 'game.entit
 		
 		shoot: function() {
 			if (this.flameActive) {
-				ig.game.spawnEntity( EntityFireParticleDamage, this.pos.x+this.size.x/2, this.pos.y+this.size.y/2, {flip:this.flip, d:{x:ig.input.mouse.x, y:ig.input.mouse.y}, vel:this.vel} ); //Spawn the fire particle at the end of the gun and give it the x and y of the mouse to help it draw a line for its path
+				ig.game.spawnEntity( EntityParticleFireDamage, this.pos.x+this.size.x/2, this.pos.y+this.size.y/2, {flip:this.flip, d:{x:ig.input.mouse.x, y:ig.input.mouse.y}, vel:this.vel} ); //Spawn the fire particle at the end of the gun and give it the x and y of the mouse to help it draw a line for its path
 				if (this.soundTimer.delta() >= 0) { //If we are done with the timer between fire sound effects, play it again.  This prevents it from looping every time a fire particle is launched
 					this.fireSound.play();
 					this.soundTimer.reset();

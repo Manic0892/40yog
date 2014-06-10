@@ -19,8 +19,8 @@
 
 //Fire particle damage.  Used on level one for the flamethrower to shoot out and kill couches and bedbugs.
 
-ig.module('game.entities.fireParticleDamage').requires('game.entities.particle', 'game.entities.ashParticleRising', 'impact.entity-pool').defines(function() {
-	EntityFireParticleDamage = EntityParticle.extend({
+ig.module('game.entities.particleFireDamage').requires('game.entities.particle', 'game.entities.particleAshRising', 'impact.entity-pool').defines(function() {
+	EntityParticleFireDamage = EntityParticle.extend({
 		checkAgainst: ig.Entity.TYPE.B, //Check against enemy
 		lifetime: .3,
 		fadetime: .2,
@@ -114,12 +114,12 @@ ig.module('game.entities.fireParticleDamage').requires('game.entities.particle',
 			
 			//If other is not dead, spawn rising ash particles and damage it
 			if (!other.dead) {
-				ig.game.spawnEntity(EntityAshParticleRising,this.pos.x,this.pos.y);
+				ig.game.spawnEntity(EntityParticleAshRising,this.pos.x,this.pos.y);
 				other.receiveDamage( 2, this );
 				this.kill();
 			}
 		}
 	});
 	
-	ig.EntityPool.enableFor(EntityFireParticleDamage);
+	ig.EntityPool.enableFor(EntityParticleFireDamage);
 });
