@@ -19,9 +19,9 @@
 
 //Main Menu.  Appears as the first interactive part of the game, with entries to play from level 1, select a level, or change options.
 
-ig.module('game.entities.mainMenu').requires('game.entities.menu').defines(function(){
-	EntityMainMenu = EntityMenu.extend({
-		name: 'mainMenu',
+ig.module('game.entities.menuMain').requires('game.entities.menu').defines(function(){
+	EntityMenuMain = EntityMenu.extend({
+		name: 'menuMain',
 		
 		items: [
 			{text:'PLAY',exec:function() {

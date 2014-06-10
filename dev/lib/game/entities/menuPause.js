@@ -19,9 +19,9 @@
 
 //Pause menu.  Spawned by the level entity when the game is paused.  Used to display options.
 
-ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entities.sliderMusic', 'game.entities.sliderSound').defines(function(){
-	EntityPauseMenu = EntityMenu.extend({
-		name: 'pauseMenu',
+ig.module('game.entities.menuPause').requires('game.entities.menu', 'game.entities.sliderMusic', 'game.entities.sliderSound').defines(function(){
+	EntityMenuPause = EntityMenu.extend({
+		name: 'menuPause',
 		ignorePause: true, //Ignore the regular game pause.  Having this pause would keep it from working as intended.
 		
 		safetyTimer: .25, //This is here to fix bug where it's spawned and then kills itself but misses toggling pause again.  Dumb bug.
@@ -34,7 +34,7 @@ ig.module('game.entities.pauseMenu').requires('game.entities.menu', 'game.entiti
 			//Resume the game.  This toggles the pause (unpauses) and cleans up the pause menu entity.
 			{text:'RESUME', exec:function() {
 				ig.game.togglePause();
-				var parentEntity = ig.game.getEntityByName('pauseMenu'); //Fuck, this is hacky.  Since we can't use this because the menu entity is separate from the pause menu, we have to find and kill the pause menu.
+				var parentEntity = ig.game.getEntityByName('menuPause'); //Fuck, this is hacky.  Since we can't use this because the menu entity is separate from the pause menu, we have to find and kill the pause menu.
 				parentEntity.parentLevel.safetyTimer.reset(); //Resets the safety timer on the level.
 				parentEntity.kill();
 			}},

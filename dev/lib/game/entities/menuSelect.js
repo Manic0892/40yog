@@ -19,9 +19,9 @@
 
 //Level select menu.  Lists all levels the player's unlocked.
 
-ig.module('game.entities.selectMenu').requires('game.entities.menu').defines(function(){
-	EntitySelectMenu = EntityMenu.extend({
-		name: 'levelSelectMenu',
+ig.module('game.entities.menuSelect').requires('game.entities.menu').defines(function(){
+	EntityMenuSelect = EntityMenu.extend({
+		name: 'menuSelectLevel',
 		
 		//Level one should always be added by default
 		items: [

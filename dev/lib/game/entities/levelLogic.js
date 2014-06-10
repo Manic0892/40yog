@@ -19,7 +19,7 @@
 
 //Basic level logic entity.  Handles things like playing music and setting the cursor.
 
-ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.pauseMenu', 'game.entities.cursor').defines(function() {
+ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.menuPause', 'game.entities.cursor').defines(function() {
 	EntityLevelLogic = ig.Entity.extend({
 		size:{x:64,y:64},
 		_wmDrawBox: true,
@@ -50,7 +50,7 @@ ig.module('game.entities.levelLogic').requires('impact.entity', 'game.entities.p
 			this.parent();
 			if (ig.input.pressed('esc') && !ig.game.paused && this.safetyTimer.delta() >= 0) { //Pause the game and display the pause menu
 				ig.game.togglePause();
-				ig.game.spawnEntity(EntityPauseMenu, 0, 0, {parentLevel: this});
+				ig.game.spawnEntity(EntityMenuPause, 0, 0, {parentLevel: this});
 			}
 			this.updateScreenPos();
 		},
