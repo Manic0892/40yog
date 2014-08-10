@@ -33,7 +33,7 @@ ig.module('game.entities.playerL2').requires('impact.entity', 'game.entities.par
 		
 		crashSound: new ig.Sound('media/sounds/crash.*'), //Crash sound effect for when the player is injured
 		
-		carSound: new ig.Sound('media/sounds/inside_car.*', false), //Looping sound effect for driving.  This doesn't loop properly, but will hopefully be fixed in future versions of Impact.
+		carSound: new ig.Sound('media/sounds/inside_car.*'), //Looping sound effect for driving.  This doesn't loop properly, but will hopefully be fixed in future versions of Impact.
 		
 		health:3, //3 hits before you die
 		gravityFactor:0, //Can't have it moving without the player's input
