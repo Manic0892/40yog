@@ -34,6 +34,10 @@ wm.config = {
 	},
 	
 	
+	// Plugins for Weltmeister: an array of module names to load
+	plugins: [],
+	
+	
 	// Default settings when creating new layers in Weltmeister. Change these
 	// as you like
 	'layerDefaults': {
@@ -75,6 +79,10 @@ wm.config = {
 		'MWHEEL_DOWN': 'zoomout',
 		'MINUS': 'zoomout'
 	},
+	
+	// Whether to enable unidirectional scrolling for touchpads; this
+	// automatically unbinds the MWHEEL_UP and MWHEEL_DOWN actions.
+	'touchScroll': false,
 	
 	// View settings. You can change the default Zoom level and whether
 	// to show the grid on startup here.
